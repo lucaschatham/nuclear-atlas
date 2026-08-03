@@ -1,0 +1,861 @@
+[
+  {
+    "id": "microsoft-constellation-crane-restart",
+    "name": "Microsoft – Constellation Crane restart PPA",
+    "parties": {
+      "offtaker": "Microsoft",
+      "offtaker_type": "hyperscaler",
+      "developer": "Constellation Energy",
+      "technology_vendor": null,
+      "utility": null,
+      "epc": null
+    },
+    "technology": "restart",
+    "mw_firm": 835,
+    "mw_optioned": null,
+    "structure_type": "restart_ppa",
+    "bindingness": {
+      "tier": "B4",
+      "evidence": "The parties signed a 20-year PPA, Constellation began physical restoration work, PJM approved the interconnection request, and NRC restart reviews are active."
+    },
+    "dates": {
+      "announced": "2024-09-20",
+      "target_cod": "2027",
+      "status_changes": [
+        { "date": "2025-08-07", "change": "Target restart advanced from 2028 to 2027." },
+        { "date": "2026-06-03", "change": "NRC issued a draft environmental assessment and finding of no significant impact." }
+      ]
+    },
+    "location": {
+      "site": "Christopher M. Crane Clean Energy Center",
+      "state": "Pennsylvania",
+      "country": "United States",
+      "grid_region": "PJM"
+    },
+    "sources": [
+      {
+        "url": "https://investors.constellationenergy.com/news-releases/news-release-details/constellation-launch-crane-clean-energy-center-restoring-jobs",
+        "publisher": "Constellation Energy",
+        "title": "Constellation to Launch Crane Clean Energy Center, Restoring Jobs and Carbon-free Power to the Grid",
+        "date": "2024-09-20",
+        "supports": "Signed 20-year PPA, Microsoft counterparty, restart structure, approximately 835 MW, and original 2028 target."
+      },
+      {
+        "url": "https://www.nrc.gov/info-finder/reactors/ccec",
+        "publisher": "U.S. Nuclear Regulatory Commission",
+        "title": "Christopher M. Crane Clean Energy Center",
+        "date": "2026-06-05",
+        "supports": "Current restart licensing review, inspections, and June 2026 draft environmental assessment milestone."
+      },
+      {
+        "url": "https://investors.constellationenergy.com/news-releases/news-release-details/constellation-reports-second-quarter-2025-results",
+        "publisher": "Constellation Energy",
+        "title": "Constellation Reports Second Quarter 2025 Results",
+        "date": "2025-08-07",
+        "supports": "Acceleration of the target restart year from 2028 to 2027."
+      }
+    ],
+    "analyst_note": "A signed PPA underwrites the restart. The plant remains in NRC review and is not yet operating.",
+    "needs_verification": false,
+    "last_verified": "2026-08-03"
+  },
+  {
+    "id": "amazon-talen-susquehanna-ppa",
+    "name": "Amazon – Talen Susquehanna PPA",
+    "parties": {
+      "offtaker": "Amazon Web Services",
+      "offtaker_type": "hyperscaler",
+      "developer": "Talen Energy",
+      "technology_vendor": null,
+      "utility": "PPL Electric Utilities",
+      "epc": null
+    },
+    "technology": "existing_plant_ppa",
+    "mw_firm": 1920,
+    "mw_optioned": null,
+    "structure_type": "ppa_front_of_meter",
+    "bindingness": {
+      "tier": "B3",
+      "evidence": "Talen and Amazon executed an expanded long-term PPA with minimum commitments and a ramp to the full 1,920 MW contract quantity."
+    },
+    "dates": {
+      "announced": "2024-03-04",
+      "target_cod": "Full contract quantity by 2032",
+      "status_changes": [
+        { "date": "2024-11-01", "change": "FERC rejected the requested expansion of the original co-located interconnection arrangement." },
+        { "date": "2025-06-11", "change": "Parties expanded the PPA to 1,920 MW and shifted toward a front-of-meter structure." }
+      ]
+    },
+    "location": {
+      "site": "Susquehanna Steam Electric Station",
+      "state": "Pennsylvania",
+      "country": "United States",
+      "grid_region": "PJM"
+    },
+    "sources": [
+      {
+        "url": "https://ir.talenenergy.com/news-releases/news-release-details/talen-energy-expands-nuclear-energy-relationship-amazon",
+        "publisher": "Talen Energy",
+        "title": "Talen Energy Expands Nuclear Energy Relationship with Amazon",
+        "date": "2025-06-11",
+        "supports": "Expanded PPA, 1,920 MW full contract quantity, delivery through 2042, ramp by 2032, and front-of-meter transition."
+      },
+      {
+        "url": "https://ir.talenenergy.com/news-releases/news-release-details/talen-energy-announces-sale-zero-carbon-data-center-campus",
+        "publisher": "Talen Energy",
+        "title": "Talen Energy Announces Sale of Zero-Carbon Data Center Campus",
+        "date": "2024-03-04",
+        "supports": "Original campus sale, Susquehanna supply relationship, and announcement date."
+      },
+      {
+        "url": "https://ir.talenenergy.com/node/9206/html",
+        "publisher": "Talen Energy",
+        "title": "Talen 2025 Form 10-K",
+        "date": "2026-02-26",
+        "supports": "FERC history, minimum commitments, ramp schedule, and transition from the original PPA to the amended front-of-meter PPA."
+      }
+    ],
+    "analyst_note": "The current record reflects the June 2025 amended PPA, which is replacing the original behind-the-meter structure.",
+    "needs_verification": false,
+    "last_verified": "2026-08-03"
+  },
+  {
+    "id": "amazon-energy-northwest-cascade",
+    "name": "Amazon – Energy Northwest Cascade SMRs",
+    "parties": {
+      "offtaker": "Amazon",
+      "offtaker_type": "hyperscaler",
+      "developer": "Energy Northwest",
+      "technology_vendor": "X-energy",
+      "utility": "Energy Northwest",
+      "epc": null
+    },
+    "technology": "smr",
+    "mw_firm": 320,
+    "mw_optioned": 640,
+    "structure_type": "development_funding",
+    "bindingness": {
+      "tier": "B2",
+      "evidence": "Amazon committed nearly $334 million to feasibility and licensing work and received purchase rights, but no operating PPA has been disclosed."
+    },
+    "dates": {
+      "announced": "2024-10-16",
+      "target_cod": "2030s",
+      "status_changes": []
+    },
+    "location": {
+      "site": "Cascade Advanced Energy Facility near Columbia Generating Station",
+      "state": "Washington",
+      "country": "United States",
+      "grid_region": "WECC"
+    },
+    "sources": [
+      {
+        "url": "https://www.aboutamazon.com/news/sustainability/amazon-nuclear-small-modular-reactor-net-carbon-zero",
+        "publisher": "Amazon",
+        "title": "Amazon signs agreements for innovative nuclear energy projects to address growing energy demands",
+        "date": "2024-10-16",
+        "supports": "Amazon agreement, X-energy investment, Energy Northwest project, and initial 320 MW description."
+      },
+      {
+        "url": "https://www.energy-northwest.com/whoweare/finance/Documents/EN%202025AB%20Amended%20Official%20Statement.pdf",
+        "publisher": "Energy Northwest",
+        "title": "2025A/B Electric Revenue Bonds Amended Official Statement",
+        "date": "2025-05-19",
+        "supports": "Nearly $334 million funding, two-year feasibility phase, Amazon purchase right for 320 MW, and Energy Northwest option for another 640 MW."
+      }
+    ],
+    "analyst_note": "The initial four-module project is shown as firm project capacity. The separate eight-module expansion remains optioned.",
+    "needs_verification": false,
+    "last_verified": "2026-08-03"
+  },
+  {
+    "id": "amazon-dominion-north-anna-smr",
+    "name": "Amazon – Dominion North Anna SMR exploration",
+    "parties": {
+      "offtaker": "Amazon",
+      "offtaker_type": "hyperscaler",
+      "developer": "Dominion Energy Virginia",
+      "technology_vendor": null,
+      "utility": "Dominion Energy Virginia",
+      "epc": null
+    },
+    "technology": "smr",
+    "mw_firm": null,
+    "mw_optioned": 300,
+    "structure_type": "mou_collaboration",
+    "bindingness": {
+      "tier": "B1",
+      "evidence": "The parties signed an MOU to explore development and financing structures; Dominion states that its SMR request is not a commitment to build."
+    },
+    "dates": {
+      "announced": "2024-10-16",
+      "target_cod": "2030s",
+      "status_changes": []
+    },
+    "location": {
+      "site": "North Anna Power Station",
+      "state": "Virginia",
+      "country": "United States",
+      "grid_region": "PJM"
+    },
+    "sources": [
+      {
+        "url": "https://news.dominionenergy.com/press-releases/press-releases/2024/Dominion-Energy-and-Amazon-to-explore-advancement-of-Small-Modular-Reactor-SMR-nuclear-development-in-Virginia-10-16-2024/default.aspx",
+        "publisher": "Dominion Energy",
+        "title": "Dominion Energy and Amazon to explore advancement of Small Modular Reactor nuclear development in Virginia",
+        "date": "2024-10-16",
+        "supports": "MOU status, exploratory scope, North Anna site, and lack of a build commitment."
+      },
+      {
+        "url": "https://www.aboutamazon.com/news/sustainability/amazon-nuclear-small-modular-reactor-net-carbon-zero",
+        "publisher": "Amazon",
+        "title": "Amazon signs agreements for innovative nuclear energy projects to address growing energy demands",
+        "date": "2024-10-16",
+        "supports": "Amazon describes the potential Virginia project as at least 300 MW."
+      }
+    ],
+    "analyst_note": "The 300 MW figure is a potential project scale, not contracted capacity. No reactor vendor is public.",
+    "needs_verification": true,
+    "last_verified": "2026-08-03"
+  },
+  {
+    "id": "google-kairos-reactor-fleet",
+    "name": "Google – Kairos advanced reactor fleet",
+    "parties": {
+      "offtaker": "Google",
+      "offtaker_type": "hyperscaler",
+      "developer": "Kairos Power",
+      "technology_vendor": "Kairos Power",
+      "utility": null,
+      "epc": null
+    },
+    "technology": "smr",
+    "mw_firm": null,
+    "mw_optioned": 450,
+    "structure_type": "master_agreement",
+    "bindingness": {
+      "tier": "B2",
+      "evidence": "A Master Plant Development Agreement governs a fleet of projects, but only the separate 50 MW Hermes 2 implementation has a disclosed binding PPA."
+    },
+    "dates": {
+      "announced": "2024-10-14",
+      "target_cod": "Fleet deployment through 2035",
+      "status_changes": [
+        { "date": "2025-08-18", "change": "Kairos and TVA signed the first project PPA for the 50 MW Hermes 2 deployment." }
+      ]
+    },
+    "location": {
+      "site": "Multiple sites, not disclosed",
+      "state": "not disclosed",
+      "country": "United States",
+      "grid_region": "Multiple"
+    },
+    "sources": [
+      {
+        "url": "https://blog.google/company-news/outreach-and-initiatives/sustainability/google-kairos-power-nuclear-energy-agreement/",
+        "publisher": "Google",
+        "title": "Google signs advanced nuclear clean energy agreement with Kairos Power",
+        "date": "2024-10-14",
+        "supports": "Multi-reactor purchase agreement, up to 500 MW, first deployment target of 2030, and fleet target through 2035."
+      },
+      {
+        "url": "https://www.kairospower.com/google",
+        "publisher": "Kairos Power",
+        "title": "Kairos Power and Google",
+        "date": "2024-10-14",
+        "supports": "Master Plant Development Agreement description and identification of Hermes 2 as the first 50 MW deployment."
+      }
+    ],
+    "analyst_note": "Optioned MW excludes the separately listed 50 MW Hermes 2 PPA to prevent double counting against the 500 MW fleet ceiling.",
+    "needs_verification": true,
+    "last_verified": "2026-08-03"
+  },
+  {
+    "id": "google-elementl-site-development",
+    "name": "Google – Elementl Power site development",
+    "parties": {
+      "offtaker": "Google",
+      "offtaker_type": "hyperscaler",
+      "developer": "Elementl Power",
+      "technology_vendor": null,
+      "utility": null,
+      "epc": null
+    },
+    "technology": "multiple",
+    "mw_firm": null,
+    "mw_optioned": 1800,
+    "structure_type": "development_funding",
+    "bindingness": {
+      "tier": "B2",
+      "evidence": "Google is providing early-stage capital for three sites and holds an option for commercial offtake; no PPA is disclosed."
+    },
+    "dates": {
+      "announced": "2025-05-07",
+      "target_cod": "By 2035",
+      "status_changes": []
+    },
+    "location": {
+      "site": "Three potential sites, not disclosed",
+      "state": "not disclosed",
+      "country": "United States",
+      "grid_region": "not disclosed"
+    },
+    "sources": [
+      {
+        "url": "https://blog.google/feed/google-and-elementl-nuclear-energy-site-development/",
+        "publisher": "Google",
+        "title": "Google and Elementl Power are collaborating to advance nuclear energy site development",
+        "date": "2025-05-07",
+        "supports": "Early-stage capital, three sites of at least 600 MW each, 2035 goal, and Google's commercial offtake option."
+      }
+    ],
+    "analyst_note": "The optioned figure is the disclosed floor of three 600 MW candidate sites. Vendors and sites remain undisclosed.",
+    "needs_verification": true,
+    "last_verified": "2026-08-03"
+  },
+  {
+    "id": "meta-constellation-clinton-ppa",
+    "name": "Meta – Constellation Clinton PPA",
+    "parties": {
+      "offtaker": "Meta",
+      "offtaker_type": "hyperscaler",
+      "developer": "Constellation Energy",
+      "technology_vendor": null,
+      "utility": null,
+      "epc": null
+    },
+    "technology": "existing_plant_ppa",
+    "mw_firm": 1121,
+    "mw_optioned": null,
+    "structure_type": "ppa_front_of_meter",
+    "bindingness": {
+      "tier": "B3",
+      "evidence": "Meta and Constellation signed a 20-year PPA for the output of Clinton, beginning in June 2027."
+    },
+    "dates": {
+      "announced": "2025-06-03",
+      "target_cod": "Agreement begins June 2027",
+      "status_changes": [
+        { "date": "2025-12-16", "change": "NRC renewed Clinton's operating license for 20 years." }
+      ]
+    },
+    "location": {
+      "site": "Clinton Clean Energy Center",
+      "state": "Illinois",
+      "country": "United States",
+      "grid_region": "MISO"
+    },
+    "sources": [
+      {
+        "url": "https://about.fb.com/news/2025/06/meta-constellation-partner-clean-energy-project/",
+        "publisher": "Meta",
+        "title": "Meta and Constellation Partner on Clean Energy Project",
+        "date": "2025-06-03",
+        "supports": "20-year agreement, June 2027 start, 1,121 MW output, and 30 MW uprate within the total."
+      },
+      {
+        "url": "https://investors.constellationenergy.com/news-releases/news-release-details/constellation-meta-sign-20-year-deal-clean-reliable-nuclear",
+        "publisher": "Constellation Energy",
+        "title": "Constellation, Meta Sign 20-Year Deal for Clean, Reliable Nuclear Energy in Illinois",
+        "date": "2025-06-03",
+        "supports": "Signed PPA structure, site, duration, and capacity."
+      },
+      {
+        "url": "https://investors.constellationenergy.com/node/9576/pdf",
+        "publisher": "Constellation Energy",
+        "title": "NRC Renews Operating Licenses for Clinton and Dresden",
+        "date": "2025-12-16",
+        "supports": "NRC approval of Clinton's 20-year initial license renewal."
+      }
+    ],
+    "analyst_note": "The disclosed 1,121 MW output already includes the 30 MW uprate, so the uprate is not added again.",
+    "needs_verification": false,
+    "last_verified": "2026-08-03"
+  },
+  {
+    "id": "meta-terrapower-natrium-fleet",
+    "name": "Meta – TerraPower Natrium fleet",
+    "parties": {
+      "offtaker": "Meta",
+      "offtaker_type": "hyperscaler",
+      "developer": "TerraPower",
+      "technology_vendor": "TerraPower",
+      "utility": null,
+      "epc": null
+    },
+    "technology": "smr",
+    "mw_firm": 690,
+    "mw_optioned": 2100,
+    "structure_type": "development_funding",
+    "bindingness": {
+      "tier": "B2",
+      "evidence": "Meta committed development funding for two Natrium units and obtained energy rights for six more; the public announcement does not describe a signed PPA."
+    },
+    "dates": {
+      "announced": "2026-01-09",
+      "target_cod": "Initial units as early as 2032; options by 2035",
+      "status_changes": []
+    },
+    "location": {
+      "site": "Multiple sites, not disclosed",
+      "state": "not disclosed",
+      "country": "United States",
+      "grid_region": "Multiple"
+    },
+    "sources": [
+      {
+        "url": "https://www.terrapower.com/terrapower-announces-deal-with-meta",
+        "publisher": "TerraPower",
+        "title": "TerraPower and Meta Enter Agreement for 8 Natrium Advanced Nuclear Plants",
+        "date": "2026-01-09",
+        "supports": "Funding commitment, up to eight plants, 2.8 GW baseload total, storage output, and initial 2032 delivery."
+      },
+      {
+        "url": "https://about.fb.com/news/2026/01/meta-nuclear-energy-projects-power-american-ai-leadership/",
+        "publisher": "Meta",
+        "title": "Meta Announces Nuclear Energy Projects, Unlocking Up to 6.6 GW to Power American Leadership in AI Innovation",
+        "date": "2026-01-09",
+        "supports": "Two funded units totaling up to 690 MW firm power and rights for six units totaling 2.1 GW."
+      }
+    ],
+    "analyst_note": "Firm MW represents the two funded units. Optioned MW represents the six additional energy-rights units. Storage discharge capacity is excluded.",
+    "needs_verification": false,
+    "last_verified": "2026-08-03"
+  },
+  {
+    "id": "meta-oklo-pike-county-campus",
+    "name": "Meta – Oklo Pike County campus",
+    "parties": {
+      "offtaker": "Meta",
+      "offtaker_type": "hyperscaler",
+      "developer": "Oklo",
+      "technology_vendor": "Oklo",
+      "utility": null,
+      "epc": null
+    },
+    "technology": "smr",
+    "mw_firm": null,
+    "mw_optioned": 1200,
+    "structure_type": "development_funding",
+    "bindingness": {
+      "tier": "B2",
+      "evidence": "A prepayment agreement funds fuel procurement and early development, but the 1.2 GW buildout remains a planned campus rather than disclosed binding offtake."
+    },
+    "dates": {
+      "announced": "2026-01-09",
+      "target_cod": "First phase as early as 2030",
+      "status_changes": [
+        { "date": "2026-06-18", "change": "Oklo signed a fuel-supply LOI with Centrus for initial Pike County deployments." }
+      ]
+    },
+    "location": {
+      "site": "Pike County advanced nuclear campus",
+      "state": "Ohio",
+      "country": "United States",
+      "grid_region": "PJM"
+    },
+    "sources": [
+      {
+        "url": "https://oklo.com/newsroom/news-details/2026/Oklo-Meta-Announce-Agreement-in-Support-of-1-2-GW-Nuclear-Energy-Development-in-Southern-Ohio/default.aspx",
+        "publisher": "Oklo",
+        "title": "Oklo, Meta Announce Agreement in Support of 1.2 GW Nuclear Energy Development in Southern Ohio",
+        "date": "2026-01-09",
+        "supports": "Prepayment and development funding mechanism, 1.2 GW planned campus, Pike County site, and regional data center purpose."
+      },
+      {
+        "url": "https://www.sec.gov/Archives/edgar/data/1849056/000162828026018698/oklo-20251231.htm",
+        "publisher": "U.S. Securities and Exchange Commission",
+        "title": "Oklo 2025 Form 10-K",
+        "date": "2026-03-17",
+        "supports": "Filed disclosure of the January 5, 2026 prepayment agreement and use of funds for fuel and first-phase development."
+      },
+      {
+        "url": "https://oklo.com/newsroom/news-details/2026/Oklo-Centrus-Sign-Letter-of-Intent-to-Purchase-Nuclear-Fuel-for-Aurora-Powerhouse-Deployment-in-Southern-Ohio/default.aspx",
+        "publisher": "Oklo",
+        "title": "Oklo, Centrus Sign Letter of Intent to Purchase Nuclear Fuel for Aurora Powerhouse Deployment in Southern Ohio",
+        "date": "2026-06-18",
+        "supports": "Fuel-supply LOI and Pike County project linkage."
+      }
+    ],
+    "analyst_note": "The 1.2 GW figure is a campus ceiling. Public documents do not allocate a binding delivery quantity to Meta.",
+    "needs_verification": false,
+    "last_verified": "2026-08-03"
+  },
+  {
+    "id": "meta-vistra-pjm-nuclear-ppas",
+    "name": "Meta – Vistra PJM nuclear PPAs and uprates",
+    "parties": {
+      "offtaker": "Meta",
+      "offtaker_type": "hyperscaler",
+      "developer": "Vistra",
+      "technology_vendor": null,
+      "utility": null,
+      "epc": null
+    },
+    "technology": "multiple",
+    "mw_firm": 2600,
+    "mw_optioned": null,
+    "structure_type": "uprate_ppa",
+    "bindingness": {
+      "tier": "B3",
+      "evidence": "Vistra entered 20-year PPAs with Meta for operating plant output and 433 MW of contracted uprates, with purchases scheduled to begin in late 2026."
+    },
+    "dates": {
+      "announced": "2026-01-09",
+      "target_cod": "Purchases begin late 2026; uprates in early 2030s",
+      "status_changes": []
+    },
+    "location": {
+      "site": "Perry, Davis-Besse, and Beaver Valley nuclear plants",
+      "state": "Ohio and Pennsylvania",
+      "country": "United States",
+      "grid_region": "PJM"
+    },
+    "sources": [
+      {
+        "url": "https://investor.vistracorp.com/2026-01-09-Vistra-and-Meta-Announce-Agreements-to-Support-Nuclear-Plants-in-PJM-and-Add-New-Nuclear-Generation-to-the-Grid",
+        "publisher": "Vistra",
+        "title": "Vistra and Meta Announce Agreements to Support Nuclear Plants in PJM and Add New Nuclear Generation to the Grid",
+        "date": "2026-01-09",
+        "supports": "20-year PPAs, more than 2,600 MW total, three named plants, 433 MW of uprates, and delivery timing."
+      }
+    ],
+    "analyst_note": "The tracker records 2,600 MW, the disclosed floor for a total described as more than 2,600 MW. The 433 MW uprate is included, not added again.",
+    "needs_verification": false,
+    "last_verified": "2026-08-03"
+  },
+  {
+    "id": "terrapower-sabey-collaboration",
+    "name": "Sabey Data Centers – TerraPower Natrium collaboration",
+    "parties": {
+      "offtaker": "Sabey Data Centers",
+      "offtaker_type": "colocation",
+      "developer": "TerraPower",
+      "technology_vendor": "TerraPower",
+      "utility": null,
+      "epc": null
+    },
+    "technology": "smr",
+    "mw_firm": null,
+    "mw_optioned": null,
+    "structure_type": "mou_collaboration",
+    "bindingness": {
+      "tier": "B1",
+      "evidence": "The parties signed an MOU to explore a later strategic collaboration agreement; no capacity, site commitment, or offtake contract is public."
+    },
+    "dates": {
+      "announced": "2025-01-21",
+      "target_cod": null,
+      "status_changes": []
+    },
+    "location": {
+      "site": "Potential sites in the Rocky Mountain region and Texas",
+      "state": "Multiple",
+      "country": "United States",
+      "grid_region": "Multiple"
+    },
+    "sources": [
+      {
+        "url": "https://www.terrapower.com/terrapower-and-sabey-data-centers-agreement-for-natrium-wide-scale-deployment",
+        "publisher": "TerraPower",
+        "title": "TerraPower and Sabey Data Centers Developing Strategic Collaboration Agreement for Wide-Scale Deployment of Natrium Plants",
+        "date": "2025-01-21",
+        "supports": "MOU status, parties, technology, exploratory geographies, and absence of a disclosed capacity."
+      }
+    ],
+    "analyst_note": "This is an exploratory umbrella MOU. No project-level record can be created until a site or contract is named.",
+    "needs_verification": true,
+    "last_verified": "2026-08-03"
+  },
+  {
+    "id": "oklo-switch-master-agreement",
+    "name": "Switch – Oklo master power agreement",
+    "parties": {
+      "offtaker": "Switch",
+      "offtaker_type": "colocation",
+      "developer": "Oklo",
+      "technology_vendor": "Oklo",
+      "utility": null,
+      "epc": null
+    },
+    "technology": "smr",
+    "mw_firm": null,
+    "mw_optioned": 12000,
+    "structure_type": "master_agreement",
+    "bindingness": {
+      "tier": "B1",
+      "evidence": "Oklo explicitly calls the 12 GW Master Power Agreement non-binding and expects later project-level PPAs."
+    },
+    "dates": {
+      "announced": "2024-12-18",
+      "target_cod": "Deployments through 2044",
+      "status_changes": []
+    },
+    "location": {
+      "site": "Multiple sites, not disclosed",
+      "state": "not disclosed",
+      "country": "United States",
+      "grid_region": "Multiple"
+    },
+    "sources": [
+      {
+        "url": "https://oklo.com/newsroom/news-details/2024/Oklo-and-Switch-Form-Landmark-Strategic-Relationship-to-Deploy-12-Gigawatts-of-Advanced-Nuclear-Power-One-of-the-Largest-Corporate-Clean-Power-Agreements-Ever-Signed/default.aspx",
+        "publisher": "Oklo",
+        "title": "Oklo and Switch Form Landmark Strategic Relationship to Deploy 12 Gigawatts of Advanced Nuclear Power",
+        "date": "2024-12-18",
+        "supports": "Non-binding status, 12 GW ceiling, deployment horizon through 2044, and expectation of later individual PPAs."
+      }
+    ],
+    "analyst_note": "All 12 GW is optioned because the master agreement is non-binding and no project-level PPA is disclosed.",
+    "needs_verification": true,
+    "last_verified": "2026-08-03"
+  },
+  {
+    "id": "oklo-equinix-energy-rights",
+    "name": "Equinix – Oklo energy rights LOI",
+    "parties": {
+      "offtaker": "Equinix",
+      "offtaker_type": "colocation",
+      "developer": "Oklo",
+      "technology_vendor": "Oklo",
+      "utility": null,
+      "epc": null
+    },
+    "technology": "smr",
+    "mw_firm": null,
+    "mw_optioned": 500,
+    "structure_type": "energy_rights_option",
+    "bindingness": {
+      "tier": "B2",
+      "evidence": "Equinix paid $25 million for rights under an LOI, but site-specific PPAs still require negotiation and execution."
+    },
+    "dates": {
+      "announced": "2024-02-16",
+      "target_cod": null,
+      "status_changes": []
+    },
+    "location": {
+      "site": "Covered U.S. facilities, subject to exclusions",
+      "state": "Multiple",
+      "country": "United States",
+      "grid_region": "Multiple"
+    },
+    "sources": [
+      {
+        "url": "https://www.sec.gov/Archives/edgar/data/1849056/000110465924047344/tm2324337d21_ex10-19.htm",
+        "publisher": "U.S. Securities and Exchange Commission",
+        "title": "Equinix letter of intent to purchase power from Oklo",
+        "date": "2024-02-16",
+        "supports": "Executed LOI, 20-year contemplated PPAs, right of first refusal from 100 MW up to 500 MW, and site exclusions."
+      },
+      {
+        "url": "https://www.sec.gov/Archives/edgar/data/1849056/000162828025014490/oklo-20241231.htm",
+        "publisher": "U.S. Securities and Exchange Commission",
+        "title": "Oklo 2024 Form 10-K",
+        "date": "2025-03-24",
+        "supports": "$25 million payment, non-binding agreement risk, and requirement for later site-specific PPAs."
+      }
+    ],
+    "analyst_note": "Money moved, which raises the deal above an ordinary LOI, but the 500 MW remains a right rather than contracted delivery.",
+    "needs_verification": false,
+    "last_verified": "2026-08-03"
+  },
+  {
+    "id": "oklo-prometheus-hyperscale-loi",
+    "name": "Prometheus Hyperscale – Oklo PPA LOI",
+    "parties": {
+      "offtaker": "Prometheus Hyperscale",
+      "offtaker_type": "neocloud",
+      "developer": "Oklo",
+      "technology_vendor": "Oklo",
+      "utility": null,
+      "epc": null
+    },
+    "technology": "smr",
+    "mw_firm": null,
+    "mw_optioned": 100,
+    "structure_type": "mou_collaboration",
+    "bindingness": {
+      "tier": "B1",
+      "evidence": "The parties signed a non-binding LOI that contemplates, but does not execute, a 20-year PPA."
+    },
+    "dates": {
+      "announced": "2024-05-23",
+      "target_cod": null,
+      "status_changes": [
+        { "date": "2024-11-01", "change": "Wyoming Hyperscale renamed itself Prometheus Hyperscale." }
+      ]
+    },
+    "location": {
+      "site": "Prometheus Hyperscale data center campus",
+      "state": "Wyoming",
+      "country": "United States",
+      "grid_region": "WECC"
+    },
+    "sources": [
+      {
+        "url": "https://oklo.com/newsroom/news-details/2024/Oklo-Partners-with-Wyoming-Hyperscale-to-Deliver-100-Megawatts-to-its-Data-Centers/default.aspx",
+        "publisher": "Oklo",
+        "title": "Oklo Partners with Wyoming Hyperscale to Deliver 100 Megawatts to its Data Centers",
+        "date": "2024-05-23",
+        "supports": "Non-binding LOI, 100 MW contemplated quantity, data center campus, and proposed 20-year PPA."
+      },
+      {
+        "url": "https://www.sec.gov/Archives/edgar/data/1849056/000162828025014490/oklo-20241231.htm",
+        "publisher": "U.S. Securities and Exchange Commission",
+        "title": "Oklo 2024 Form 10-K",
+        "date": "2025-03-24",
+        "supports": "Current Prometheus Hyperscale name and continued classification as a non-binding LOI."
+      }
+    ],
+    "analyst_note": "The tracker uses the buyer's current name. No definitive PPA has been disclosed.",
+    "needs_verification": true,
+    "last_verified": "2026-08-03"
+  },
+  {
+    "id": "google-tva-kairos-hermes-2",
+    "name": "Google – TVA – Kairos Hermes 2 PPA",
+    "parties": {
+      "offtaker": "Google",
+      "offtaker_type": "hyperscaler",
+      "developer": "Kairos Power",
+      "technology_vendor": "Kairos Power",
+      "utility": "Tennessee Valley Authority",
+      "epc": null
+    },
+    "technology": "smr",
+    "mw_firm": 50,
+    "mw_optioned": null,
+    "structure_type": "ppa_front_of_meter",
+    "bindingness": {
+      "tier": "B4",
+      "evidence": "Kairos and TVA signed a binding PPA, the NRC issued a construction permit, and Kairos broke ground on Hermes 2 in April 2026."
+    },
+    "dates": {
+      "announced": "2025-08-18",
+      "target_cod": "2030",
+      "status_changes": [
+        { "date": "2026-04-17", "change": "Kairos broke ground after receiving the NRC construction permit." }
+      ]
+    },
+    "location": {
+      "site": "Hermes 2, Oak Ridge",
+      "state": "Tennessee",
+      "country": "United States",
+      "grid_region": "TVA"
+    },
+    "sources": [
+      {
+        "url": "https://www.kairospower.com/updates/google-kairos-power-tva-collaborate-to-meet-americas-growing-energy-needs",
+        "publisher": "Kairos Power",
+        "title": "Google, Kairos Power, TVA Collaborate to Meet America's Growing Energy Needs",
+        "date": "2025-08-18",
+        "supports": "Signed PPA, 50 MW output, Oak Ridge site, 2030 target, TVA delivery, and Google data center attribution."
+      },
+      {
+        "url": "https://www.kairospower.com/updates/kairos-power-breaks-ground-on-hermes-2-demonstration-plant",
+        "publisher": "Kairos Power",
+        "title": "Kairos Power Breaks Ground on Hermes 2 Demonstration Plant",
+        "date": "2026-04-17",
+        "supports": "NRC construction permit and physical groundbreaking milestone."
+      }
+    ],
+    "analyst_note": "This is the first project-level implementation under the broader Google and Kairos fleet agreement.",
+    "needs_verification": false,
+    "last_verified": "2026-08-03"
+  },
+  {
+    "id": "google-nextera-duane-arnold-restart",
+    "name": "Google – NextEra Duane Arnold restart PPA",
+    "parties": {
+      "offtaker": "Google",
+      "offtaker_type": "hyperscaler",
+      "developer": "NextEra Energy",
+      "technology_vendor": null,
+      "utility": null,
+      "epc": null
+    },
+    "technology": "restart",
+    "mw_firm": null,
+    "mw_optioned": null,
+    "structure_type": "restart_ppa",
+    "bindingness": {
+      "tier": "B3",
+      "evidence": "Google and NextEra signed a 25-year PPA that enables the restart, subject to regulatory approvals."
+    },
+    "dates": {
+      "announced": "2025-10-27",
+      "target_cod": "First quarter 2029",
+      "status_changes": []
+    },
+    "location": {
+      "site": "Duane Arnold Energy Center",
+      "state": "Iowa",
+      "country": "United States",
+      "grid_region": "MISO"
+    },
+    "sources": [
+      {
+        "url": "https://newsroom.nexteraenergy.com/NextEra-Energy-and-Google-Announce-New-Collaboration-to-Accelerate-Nuclear-Energy-Deployment-in-the-U-S",
+        "publisher": "NextEra Energy",
+        "title": "NextEra Energy and Google Announce New Collaboration to Accelerate Nuclear Energy Deployment in the U.S.",
+        "date": "2025-10-27",
+        "supports": "Signed 25-year agreement, 615 MW plant rating, Google purpose, restart structure, and first-quarter 2029 target."
+      },
+      {
+        "url": "https://blog.google/feed/infrastructureduane-arnold-nuclear-plant-iowa/",
+        "publisher": "Google",
+        "title": "Our new agreement with NextEra Energy will bring Iowa's only nuclear plant back to life",
+        "date": "2025-10-27",
+        "supports": "Google's role, cloud and AI infrastructure purpose, restart funding, and early 2029 expectation."
+      }
+    ],
+    "analyst_note": "The plant is rated at 615 MW, but CIPCO will buy an undisclosed remaining share. Google's MW allocation is therefore left blank.",
+    "needs_verification": false,
+    "last_verified": "2026-08-03"
+  },
+  {
+    "id": "standard-power-nuscale-entra1-sites",
+    "name": "Standard Power – NuScale and ENTRA1 sites",
+    "parties": {
+      "offtaker": "Standard Power",
+      "offtaker_type": "colocation",
+      "developer": "ENTRA1 Energy",
+      "technology_vendor": "NuScale Power",
+      "utility": null,
+      "epc": null
+    },
+    "technology": "smr",
+    "mw_firm": null,
+    "mw_optioned": 1848,
+    "structure_type": "site_development",
+    "bindingness": {
+      "tier": "B1",
+      "evidence": "Standard Power announced planned facilities and selected technology and development partners, but no definitive offtake or construction contract is public."
+    },
+    "dates": {
+      "announced": "2023-10-06",
+      "target_cod": "Originally targeted 2029",
+      "status_changes": []
+    },
+    "location": {
+      "site": "Two planned data center energy facilities",
+      "state": "Ohio and Pennsylvania",
+      "country": "United States",
+      "grid_region": "PJM"
+    },
+    "sources": [
+      {
+        "url": "https://www.nuscalepower.com/press-releases/2023/standard-power-chooses-nuscales-approved-smr-technology-and-entra1-energy-to-energize-data-centers",
+        "publisher": "NuScale Power",
+        "title": "Standard Power Chooses NuScale's Approved SMR Technology and ENTRA1 Energy to Energize Data Centers",
+        "date": "2023-10-06",
+        "supports": "Partner selection, two planned sites, 24 modules at 77 MW each, data center purpose, and original 2029 target."
+      }
+    ],
+    "analyst_note": "Optioned MW is 24 disclosed 77 MW modules. No primary-source project update has confirmed a definitive agreement or current schedule.",
+    "needs_verification": true,
+    "last_verified": "2026-08-03"
+  }
+]

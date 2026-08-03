@@ -1,0 +1,126 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://nuclear-datacenter-deal-tracker.org/schema/deals.json",
+  "title": "Nuclear data center deals",
+  "type": "array",
+  "minItems": 1,
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "id",
+      "name",
+      "parties",
+      "technology",
+      "mw_firm",
+      "mw_optioned",
+      "structure_type",
+      "bindingness",
+      "dates",
+      "location",
+      "sources",
+      "analyst_note",
+      "needs_verification",
+      "last_verified"
+    ],
+    "properties": {
+      "id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+      "name": { "type": "string", "minLength": 3 },
+      "parties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["offtaker", "offtaker_type", "developer", "technology_vendor", "utility", "epc"],
+        "properties": {
+          "offtaker": { "type": "string", "minLength": 1 },
+          "offtaker_type": {
+            "enum": ["hyperscaler", "colocation", "neocloud", "enterprise", "utility", "other"]
+          },
+          "developer": { "type": ["string", "null"] },
+          "technology_vendor": { "type": ["string", "null"] },
+          "utility": { "type": ["string", "null"] },
+          "epc": { "type": ["string", "null"] }
+        }
+      },
+      "technology": {
+        "enum": ["smr", "large_lwr", "restart", "uprate", "existing_plant_ppa", "multiple", "other"]
+      },
+      "mw_firm": { "type": ["number", "null"], "minimum": 0 },
+      "mw_optioned": { "type": ["number", "null"], "minimum": 0 },
+      "structure_type": {
+        "enum": [
+          "ppa_front_of_meter",
+          "ppa_behind_meter",
+          "restart_ppa",
+          "uprate_ppa",
+          "development_funding",
+          "jv_equity",
+          "energy_rights_option",
+          "master_agreement",
+          "mou_collaboration",
+          "site_development",
+          "other"
+        ]
+      },
+      "bindingness": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["tier", "evidence"],
+        "properties": {
+          "tier": { "enum": ["B0", "B1", "B2", "B3", "B4", "B5", "BX"] },
+          "evidence": { "type": "string", "minLength": 10 }
+        }
+      },
+      "dates": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["announced", "target_cod", "status_changes"],
+        "properties": {
+          "announced": { "type": "string", "format": "date" },
+          "target_cod": { "type": ["string", "null"] },
+          "status_changes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["date", "change"],
+              "properties": {
+                "date": { "type": "string", "format": "date" },
+                "change": { "type": "string", "minLength": 3 }
+              }
+            }
+          }
+        }
+      },
+      "location": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["site", "state", "country", "grid_region"],
+        "properties": {
+          "site": { "type": ["string", "null"] },
+          "state": { "type": ["string", "null"] },
+          "country": { "type": ["string", "null"] },
+          "grid_region": { "type": ["string", "null"] }
+        }
+      },
+      "sources": {
+        "type": "array",
+        "minItems": 1,
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["url", "publisher", "title", "date", "supports"],
+          "properties": {
+            "url": { "type": "string", "format": "uri", "pattern": "^https://" },
+            "publisher": { "type": "string", "minLength": 1 },
+            "title": { "type": "string", "minLength": 3 },
+            "date": { "type": "string", "format": "date" },
+            "supports": { "type": "string", "minLength": 3 }
+          }
+        }
+      },
+      "analyst_note": { "type": "string", "minLength": 3 },
+      "needs_verification": { "type": "boolean" },
+      "last_verified": { "type": "string", "format": "date" }
+    }
+  }
+}

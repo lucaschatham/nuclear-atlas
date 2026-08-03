@@ -1,0 +1,104 @@
+[
+  {
+    "date": "2026-08-03",
+    "deal": "microsoft-constellation-crane-restart",
+    "what_changed": "Added the initial record and current NRC restart milestones.",
+    "source": "https://www.nrc.gov/info-finder/reactors/ccec"
+  },
+  {
+    "date": "2026-08-03",
+    "deal": "amazon-talen-susquehanna-ppa",
+    "what_changed": "Added the amended 1,920 MW front-of-meter PPA record.",
+    "source": "https://ir.talenenergy.com/news-releases/news-release-details/talen-energy-expands-nuclear-energy-relationship-amazon"
+  },
+  {
+    "date": "2026-08-03",
+    "deal": "amazon-energy-northwest-cascade",
+    "what_changed": "Added the funded feasibility phase and separated initial from optioned capacity.",
+    "source": "https://www.energy-northwest.com/whoweare/finance/Documents/EN%202025AB%20Amended%20Official%20Statement.pdf"
+  },
+  {
+    "date": "2026-08-03",
+    "deal": "amazon-dominion-north-anna-smr",
+    "what_changed": "Added the exploratory North Anna MOU.",
+    "source": "https://news.dominionenergy.com/press-releases/press-releases/2024/Dominion-Energy-and-Amazon-to-explore-advancement-of-Small-Modular-Reactor-SMR-nuclear-development-in-Virginia-10-16-2024/default.aspx"
+  },
+  {
+    "date": "2026-08-03",
+    "deal": "google-kairos-reactor-fleet",
+    "what_changed": "Added the fleet umbrella and excluded the separate Hermes 2 implementation from its optioned total.",
+    "source": "https://blog.google/company-news/outreach-and-initiatives/sustainability/google-kairos-power-nuclear-energy-agreement/"
+  },
+  {
+    "date": "2026-08-03",
+    "deal": "google-elementl-site-development",
+    "what_changed": "Added the three-site development funding agreement.",
+    "source": "https://blog.google/feed/google-and-elementl-nuclear-energy-site-development/"
+  },
+  {
+    "date": "2026-08-03",
+    "deal": "meta-constellation-clinton-ppa",
+    "what_changed": "Added the 20-year Clinton PPA.",
+    "source": "https://about.fb.com/news/2025/06/meta-constellation-partner-clean-energy-project/"
+  },
+  {
+    "date": "2026-08-03",
+    "deal": "meta-terrapower-natrium-fleet",
+    "what_changed": "Added funded and optioned Natrium units as separate capacity fields.",
+    "source": "https://www.terrapower.com/terrapower-announces-deal-with-meta"
+  },
+  {
+    "date": "2026-08-03",
+    "deal": "meta-oklo-pike-county-campus",
+    "what_changed": "Added the Pike County prepayment and development record.",
+    "source": "https://oklo.com/newsroom/news-details/2026/Oklo-Meta-Announce-Agreement-in-Support-of-1-2-GW-Nuclear-Energy-Development-in-Southern-Ohio/default.aspx"
+  },
+  {
+    "date": "2026-08-03",
+    "deal": "meta-vistra-pjm-nuclear-ppas",
+    "what_changed": "Added the operating plant PPAs and uprates without double counting the uprate capacity.",
+    "source": "https://investor.vistracorp.com/2026-01-09-Vistra-and-Meta-Announce-Agreements-to-Support-Nuclear-Plants-in-PJM-and-Add-New-Nuclear-Generation-to-the-Grid"
+  },
+  {
+    "date": "2026-08-03",
+    "deal": "terrapower-sabey-collaboration",
+    "what_changed": "Added the exploratory Natrium collaboration MOU.",
+    "source": "https://www.terrapower.com/terrapower-and-sabey-data-centers-agreement-for-natrium-wide-scale-deployment"
+  },
+  {
+    "date": "2026-08-03",
+    "deal": "oklo-switch-master-agreement",
+    "what_changed": "Added the non-binding 12 GW master agreement as optioned capacity.",
+    "source": "https://oklo.com/newsroom/news-details/2024/Oklo-and-Switch-Form-Landmark-Strategic-Relationship-to-Deploy-12-Gigawatts-of-Advanced-Nuclear-Power-One-of-the-Largest-Corporate-Clean-Power-Agreements-Ever-Signed/default.aspx"
+  },
+  {
+    "date": "2026-08-03",
+    "deal": "oklo-equinix-energy-rights",
+    "what_changed": "Added the paid energy-rights LOI and future PPA conditions.",
+    "source": "https://www.sec.gov/Archives/edgar/data/1849056/000110465924047344/tm2324337d21_ex10-19.htm"
+  },
+  {
+    "date": "2026-08-03",
+    "deal": "oklo-prometheus-hyperscale-loi",
+    "what_changed": "Added the 100 MW non-binding LOI under the buyer's current name.",
+    "source": "https://oklo.com/newsroom/news-details/2024/Oklo-Partners-with-Wyoming-Hyperscale-to-Deliver-100-Megawatts-to-its-Data-Centers/default.aspx"
+  },
+  {
+    "date": "2026-08-03",
+    "deal": "google-tva-kairos-hermes-2",
+    "what_changed": "Added the binding Hermes 2 PPA and construction milestone.",
+    "source": "https://www.kairospower.com/updates/kairos-power-breaks-ground-on-hermes-2-demonstration-plant"
+  },
+  {
+    "date": "2026-08-03",
+    "deal": "google-nextera-duane-arnold-restart",
+    "what_changed": "Added the signed restart PPA while leaving Google's undisclosed MW allocation blank.",
+    "source": "https://newsroom.nexteraenergy.com/NextEra-Energy-and-Google-Announce-New-Collaboration-to-Accelerate-Nuclear-Energy-Deployment-in-the-U-S"
+  },
+  {
+    "date": "2026-08-03",
+    "deal": "standard-power-nuscale-entra1-sites",
+    "what_changed": "Added the two planned SMR-powered data center sites and flagged the schedule for verification.",
+    "source": "https://www.nuscalepower.com/press-releases/2023/standard-power-chooses-nuscales-approved-smr-technology-and-entra1-energy-to-energize-data-centers"
+  }
+]
