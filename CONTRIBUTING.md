@@ -16,4 +16,4 @@ Every record needs at least one source, a bindingness tier, an evidence sentence
 
 ## Tip line
 
-Use [GitHub issues](https://github.com/lucaschatham/nuclear-datacenter-deal-tracker/issues) for leads, dead links, status changes, and suspected errors. Include a source URL and the affected deal id when possible.
+Use [GitHub issues](https://github.com/lucaschatham/nuclear-notebook/issues) for leads, dead links, status changes, and suspected errors. Include a source URL and the affected deal id when possible.

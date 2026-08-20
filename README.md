@@ -1,4 +1,4 @@
-# Nuclear Data Center Deal Tracker
+# Nuclear Notebook
 
 [![MIT License](https://img.shields.io/badge/license-MIT-2f2a21.svg)](LICENSE)
 
@@ -44,11 +44,11 @@ Generated downloads are available as JSON and CSV under `public/data/` after run
 
 ## Bindingness
 
-The seven-tier rubric runs from B0, unconfirmed reporting, through B5, operating under the deal. BX preserves dead, lapsed, and superseded records. Read the complete [methodology and rubric](https://lucaschatham.github.io/nuclear-datacenter-deal-tracker/about/).
+The seven-tier rubric runs from B0, unconfirmed reporting, through B5, operating under the deal. BX preserves dead, lapsed, and superseded records. Read the complete [methodology and rubric](https://lucaschatham.github.io/nuclear-notebook/about/).
 
 ## Contribute a correction
 
-Open a [GitHub issue](https://github.com/lucaschatham/nuclear-datacenter-deal-tracker/issues) with the deal id, proposed correction, and a primary source. For direct additions, follow [CONTRIBUTING.md](CONTRIBUTING.md) and include a changelog entry.
+Open a [GitHub issue](https://github.com/lucaschatham/nuclear-notebook/issues) with the deal id, proposed correction, and a primary source. For direct additions, follow [CONTRIBUTING.md](CONTRIBUTING.md) and include a changelog entry.
 
 ## License
 

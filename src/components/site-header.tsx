@@ -12,11 +12,11 @@ export function SiteHeader() {
     <header className="sticky top-0 z-50 border-b border-border/80 bg-background/92 backdrop-blur-md">
       <div className="mx-auto flex h-14 max-w-[1600px] items-center justify-between px-4 sm:px-6 lg:px-10">
         <Link href="/" className="group flex items-center gap-3 focus-visible:outline-2 focus-visible:outline-offset-4">
-          <span className="grid size-7 place-items-center border border-foreground/40 font-mono text-[10px] font-semibold transition-transform group-hover:rotate-6">
-            N×D
+              <span className="grid size-7 place-items-center border border-foreground/40 font-mono text-[10px] font-semibold transition-transform group-hover:rotate-6">
+                NN
           </span>
           <span className="hidden leading-none sm:block">
-            <span className="block font-mono text-[10px] font-semibold tracking-[0.2em]">NUCLEAR × COMPUTE</span>
+                <span className="block font-mono text-[10px] font-semibold tracking-[0.2em]">NUCLEAR NOTEBOOK</span>
             <span className="mt-1 block text-[10px] text-muted-foreground">PUBLIC DEAL LEDGER</span>
           </span>
         </Link>
