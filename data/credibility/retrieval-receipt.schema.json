@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lucaschatham.github.io/nuclear-notebook/data/credibility/retrieval-receipt.schema.json",
+  "title": "Nuclear Notebook retrieval receipts",
+  "type": "array",
+  "items": { "$ref": "#/$defs/receipt" },
+  "$defs": {
+    "receipt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "run_id",
+        "run_mode",
+        "source_id",
+        "checked_at",
+        "request_url",
+        "status",
+        "http_status",
+        "source_published_at",
+        "etag",
+        "last_modified",
+        "content_type",
+        "byte_count",
+        "sha256",
+        "normalized_sha256",
+        "adapter_version",
+        "duration_ms",
+        "error_class",
+        "error_message",
+        "previous_receipt_id",
+        "archive_path"
+      ],
+      "properties": {
+        "id": { "type": "string", "minLength": 8 },
+        "run_id": { "type": "string", "minLength": 3 },
+        "run_mode": { "enum": ["scheduled", "manual_probe"] },
+        "source_id": { "type": "string", "minLength": 3 },
+        "checked_at": { "type": "string", "format": "date-time" },
+        "request_url": { "type": "string", "format": "uri", "pattern": "^https://" },
+        "status": { "enum": ["changed", "unchanged", "failed", "blocked_auth", "manual_required"] },
+        "http_status": { "type": ["integer", "null"], "minimum": 100, "maximum": 599 },
+        "source_published_at": { "type": ["string", "null"], "format": "date-time" },
+        "etag": { "type": ["string", "null"] },
+        "last_modified": { "type": ["string", "null"] },
+        "content_type": { "type": ["string", "null"] },
+        "retry_after": { "type": ["string", "null"] },
+        "byte_count": { "type": "integer", "minimum": 0 },
+        "sha256": { "type": ["string", "null"], "pattern": "^[a-f0-9]{64}$" },
+        "normalized_sha256": { "type": ["string", "null"], "pattern": "^[a-f0-9]{64}$" },
+        "incremental_cursor_at": { "type": ["string", "null"], "format": "date-time" },
+        "incremental_cursor_fingerprints": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "pattern": "^.+:[a-f0-9]{64}$" }
+        },
+        "adapter_version": { "type": "string", "minLength": 1 },
+        "duration_ms": { "type": "integer", "minimum": 0 },
+        "error_class": { "type": ["string", "null"] },
+        "error_message": { "type": ["string", "null"] },
+        "previous_receipt_id": { "type": ["string", "null"] },
+        "archive_path": { "type": ["string", "null"] }
+      }
+    }
+  }
+}

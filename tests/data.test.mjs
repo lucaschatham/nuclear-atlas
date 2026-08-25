@@ -38,3 +38,21 @@ test("changelog references known deals", async () => {
     assert.match(entry.source, /^https:\/\//)
   }
 })
+
+test("product branding and repository links use Nuclear Notebook", async () => {
+  const files = await Promise.all([
+    "README.md",
+    "CONTRIBUTING.md",
+    "next.config.ts",
+    "package.json",
+    "src/app/layout.tsx",
+    "src/app/about/page.tsx",
+    "src/components/site-header.tsx",
+  ].map((path) => readFile(new URL(path, root), "utf8")))
+
+  const content = files.join("\n")
+  assert.match(content, /Nuclear Notebook/)
+  assert.match(content, /lucaschatham\/nuclear-notebook/)
+  assert.doesNotMatch(content, /Nuclear Data Center Deal Tracker/)
+  assert.doesNotMatch(content, /nuclear-datacenter-deal-tracker/)
+})

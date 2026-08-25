@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lucaschatham.github.io/nuclear-notebook/data/credibility/proof-review.schema.json",
+  "title": "Nuclear Notebook credibility proof reviews",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "date",
+      "reviewer",
+      "review_minutes",
+      "reviewed_receipt_ids",
+      "reviewed_event_ids",
+      "audited_event_ids",
+      "reproduced_event_ids",
+      "corrections_required",
+      "critical_errors_published",
+      "claims_audited",
+      "claims_reproduced",
+      "scenario_tests",
+      "notes"
+    ],
+    "properties": {
+      "date": { "type": "string", "format": "date" },
+      "reviewer": { "type": "string", "minLength": 2 },
+      "review_minutes": { "type": "integer", "minimum": 0 },
+      "reviewed_receipt_ids": { "type": "array", "items": { "type": "string", "minLength": 3 } },
+      "reviewed_event_ids": { "type": "array", "items": { "type": "string", "minLength": 3 } },
+      "audited_event_ids": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 3 } },
+      "reproduced_event_ids": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 3 } },
+      "corrections_required": { "type": "integer", "minimum": 0 },
+      "critical_errors_published": { "type": "integer", "minimum": 0 },
+      "claims_audited": { "type": "integer", "minimum": 0 },
+      "claims_reproduced": { "type": "integer", "minimum": 0 },
+      "scenario_tests": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["outage", "correction", "retraction", "conflict", "schema_drift"],
+        "properties": {
+          "outage": { "type": "boolean" },
+          "correction": { "type": "boolean" },
+          "retraction": { "type": "boolean" },
+          "conflict": { "type": "boolean" },
+          "schema_drift": { "type": "boolean" }
+        }
+      },
+      "notes": { "type": "string" }
+    }
+  }
+}

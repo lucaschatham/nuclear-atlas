@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const isGitHubPages = process.env.GITHUB_ACTIONS === "true";
-const basePath = isGitHubPages ? "/nuclear-datacenter-deal-tracker" : "";
+const basePath = isGitHubPages ? "/nuclear-notebook" : "";
 
 const nextConfig: NextConfig = {
   output: "export",

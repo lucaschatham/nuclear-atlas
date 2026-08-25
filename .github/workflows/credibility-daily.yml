@@ -1,0 +1,145 @@
+name: Daily credibility review
+
+on:
+  schedule:
+    - cron: "17 10 * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: credibility-daily
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      DATA_GOV_API_KEY: ${{ secrets.DATA_GOV_API_KEY }}
+      NRC_ADAMS_SUBSCRIPTION_KEY: ${{ secrets.NRC_ADAMS_SUBSCRIPTION_KEY }}
+      SAM_GOV_API_KEY: ${{ secrets.SAM_GOV_API_KEY }}
+      EIA_API_KEY: ${{ secrets.EIA_API_KEY }}
+      FERC_API_KEY: ${{ secrets.FERC_API_KEY }}
+      USGS_API_KEY: ${{ secrets.USGS_API_KEY }}
+      CENSUS_API_KEY: ${{ secrets.CENSUS_API_KEY }}
+      SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT }}
+      CREDIBILITY_RUN_MODE: scheduled
+      REVIEW_BRANCH: automation/credibility-daily
+      DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Continue the rolling review branch
+        run: |
+          git fetch origin "$DEFAULT_BRANCH"
+          open_pr_count=$(gh pr list --head "$REVIEW_BRANCH" --state open --json number --jq 'length')
+          if [ "$open_pr_count" -gt 0 ]; then
+            git fetch origin "$REVIEW_BRANCH"
+            if ! git show-ref --verify --quiet "refs/remotes/origin/$REVIEW_BRANCH"; then
+              echo "Open review pull request has no remote review branch."
+              exit 1
+            fi
+            git switch -C "$REVIEW_BRANCH" "origin/$REVIEW_BRANCH"
+            if ! git merge --no-edit "origin/$DEFAULT_BRANCH"; then
+              git merge --abort || true
+              exit 1
+            fi
+          else
+            if git ls-remote --exit-code --heads origin "$REVIEW_BRANCH" >/dev/null; then
+              git push origin --delete "$REVIEW_BRANCH"
+            fi
+            git switch -C "$REVIEW_BRANCH" "origin/$DEFAULT_BRANCH"
+          fi
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Collect source receipts and review candidates
+        id: collect
+        continue-on-error: true
+        run: npm run credibility:run
+
+      - name: Validate credibility contracts
+        id: validate
+        if: always()
+        continue-on-error: true
+        run: npm run validate:credibility
+
+      - name: Run deterministic tests
+        id: tests
+        if: always()
+        continue-on-error: true
+        run: npm test
+
+      - name: Upload raw changed-source snapshots for review
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: credibility-source-snapshots-${{ github.run_id }}
+          path: |
+            .credibility-artifacts/
+            data/credibility/receipts/
+            data/credibility/source-status.json
+            data/credibility/candidates/
+          if-no-files-found: ignore
+          retention-days: 90
+
+      - name: Commit review data
+        id: review_data
+        if: always() && steps.validate.outcome == 'success' && steps.tests.outcome == 'success'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/credibility/source-status.json
+          if [ -d data/credibility/receipts ]; then git add data/credibility/receipts; fi
+          if [ -d data/credibility/candidates ]; then git add data/credibility/candidates; fi
+          if git diff --cached --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            git commit -m "data: collect daily credibility receipts"
+            git push --set-upstream origin "$REVIEW_BRANCH"
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Create or update the human-review pull request
+        if: steps.review_data.outputs.changed == 'true'
+        run: |
+          pr_url=$(gh pr list --head "$REVIEW_BRANCH" --state open --json url --jq '.[0].url')
+          if [ -z "$pr_url" ]; then
+            pr_url=$(gh pr create \
+              --base "${{ github.event.repository.default_branch }}" \
+              --head "$REVIEW_BRANCH" \
+              --title "Daily credibility source review" \
+              --body "Machine-collected receipts and candidate records. Review source freshness, completeness, and claim support before merging. No evidence event is published automatically. Run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}")
+          fi
+          echo "Review pull request: $pr_url" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Summarize and alert on collection failure
+        if: always()
+        run: |
+          echo "## Credibility collection" >> "$GITHUB_STEP_SUMMARY"
+          echo "Collection: ${{ steps.collect.outcome }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "Validation: ${{ steps.validate.outcome }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "Tests: ${{ steps.tests.outcome }}" >> "$GITHUB_STEP_SUMMARY"
+          if [ "${{ steps.collect.outcome }}" != "success" ] || [ "${{ steps.validate.outcome }}" != "success" ] || [ "${{ steps.tests.outcome }}" != "success" ]; then
+            title="Credibility pipeline failure"
+            issue_number=$(gh issue list --state open --search "$title in:title" --json number --jq '.[0].number')
+            body="Daily credibility run failed or detected a blocked source. The receipt and source status preserve the last-known-good data. Inspect ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}."
+            if [ -n "$issue_number" ]; then
+              gh issue comment "$issue_number" --body "$body"
+            else
+              gh issue create --title "$title" --body "$body"
+            fi
+            exit 1
+          fi

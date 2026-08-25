@@ -1,0 +1,27 @@
+[
+  {
+    "project_id": "google-tva-kairos-hermes-2",
+    "archetype": "new_build_demonstration",
+    "proof_focus": ["licensing", "construction", "offtake", "schedule"]
+  },
+  {
+    "project_id": "microsoft-constellation-crane-restart",
+    "archetype": "reactor_restart",
+    "proof_focus": ["licensing", "construction", "grid", "offtake", "schedule"]
+  },
+  {
+    "project_id": "amazon-talen-susquehanna-ppa",
+    "archetype": "operating_reactor_power_sale",
+    "proof_focus": ["offtake", "grid", "operations"]
+  },
+  {
+    "project_id": "amazon-energy-northwest-cascade",
+    "archetype": "early_stage_utility_development",
+    "proof_focus": ["financing", "licensing", "offtake", "schedule"]
+  },
+  {
+    "project_id": "meta-oklo-pike-county-campus",
+    "archetype": "early_stage_vendor_campus",
+    "proof_focus": ["financing", "fuel", "offtake", "schedule"]
+  }
+]

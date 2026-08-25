@@ -25,8 +25,8 @@ const newsreader = Newsreader({
 
 export const metadata: Metadata = {
   title: {
-    default: "Nuclear Data Center Deal Tracker",
-    template: "%s | Nuclear Data Center Deal Tracker",
+    default: "Nuclear Notebook",
+    template: "%s | Nuclear Notebook",
   },
   description:
     "A free, sourced, open-data tracker of nuclear power deals serving data centers and other large loads.",
