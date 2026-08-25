@@ -25,8 +25,8 @@ const newsreader = Newsreader({
 
 export const metadata: Metadata = {
   title: {
-    default: "Nuclear Notebook",
-    template: "%s | Nuclear Notebook",
+    default: "Nuclear Atlas",
+    template: "%s | Nuclear Atlas",
   },
   description:
     "A public dashboard showing what nuclear data sources tell us, how fresh they are, and what remains unknown.",

@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://lucaschatham.github.io/nuclear-notebook/data/credibility/proof-review.schema.json",
-  "title": "Nuclear Notebook credibility proof reviews",
+  "$id": "https://nuclear.lucaschatham.com/data/credibility/proof-review.schema.json",
+  "title": "Nuclear Atlas credibility proof reviews",
   "type": "array",
   "items": {
     "type": "object",

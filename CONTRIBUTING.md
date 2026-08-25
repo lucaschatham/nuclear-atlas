@@ -23,4 +23,4 @@ HTML, PDF, Power BI, state-portal, and third-party evidence always requires huma
 
 ## Tip line
 
-Use [GitHub issues](https://github.com/lucaschatham/nuclear-notebook/issues) for leads, dead links, status changes, and suspected errors. Include a source URL and the affected deal id when possible.
+Use [GitHub issues](https://github.com/lucaschatham/nuclear-atlas/issues) for leads, dead links, status changes, and suspected errors. Include a source URL and the affected deal id when possible.

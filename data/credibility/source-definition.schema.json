@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://lucaschatham.github.io/nuclear-notebook/data/credibility/source-definition.schema.json",
-  "title": "Nuclear Notebook source registry",
+  "$id": "https://nuclear.lucaschatham.com/data/credibility/source-definition.schema.json",
+  "title": "Nuclear Atlas source registry",
   "type": "array",
   "minItems": 1,
   "items": { "$ref": "#/$defs/source" },

@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://lucaschatham.github.io/nuclear-notebook/data/credibility/source-status.schema.json",
-  "title": "Nuclear Notebook derived source status",
+  "$id": "https://nuclear.lucaschatham.com/data/credibility/source-status.schema.json",
+  "title": "Nuclear Atlas derived source status",
   "type": "array",
   "items": {
     "type": "object",

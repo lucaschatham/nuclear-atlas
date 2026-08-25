@@ -1,4 +1,4 @@
-# Nuclear Notebook
+# Nuclear Atlas
 
 [![MIT License](https://img.shields.io/badge/license-MIT-2f2a21.svg)](LICENSE)
 
@@ -60,11 +60,11 @@ Generated public outputs include `source-registry.json`, `source-probes.json`, `
 
 ## Bindingness
 
-The seven-tier rubric runs from B0, unconfirmed reporting, through B5, operating under the deal. BX preserves dead, lapsed, and superseded records. Read the complete [methodology and rubric](https://lucaschatham.github.io/nuclear-notebook/about/).
+The seven-tier rubric runs from B0, unconfirmed reporting, through B5, operating under the deal. BX preserves dead, lapsed, and superseded records. Read the complete [methodology and rubric](https://nuclear.lucaschatham.com/about/).
 
 ## Contribute a correction
 
-Open a [GitHub issue](https://github.com/lucaschatham/nuclear-notebook/issues) with the deal id, proposed correction, and a primary source. For direct additions, follow [CONTRIBUTING.md](CONTRIBUTING.md) and include a changelog entry.
+Open a [GitHub issue](https://github.com/lucaschatham/nuclear-atlas/issues) with the deal id, proposed correction, and a primary source. For direct additions, follow [CONTRIBUTING.md](CONTRIBUTING.md) and include a changelog entry.
 
 ## License
 

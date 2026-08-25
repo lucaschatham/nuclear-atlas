@@ -1,6 +1,6 @@
 # Credibility pipeline
 
-Nuclear Notebook checks approved public sources every 24 hours. It preserves the distinction between when Nuclear Notebook checked a source, when the publisher updated it, and when the underlying event took effect.
+Nuclear Atlas checks approved public sources every 24 hours. It preserves the distinction between when Nuclear Atlas checked a source, when the publisher updated it, and when the underlying event took effect.
 
 The pipeline does not publish new factual claims automatically. It creates receipts and review candidates on a rolling pull-request branch. A person must review and merge evidence. Only GitHub scheduler run IDs count toward the proof gate; manual and prelaunch checks remain visible but excluded.
 

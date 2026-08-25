@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://lucaschatham.github.io/nuclear-notebook/data/credibility/evidence-event.schema.json",
-  "title": "Nuclear Notebook evidence events",
+  "$id": "https://nuclear.lucaschatham.com/data/credibility/evidence-event.schema.json",
+  "title": "Nuclear Atlas evidence events",
   "type": "array",
   "items": { "$ref": "#/$defs/event" },
   "$defs": {

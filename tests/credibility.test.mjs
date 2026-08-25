@@ -904,7 +904,7 @@ test("proof runs exclude local attempts that were mislabeled as scheduled", () =
 })
 
 test("public evidence output excludes unreviewed observations", async () => {
-  const temporaryDirectory = await mkdtemp(join(tmpdir(), "nuclear-notebook-credibility-"))
+  const temporaryDirectory = await mkdtemp(join(tmpdir(), "nuclear-atlas-credibility-"))
   const inputPath = join(temporaryDirectory, "events.json")
   await writeFile(inputPath, JSON.stringify([
     { id: "observed", review_state: "observed" },

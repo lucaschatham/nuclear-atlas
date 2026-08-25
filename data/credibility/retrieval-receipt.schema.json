@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://lucaschatham.github.io/nuclear-notebook/data/credibility/retrieval-receipt.schema.json",
-  "title": "Nuclear Notebook retrieval receipts",
+  "$id": "https://nuclear.lucaschatham.com/data/credibility/retrieval-receipt.schema.json",
+  "title": "Nuclear Atlas retrieval receipts",
   "type": "array",
   "items": { "$ref": "#/$defs/receipt" },
   "$defs": {

@@ -39,7 +39,7 @@ test("changelog references known deals", async () => {
   }
 })
 
-test("product branding and repository links use Nuclear Notebook", async () => {
+test("product branding and repository links use Nuclear Atlas", async () => {
   const files = await Promise.all([
     "README.md",
     "CONTRIBUTING.md",
@@ -51,8 +51,10 @@ test("product branding and repository links use Nuclear Notebook", async () => {
   ].map((path) => readFile(new URL(path, root), "utf8")))
 
   const content = files.join("\n")
-  assert.match(content, /Nuclear Notebook/)
-  assert.match(content, /lucaschatham\/nuclear-notebook/)
+  assert.match(content, /Nuclear Atlas/)
+  assert.match(content, /lucaschatham\/nuclear-atlas/)
+  assert.doesNotMatch(content, /Nuclear Notebook/)
+  assert.doesNotMatch(content, /lucaschatham\/nuclear-notebook/)
   assert.doesNotMatch(content, /Nuclear Data Center Deal Tracker/)
   assert.doesNotMatch(content, /nuclear-datacenter-deal-tracker/)
 })

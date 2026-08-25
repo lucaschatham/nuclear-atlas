@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://lucaschatham.github.io/nuclear-notebook/data/schema.json",
+  "$id": "https://nuclear.lucaschatham.com/data/schema.json",
   "title": "Nuclear data center deals",
   "type": "array",
   "minItems": 1,
