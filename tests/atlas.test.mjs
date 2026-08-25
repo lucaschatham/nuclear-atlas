@@ -88,3 +88,13 @@ test("atlas exposes source evidence and preserves the existing deal explorer", a
   assert.match(page, /DownloadButtons/)
   assert.match(layout, /https:\/\/nuclearatlas\.lucaschatham\.com/)
 })
+
+test("map surface fills the atlas panel after MapLibre adds its root class", async () => {
+  const [mapComponent, globalCss] = await Promise.all([
+    read("src/components/atlas-map.tsx"),
+    read("src/app/globals.css"),
+  ])
+
+  assert.match(mapComponent, /atlas-map-surface/)
+  assert.match(globalCss, /\.atlas-map-surface\.maplibregl-map\s*\{[^}]*position:\s*absolute[^}]*inset:\s*0/s)
+})

@@ -201,7 +201,7 @@ export function AtlasMap({ points, selectedId, viewRevision, resetWorldRevision,
 
   return (
     <div className="relative h-full min-h-[460px] overflow-hidden bg-[#08110f]">
-      <div ref={containerRef} className="absolute inset-0" aria-label="Interactive globe showing nuclear evidence locations" />
+      <div ref={containerRef} className="atlas-map-surface absolute inset-0" aria-label="Interactive globe showing nuclear evidence locations" />
       <button
         type="button"
         onClick={resetWorld}
