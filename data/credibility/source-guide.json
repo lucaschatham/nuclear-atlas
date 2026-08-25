@@ -1,0 +1,172 @@
+[
+  {
+    "source_id": "nrc-reactor-status",
+    "category": "Reactors and regulation",
+    "plain_english": "Shows which U.S. power reactors are operating and how much power they report each day."
+  },
+  {
+    "source_id": "nrc-adams",
+    "category": "Reactors and regulation",
+    "plain_english": "Holds official NRC applications, licenses, inspections, orders, and spent fuel decisions."
+  },
+  {
+    "source_id": "nrc-structured-datasets",
+    "category": "Reactors and regulation",
+    "plain_english": "Provides downloadable NRC lists for reactors, events, licenses, and storage systems."
+  },
+  {
+    "source_id": "federal-register-nrc",
+    "category": "Reactors and regulation",
+    "plain_english": "Shows new NRC notices, proposed rules, hearings, and licensing actions published for the public."
+  },
+  {
+    "source_id": "govinfo-federal-register",
+    "category": "Reactors and regulation",
+    "plain_english": "Provides the official legal copy of Federal Register notices so important actions can be verified."
+  },
+  {
+    "source_id": "regulations-gov-nrc",
+    "category": "Reactors and regulation",
+    "plain_english": "Collects NRC rulemaking dockets, supporting documents, and public comments."
+  },
+  {
+    "source_id": "usaspending-nuclear",
+    "category": "Money and government support",
+    "plain_english": "Shows federal nuclear awards, recipients, dollars obligated, and contract changes."
+  },
+  {
+    "source_id": "sam-opportunities-nuclear",
+    "category": "Money and government support",
+    "plain_english": "Lists federal nuclear work that agencies are buying, including deadlines and amendments."
+  },
+  {
+    "source_id": "grants-gov-nuclear",
+    "category": "Money and government support",
+    "plain_english": "Lists open federal nuclear grants, who can apply, and when applications are due."
+  },
+  {
+    "source_id": "osti-nuclear",
+    "category": "Money and government support",
+    "plain_english": "Finds DOE-funded nuclear research, technical reports, datasets, and demonstration results."
+  },
+  {
+    "source_id": "doe-program-pages",
+    "category": "Money and government support",
+    "plain_english": "Tracks DOE selections, loans, awards, milestones, and official project announcements."
+  },
+  {
+    "source_id": "sec-edgar-oklo",
+    "category": "Money and government support",
+    "plain_english": "Shows what Oklo files with investors about financing, contracts, risks, costs, and schedules."
+  },
+  {
+    "source_id": "eia-nuclear",
+    "category": "Power and the grid",
+    "plain_english": "Reports nuclear generation, reactor outages, plant ownership, fuel, and electricity market data."
+  },
+  {
+    "source_id": "ferc-electric",
+    "category": "Power and the grid",
+    "plain_english": "Shows federal power market filings, proceedings, and reported electricity sales."
+  },
+  {
+    "source_id": "iso-rto-queues",
+    "category": "Power and the grid",
+    "plain_english": "Shows projects waiting to connect to regional power grids and where they are in the process."
+  },
+  {
+    "source_id": "state-puc-dockets",
+    "category": "Power and the grid",
+    "plain_english": "Shows state utility requests and decisions on rates, new projects, and customer power contracts."
+  },
+  {
+    "source_id": "local-permitting",
+    "category": "Sites and communities",
+    "plain_english": "Shows local hearings and permits for land, buildings, roads, water, and taxes around a project."
+  },
+  {
+    "source_id": "epa-echo",
+    "category": "Sites and communities",
+    "plain_english": "Shows a facility's environmental permits, inspections, violations, and enforcement history."
+  },
+  {
+    "source_id": "epa-radnet",
+    "category": "Sites and communities",
+    "plain_english": "Reports radiation readings from EPA monitoring stations across the United States."
+  },
+  {
+    "source_id": "usgs-water",
+    "category": "Sites and communities",
+    "plain_english": "Shows nearby streamflow, groundwater, and water quality measurements for evaluating a site."
+  },
+  {
+    "source_id": "fema-national-risk-index",
+    "category": "Sites and communities",
+    "plain_english": "Estimates local exposure to floods, earthquakes, wildfire, storms, and other natural hazards."
+  },
+  {
+    "source_id": "census-community",
+    "category": "Sites and communities",
+    "plain_english": "Describes who lives near a site, including population, housing, income, and local businesses."
+  },
+  {
+    "source_id": "bls-qcew",
+    "category": "Sites and communities",
+    "plain_english": "Shows local jobs, wages, and industry concentration to assess the available workforce."
+  },
+  {
+    "source_id": "noaa-climate",
+    "category": "Sites and communities",
+    "plain_english": "Provides weather, climate, and severe storm records that affect site design and operations."
+  },
+  {
+    "source_id": "nrc-spent-fuel",
+    "category": "Fuel, waste, and supply chain",
+    "plain_english": "Shows licensed U.S. spent fuel storage sites and the storage systems regulators have approved."
+  },
+  {
+    "source_id": "usitc-census-trade",
+    "category": "Fuel, waste, and supply chain",
+    "plain_english": "Shows public U.S. import and export flows for nuclear fuel and supply chain materials."
+  },
+  {
+    "source_id": "doe-spent-fuel",
+    "category": "Fuel, waste, and supply chain",
+    "plain_english": "Tracks DOE records on spent fuel inventories, cleanup, transport, storage, and disposal work."
+  },
+  {
+    "source_id": "kairos-power-updates",
+    "category": "Company disclosures",
+    "plain_english": "Shows what Kairos Power says publicly about construction, schedules, and customer agreements."
+  },
+  {
+    "source_id": "constellation-investor-relations",
+    "category": "Company disclosures",
+    "plain_english": "Shows Constellation's public statements on plant operations, projects, financing, and power contracts."
+  },
+  {
+    "source_id": "talen-investor-relations",
+    "category": "Company disclosures",
+    "plain_english": "Shows Talen's public statements on Susquehanna, data center power sales, financing, and grid issues."
+  },
+  {
+    "source_id": "energy-northwest-publications",
+    "category": "Company disclosures",
+    "plain_english": "Shows Energy Northwest's public records on project finance, construction, schedules, and customers."
+  },
+  {
+    "source_id": "iaea-nuclear-data",
+    "category": "International and discovery",
+    "plain_english": "Provides international reactor, fuel cycle, and spent fuel information reported through the IAEA."
+  },
+  {
+    "source_id": "oecd-nea-nuclear-data",
+    "category": "International and discovery",
+    "plain_english": "Compares nuclear programs, construction, operations, policy, and costs across member countries."
+  },
+  {
+    "source_id": "third-party-nuclear-trackers",
+    "category": "International and discovery",
+    "plain_english": "Flags projects and claims worth investigating, but never replaces an official or firsthand source."
+  }
+]

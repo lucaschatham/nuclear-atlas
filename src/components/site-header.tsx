@@ -17,7 +17,7 @@ export function SiteHeader() {
           </span>
           <span className="hidden leading-none sm:block">
                 <span className="block font-mono text-[10px] font-semibold tracking-[0.2em]">NUCLEAR NOTEBOOK</span>
-            <span className="mt-1 block text-[10px] text-muted-foreground">PUBLIC DEAL LEDGER</span>
+            <span className="mt-1 block text-[10px] text-muted-foreground">PUBLIC EVIDENCE DASHBOARD</span>
           </span>
         </Link>
         <nav aria-label="Primary navigation" className="flex items-center gap-1 sm:gap-2">

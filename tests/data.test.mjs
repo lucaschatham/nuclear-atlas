@@ -56,3 +56,24 @@ test("product branding and repository links use Nuclear Notebook", async () => {
   assert.doesNotMatch(content, /Nuclear Data Center Deal Tracker/)
   assert.doesNotMatch(content, /nuclear-datacenter-deal-tracker/)
 })
+
+test("every registered source has a concise plain-language guide", async () => {
+  const [sources, guide] = await Promise.all([
+    readJson("data/credibility/sources.json"),
+    readJson("data/credibility/source-guide.json"),
+  ])
+  const sourceIds = sources.map((source) => source.id).sort()
+  const guideIds = guide.map((entry) => entry.source_id).sort()
+
+  assert.deepEqual(guideIds, sourceIds)
+  assert.equal(new Set(guideIds).size, guideIds.length)
+
+  for (const entry of guide) {
+    assert.match(entry.category, /\S/)
+    assert.match(entry.plain_english, /\S/)
+    assert.ok(
+      entry.plain_english.length <= 180,
+      `${entry.source_id} explanation is too long`,
+    )
+  }
+})

@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     template: "%s | Nuclear Notebook",
   },
   description:
-    "A free, sourced, open-data tracker of nuclear power deals serving data centers and other large loads.",
+    "A public dashboard showing what nuclear data sources tell us, how fresh they are, and what remains unknown.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
