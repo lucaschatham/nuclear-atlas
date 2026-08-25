@@ -60,7 +60,7 @@ Generated public outputs include `source-registry.json`, `source-probes.json`, `
 
 ## Bindingness
 
-The seven-tier rubric runs from B0, unconfirmed reporting, through B5, operating under the deal. BX preserves dead, lapsed, and superseded records. Read the complete [methodology and rubric](https://nuclear.lucaschatham.com/about/).
+The seven-tier rubric runs from B0, unconfirmed reporting, through B5, operating under the deal. BX preserves dead, lapsed, and superseded records. Read the complete [methodology and rubric](https://nuclearatlas.lucaschatham.com/about/).
 
 ## Contribute a correction
 

@@ -74,9 +74,10 @@ test("production atlas keeps lifecycle navigation primary and personas optional"
 })
 
 test("atlas exposes source evidence and preserves the existing deal explorer", async () => {
-  const [component, page] = await Promise.all([
+  const [component, page, layout] = await Promise.all([
     read("src/components/nuclear-atlas.tsx"),
     read("src/app/page.tsx"),
+    read("src/app/layout.tsx"),
   ])
 
   assert.match(component, /source/i)
@@ -85,4 +86,5 @@ test("atlas exposes source evidence and preserves the existing deal explorer", a
   assert.match(component, /href={`\/deal\//)
   assert.match(page, /DealExplorer/)
   assert.match(page, /DownloadButtons/)
+  assert.match(layout, /https:\/\/nuclearatlas\.lucaschatham\.com/)
 })

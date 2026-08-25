@@ -44,6 +44,13 @@ test("product branding and repository links use Nuclear Atlas", async () => {
     "README.md",
     "CONTRIBUTING.md",
     ".github/workflows/ci.yml",
+    "data/schema.json",
+    "data/credibility/evidence-event.schema.json",
+    "data/credibility/proof-review.schema.json",
+    "data/credibility/retrieval-receipt.schema.json",
+    "data/credibility/source-definition.schema.json",
+    "data/credibility/source-probe.schema.json",
+    "data/credibility/source-status.schema.json",
     "next.config.ts",
     "package.json",
     "src/app/layout.tsx",
@@ -54,9 +61,11 @@ test("product branding and repository links use Nuclear Atlas", async () => {
   const content = files.join("\n")
   assert.match(content, /Nuclear Atlas/)
   assert.match(content, /lucaschatham\/nuclear-atlas/)
+  assert.match(content, /https:\/\/nuclearatlas\.lucaschatham\.com/)
   assert.match(content, /NEXT_PUBLIC_BASE_PATH: \/nuclear-atlas/)
   assert.doesNotMatch(content, /Nuclear Notebook/)
   assert.doesNotMatch(content, /lucaschatham\/nuclear-notebook/)
+  assert.doesNotMatch(content, /https:\/\/nuclear\.lucaschatham\.com/)
   assert.doesNotMatch(content, /Nuclear Data Center Deal Tracker/)
   assert.doesNotMatch(content, /nuclear-datacenter-deal-tracker/)
 })

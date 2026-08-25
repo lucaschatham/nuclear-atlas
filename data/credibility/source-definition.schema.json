@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://nuclear.lucaschatham.com/data/credibility/source-definition.schema.json",
+  "$id": "https://nuclearatlas.lucaschatham.com/data/credibility/source-definition.schema.json",
   "title": "Nuclear Atlas source registry",
   "type": "array",
   "minItems": 1,

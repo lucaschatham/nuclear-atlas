@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://nuclear.lucaschatham.com/data/credibility/proof-review.schema.json",
+  "$id": "https://nuclearatlas.lucaschatham.com/data/credibility/proof-review.schema.json",
   "title": "Nuclear Atlas credibility proof reviews",
   "type": "array",
   "items": {

@@ -25,12 +25,14 @@ const newsreader = Newsreader({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://nuclearatlas.lucaschatham.com"),
   title: {
     default: "Nuclear Atlas",
     template: "%s | Nuclear Atlas",
   },
   description:
     "A global public evidence atlas for nuclear projects, fuel, operations, spent fuel, waste, and decommissioning.",
+  alternates: { canonical: "/" },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
