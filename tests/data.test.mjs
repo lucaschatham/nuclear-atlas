@@ -43,6 +43,7 @@ test("product branding and repository links use Nuclear Atlas", async () => {
   const files = await Promise.all([
     "README.md",
     "CONTRIBUTING.md",
+    ".github/workflows/ci.yml",
     "next.config.ts",
     "package.json",
     "src/app/layout.tsx",
@@ -53,6 +54,7 @@ test("product branding and repository links use Nuclear Atlas", async () => {
   const content = files.join("\n")
   assert.match(content, /Nuclear Atlas/)
   assert.match(content, /lucaschatham\/nuclear-atlas/)
+  assert.match(content, /NEXT_PUBLIC_BASE_PATH: \/nuclear-atlas/)
   assert.doesNotMatch(content, /Nuclear Notebook/)
   assert.doesNotMatch(content, /lucaschatham\/nuclear-notebook/)
   assert.doesNotMatch(content, /Nuclear Data Center Deal Tracker/)
