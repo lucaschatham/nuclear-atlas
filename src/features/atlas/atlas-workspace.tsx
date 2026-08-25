@@ -274,12 +274,12 @@ function HydratedAtlasWorkspace({ records, sources }: AtlasWorkspaceProps) {
 
   return (
     <section aria-labelledby="atlas-title" className="bg-background">
-      <header className="border-b bg-card/40 px-4 py-5 sm:px-6 lg:px-8">
-        <div className="mx-auto flex max-w-[1920px] flex-col gap-4 xl:flex-row xl:items-end xl:justify-between">
-          <div>
-            <p className="text-xs font-medium uppercase tracking-wider text-primary">Global public evidence atlas</p>
-            <h1 id="atlas-title" className="mt-1 text-2xl font-semibold tracking-tight sm:text-3xl">Nuclear projects, mapped to their public evidence.</h1>
-            <p className="mt-1 text-sm text-muted-foreground">Every record names its source and location precision. Missing coverage stays visible.</p>
+      <header className="border-b bg-card/40 px-4 py-4 sm:px-6 lg:px-8">
+        <div className="mx-auto flex max-w-[1920px] flex-col gap-4 xl:flex-row xl:items-center xl:justify-between">
+          <div className="min-w-0">
+            <h1 id="atlas-title" className="text-3xl font-semibold leading-none tracking-tight sm:text-4xl lg:text-[2.75rem]">Nuclear Atlas</h1>
+            <p className="mt-2 max-w-5xl text-sm font-medium leading-5 text-foreground/85 sm:text-base">Understand the global nuclear landscape, from fuel supply and new projects to spent fuel and decommissioning.</p>
+            <p className="mt-1 max-w-5xl text-xs leading-5 text-muted-foreground sm:text-sm">Built from public evidence. Every record shows its source, date, and location precision. Coverage gaps remain visible.</p>
           </div>
           <ButtonGroup>
             <Button type="button" variant="outline" className="h-10" onClick={() => dispatch({ type: "open-inspector", inspector: "sources" })}>
