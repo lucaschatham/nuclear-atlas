@@ -4,7 +4,7 @@
 
 Separate announced from binding. Every nuclear × large-load deal, its structure, its contractual weight, and what changed, in one free place.
 
-The dataset is the product. The site is a static, filterable viewer with per-fact sourcing, a published bindingness rubric, open downloads, and a permanent changelog.
+The dataset is the product. The site is a static, filterable viewer with per-fact sourcing, a published bindingness rubric, open downloads, and a permanent changelog. Its credibility layer checks approved public sources daily while preserving source-native dates, failures, conflicts, and corrections.
 
 ## Screenshot
 
@@ -22,6 +22,7 @@ Open `http://localhost:3000`. To validate and export the production site:
 ```bash
 npm test
 npm run validate:data
+npm run validate:credibility
 npm run build
 ```
 
@@ -41,6 +42,21 @@ The static export is written to `out/`.
 - analyst note, verification flag, and last-verified date
 
 Generated downloads are available as JSON and CSV under `public/data/` after running the build.
+
+## Credibility layer
+
+`data/credibility/` contains the source registry, retrieval-receipt schema, append-only evidence ledger, five-project proof cohort, and proof-review log. The automated pipeline:
+
+- polls only sources explicitly marked `approved_automated`
+- records changed, unchanged, failed, and blocked checks
+- uses raw and canonical hashes to avoid false changes from volatile API metadata
+- blocks incomplete pagination, unexpected empty results, schema drift, and unresolved reviewed conflicts
+- retains last-known-good facts during source failures
+- excludes observed and conflicting evidence from public downloads
+
+Run a read-only live probe with `npm run credibility:probe`. Read [the credibility operator guide](docs/credibility.md) before approving a source or evidence event.
+
+Generated public outputs include `source-registry.json`, `source-probes.json`, `source-status.json`, `evidence-events.json`, and `credibility-proof.json`. The proof gate starts closed and requires 14 complete daily runs plus a 20-claim audit before dashboard expansion.
 
 ## Bindingness
 

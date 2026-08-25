@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lucaschatham.github.io/nuclear-notebook/data/credibility/source-probe.schema.json",
+  "title": "Nuclear Notebook source access probes",
+  "type": "array",
+  "minItems": 12,
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "source_id",
+      "probed_at",
+      "result",
+      "http_status",
+      "response_format",
+      "record_count",
+      "identifiers",
+      "rate_limit_behavior",
+      "empty_response_behavior",
+      "notes"
+    ],
+    "properties": {
+      "source_id": { "type": "string", "minLength": 3 },
+      "probed_at": { "type": "string", "format": "date-time" },
+      "result": { "enum": ["success", "blocked_auth", "failed_contract", "terms_blocked"] },
+      "http_status": { "type": ["integer", "null"], "minimum": 100, "maximum": 599 },
+      "response_format": { "type": ["string", "null"] },
+      "record_count": { "type": ["integer", "null"], "minimum": 0 },
+      "identifiers": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+      "rate_limit_behavior": { "type": "string", "minLength": 3 },
+      "empty_response_behavior": { "type": "string", "minLength": 3 },
+      "notes": { "type": "string", "minLength": 3 }
+    }
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lucaschatham.github.io/nuclear-notebook/data/credibility/evidence-event.schema.json",
+  "title": "Nuclear Notebook evidence events",
+  "type": "array",
+  "items": { "$ref": "#/$defs/event" },
+  "$defs": {
+    "event": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "project_id",
+        "claim_type",
+        "claim_key",
+        "normalized_value",
+        "unit",
+        "source_id",
+        "document_url",
+        "source_document_id",
+        "source_locator",
+        "published_at",
+        "effective_at",
+        "retrieved_at",
+        "retrieval_receipt_id",
+        "authority_class",
+        "review_state",
+        "supersedes_event_id"
+      ],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+        "project_id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+        "claim_type": {
+          "enum": [
+            "licensing",
+            "construction",
+            "schedule",
+            "financing",
+            "federal_support",
+            "offtake",
+            "grid",
+            "fuel",
+            "supply_chain",
+            "operations",
+            "safety",
+            "environment",
+            "community",
+            "waste"
+          ]
+        },
+        "claim_key": { "type": "string", "pattern": "^[a-z0-9]+(?:[.-][a-z0-9]+)+$" },
+        "normalized_value": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "number" },
+            { "type": "boolean" },
+            { "type": "null" }
+          ]
+        },
+        "unit": { "type": ["string", "null"] },
+        "source_id": { "type": "string", "minLength": 3 },
+        "document_url": { "type": "string", "format": "uri", "pattern": "^https://" },
+        "source_document_id": { "type": "string", "minLength": 3 },
+        "source_locator": { "type": "string", "minLength": 3 },
+        "published_at": { "type": "string", "format": "date" },
+        "effective_at": { "type": ["string", "null"], "format": "date" },
+        "retrieved_at": { "type": "string", "format": "date-time" },
+        "retrieval_receipt_id": { "type": ["string", "null"] },
+        "authority_class": {
+          "enum": [
+            "official_legal",
+            "official_regulatory",
+            "official_government",
+            "counterparty_filing",
+            "counterparty_statement",
+            "independent_primary",
+            "secondary_discovery"
+          ]
+        },
+        "review_state": { "enum": ["observed", "reviewed", "published", "conflicting", "superseded", "retracted"] },
+        "supersedes_event_id": { "type": ["string", "null"] }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "review_state": { "enum": ["reviewed", "published", "superseded", "retracted"] } }, "required": ["review_state"] },
+          "then": { "properties": { "retrieval_receipt_id": { "type": "string", "minLength": 8 } } }
+        }
+      ]
+    }
+  }
+}

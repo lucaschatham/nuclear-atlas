@@ -1,7 +1,17 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises"
 
+import { buildProofStatusFromFiles } from "./credibility/proof.mjs"
+
 const root = new URL("../", import.meta.url)
-const deals = JSON.parse(await readFile(new URL("data/deals.json", root), "utf8"))
+const readJson = async (path) => JSON.parse(await readFile(new URL(path, root), "utf8"))
+const [deals, sourceRegistry, sourceStatus, sourceProbes, evidenceEvents, proofStatus] = await Promise.all([
+  readJson("data/deals.json"),
+  readJson("data/credibility/sources.json"),
+  readJson("data/credibility/source-status.json"),
+  readJson("data/credibility/source-probes.json"),
+  readJson("data/credibility/evidence-events.json"),
+  buildProofStatusFromFiles({ rootUrl: root }),
+])
 const outputDirectory = new URL("public/data/", root)
 
 const columns = [
@@ -69,4 +79,32 @@ const csv = [columns.join(","), ...rows.map((row) => columns.map((column) => quo
 await mkdir(outputDirectory, { recursive: true })
 await writeFile(new URL("deals.json", outputDirectory), `${JSON.stringify(deals, null, 2)}\n`)
 await writeFile(new URL("deals.csv", outputDirectory), `${csv}\n`)
-console.log(`Generated JSON and CSV downloads for ${deals.length} deals.`)
+
+const publicSourceRegistry = sourceRegistry.map((source) => ({
+  id: source.id,
+  name: source.name,
+  publisher: source.publisher,
+  authority_class: source.authority_class,
+  geographic_scope: source.geographic_scope,
+  endpoint: source.endpoint,
+  access_method: source.access_method,
+  auth_method: source.auth_method,
+  terms_url: source.terms_url,
+  archival_policy: source.archival_policy,
+  expected_cadence: source.expected_cadence,
+  polling_interval_hours: source.polling_interval_hours,
+  supported_claim_types: source.supported_claim_types,
+  adapter_version: source.adapter_version,
+  operational_state: source.operational_state,
+  notes: source.notes,
+}))
+const publicEvidenceEvents = evidenceEvents.filter((event) =>
+  ["reviewed", "published", "superseded", "retracted"].includes(event.review_state),
+)
+
+await writeFile(new URL("source-registry.json", outputDirectory), `${JSON.stringify(publicSourceRegistry, null, 2)}\n`)
+await writeFile(new URL("source-status.json", outputDirectory), `${JSON.stringify(sourceStatus, null, 2)}\n`)
+await writeFile(new URL("source-probes.json", outputDirectory), `${JSON.stringify(sourceProbes, null, 2)}\n`)
+await writeFile(new URL("evidence-events.json", outputDirectory), `${JSON.stringify(publicEvidenceEvents, null, 2)}\n`)
+await writeFile(new URL("credibility-proof.json", outputDirectory), `${JSON.stringify(proofStatus, null, 2)}\n`)
+console.log(`Generated deal downloads and credibility outputs for ${deals.length} deals and ${sourceRegistry.length} sources.`)

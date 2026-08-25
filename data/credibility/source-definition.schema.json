@@ -1,0 +1,146 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lucaschatham.github.io/nuclear-notebook/data/credibility/source-definition.schema.json",
+  "title": "Nuclear Notebook source registry",
+  "type": "array",
+  "minItems": 1,
+  "items": { "$ref": "#/$defs/source" },
+  "$defs": {
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "publisher",
+        "authority_class",
+        "geographic_scope",
+        "endpoint",
+        "allowed_hosts",
+        "access_method",
+        "auth_method",
+        "auth_env",
+        "auth_placement",
+        "auth_parameter",
+        "terms_url",
+        "archival_policy",
+        "expected_cadence",
+        "polling_interval_hours",
+        "supported_claim_types",
+        "adapter",
+        "adapter_version",
+        "operational_state",
+        "empty_response_is_valid",
+        "timeout_ms",
+        "maximum_response_bytes",
+        "request",
+        "notes"
+      ],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+        "name": { "type": "string", "minLength": 3 },
+        "publisher": { "type": "string", "minLength": 2 },
+        "authority_class": {
+          "enum": [
+            "official_legal",
+            "official_regulatory",
+            "official_government",
+            "counterparty_filing",
+            "counterparty_statement",
+            "independent_primary",
+            "secondary_discovery"
+          ]
+        },
+        "geographic_scope": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 2 }
+        },
+        "endpoint": { "type": "string", "format": "uri", "pattern": "^https://" },
+        "allowed_hosts": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "pattern": "^[A-Za-z0-9.-]+$" }
+        },
+        "access_method": { "enum": ["api", "rss", "bulk", "html", "pdf", "portal", "dataset"] },
+        "auth_method": { "enum": ["none", "api_key", "subscription", "user_agent", "manual", "restricted"] },
+        "auth_env": { "type": ["string", "null"] },
+        "auth_placement": { "enum": ["query", "header", null] },
+        "auth_parameter": { "type": ["string", "null"] },
+        "terms_url": { "type": "string", "format": "uri", "pattern": "^https://" },
+        "archival_policy": { "enum": ["full_snapshot", "record_snapshot", "metadata_only", "no_archive"] },
+        "expected_cadence": { "enum": ["intra_day", "daily", "weekly", "monthly", "quarterly", "annual", "irregular"] },
+        "polling_interval_hours": { "type": "integer", "minimum": 1 },
+        "supported_claim_types": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "enum": [
+              "licensing",
+              "construction",
+              "schedule",
+              "financing",
+              "federal_support",
+              "offtake",
+              "grid",
+              "fuel",
+              "supply_chain",
+              "operations",
+              "safety",
+              "environment",
+              "community",
+              "waste"
+            ]
+          }
+        },
+        "adapter": { "type": ["string", "null"] },
+        "adapter_version": { "type": "string", "minLength": 1 },
+        "operational_state": { "enum": ["candidate", "probed", "manual_only", "approved_automated", "paused", "retired"] },
+        "empty_response_is_valid": { "type": "boolean" },
+        "timeout_ms": { "type": "integer", "minimum": 1000 },
+        "maximum_response_bytes": { "type": "integer", "minimum": 1024 },
+        "minimum_record_count": { "type": "integer", "minimum": 1 },
+        "comparison_mode": { "enum": ["snapshot", "incremental"] },
+        "incremental_record_id_path": { "type": "string", "minLength": 1 },
+        "incremental_record_timestamp_path": { "type": "string", "minLength": 1 },
+        "accepted_content_types": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 3 }
+        },
+        "request": {
+          "type": ["object", "null"],
+          "additionalProperties": false,
+          "properties": {
+            "method": { "enum": ["GET", "POST"] },
+            "query": {
+              "type": "object",
+              "additionalProperties": {
+                "oneOf": [
+                  { "type": "string" },
+                  { "type": "number" },
+                  { "type": "boolean" },
+                  { "type": "null" },
+                  {
+                    "type": "array",
+                    "items": {
+                      "oneOf": [
+                        { "type": "string" },
+                        { "type": "number" },
+                        { "type": "boolean" }
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            "headers": { "type": "object", "additionalProperties": { "type": "string" } },
+            "body": { "type": "object", "additionalProperties": true },
+            "records_path": { "type": "string" }
+          }
+        },
+        "notes": { "type": "string", "minLength": 3 }
+      }
+    }
+  }
+}

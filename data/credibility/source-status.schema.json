@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lucaschatham.github.io/nuclear-notebook/data/credibility/source-status.schema.json",
+  "title": "Nuclear Notebook derived source status",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "source_id",
+      "last_receipt_id",
+      "last_checked_at",
+      "check_status",
+      "last_success_at",
+      "last_success_sha256",
+      "last_change_at",
+      "source_published_at",
+      "record_count",
+      "consecutive_failures",
+      "is_stale",
+      "stale_since",
+      "error_class",
+      "error_message"
+    ],
+    "properties": {
+      "source_id": { "type": "string", "minLength": 3 },
+      "last_receipt_id": { "type": "string", "minLength": 8 },
+      "last_checked_at": { "type": "string", "format": "date-time" },
+      "check_status": { "enum": ["changed", "unchanged", "failed", "blocked_auth", "manual_required"] },
+      "last_success_at": { "type": ["string", "null"], "format": "date-time" },
+      "last_success_sha256": { "type": ["string", "null"], "pattern": "^[a-f0-9]{64}$" },
+      "last_change_at": { "type": ["string", "null"], "format": "date-time" },
+      "source_published_at": { "type": ["string", "null"], "format": "date-time" },
+      "record_count": { "type": ["integer", "null"], "minimum": 0 },
+      "consecutive_failures": { "type": "integer", "minimum": 0 },
+      "is_stale": { "type": "boolean" },
+      "stale_since": { "type": ["string", "null"], "format": "date-time" },
+      "error_class": { "type": ["string", "null"] },
+      "error_message": { "type": ["string", "null"] }
+    }
+  }
+}
