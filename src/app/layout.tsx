@@ -3,6 +3,7 @@ import { IBM_Plex_Mono, IBM_Plex_Sans, Newsreader } from "next/font/google";
 import { SiteHeader } from "@/components/site-header";
 import { ThemeProvider } from "@/components/theme-provider";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import "maplibre-gl/dist/maplibre-gl.css";
 import "./globals.css";
 
 const plexSans = IBM_Plex_Sans({
@@ -29,7 +30,7 @@ export const metadata: Metadata = {
     template: "%s | Nuclear Atlas",
   },
   description:
-    "A public dashboard showing what nuclear data sources tell us, how fresh they are, and what remains unknown.",
+    "A global public evidence atlas for nuclear projects, fuel, operations, spent fuel, waste, and decommissioning.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

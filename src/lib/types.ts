@@ -51,3 +51,13 @@ export type ChangelogEntry = {
   what_changed: string;
   source: string;
 };
+
+export type AtlasLocation = {
+  deal_id: string;
+  latitude: number;
+  longitude: number;
+  precision: "site" | "county" | "state" | "region" | "country";
+  display_label: string;
+  coordinate_note: string;
+  source_url: string;
+};

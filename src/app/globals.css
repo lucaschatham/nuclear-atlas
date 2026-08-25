@@ -106,4 +106,61 @@
 
 @media (prefers-reduced-motion: reduce) {
   .ledger-in { animation: none; }
+
+  .maplibregl-canvas { scroll-behavior: auto; }
+}
+
+.maplibregl-map {
+  font: inherit;
+}
+
+.maplibregl-ctrl-group {
+  border: 1px solid rgb(255 255 255 / 0.18) !important;
+  border-radius: 0 !important;
+  background: rgb(16 23 19 / 0.92) !important;
+}
+
+.maplibregl-ctrl-group button + button {
+  border-top-color: rgb(255 255 255 / 0.12) !important;
+}
+
+.maplibregl-ctrl-group button span {
+  filter: invert(1);
+}
+
+.maplibregl-ctrl-attrib {
+  background: rgb(16 23 19 / 0.82) !important;
+  color: rgb(255 255 255 / 0.62) !important;
+}
+
+.maplibregl-ctrl-attrib a {
+  color: inherit !important;
+}
+
+.atlas-dom-marker {
+  width: 14px;
+  height: 14px;
+  border: 2px solid #0e130f;
+  border-radius: 999px;
+  background: #d9ff68;
+  box-shadow: 0 0 0 1px rgb(255 255 255 / 0.35), 0 4px 12px rgb(0 0 0 / 0.55);
+  cursor: pointer;
+  transition: width 140ms ease, height 140ms ease, box-shadow 140ms ease;
+}
+
+.atlas-dom-marker.maplibregl-marker {
+  z-index: 2;
+}
+
+.atlas-dom-marker[data-precision="approximate"] {
+  background: #ffb15a;
+  opacity: 0.88;
+}
+
+.atlas-dom-marker[data-selected="true"],
+.atlas-dom-marker:focus-visible {
+  width: 22px;
+  height: 22px;
+  outline: 2px solid #edf1e8;
+  outline-offset: 2px;
 }

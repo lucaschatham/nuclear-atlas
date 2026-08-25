@@ -1,0 +1,155 @@
+[
+  {
+    "deal_id": "microsoft-constellation-crane-restart",
+    "latitude": 40.153,
+    "longitude": -76.725,
+    "precision": "site",
+    "display_label": "Crane Clean Energy Center, Pennsylvania",
+    "coordinate_note": "Published facility location.",
+    "source_url": "https://investors.constellationenergy.com/news-releases/news-release-details/constellation-launch-crane-clean-energy-center-restoring-jobs"
+  },
+  {
+    "deal_id": "amazon-talen-susquehanna-ppa",
+    "latitude": 41.089,
+    "longitude": -76.149,
+    "precision": "site",
+    "display_label": "Susquehanna Steam Electric Station, Pennsylvania",
+    "coordinate_note": "Published facility location.",
+    "source_url": "https://ir.talenenergy.com/news-releases/news-release-details/talen-energy-expands-nuclear-energy-relationship-amazon"
+  },
+  {
+    "deal_id": "amazon-energy-northwest-cascade",
+    "latitude": 46.471,
+    "longitude": -119.334,
+    "precision": "site",
+    "display_label": "Cascade project area, Washington",
+    "coordinate_note": "Planned near the published Columbia Generating Station site.",
+    "source_url": "https://www.aboutamazon.com/news/sustainability/amazon-nuclear-small-modular-reactor-net-carbon-zero"
+  },
+  {
+    "deal_id": "amazon-dominion-north-anna-smr",
+    "latitude": 38.061,
+    "longitude": -77.79,
+    "precision": "site",
+    "display_label": "North Anna Power Station, Virginia",
+    "coordinate_note": "Published facility location. The proposed SMR location is not final.",
+    "source_url": "https://news.dominionenergy.com/press-releases/press-releases/2024/Dominion-Energy-and-Amazon-to-explore-advancement-of-Small-Modular-Reactor-SMR-nuclear-development-in-Virginia-10-16-2024/default.aspx"
+  },
+  {
+    "deal_id": "google-kairos-reactor-fleet",
+    "latitude": 39.5,
+    "longitude": -98.35,
+    "precision": "country",
+    "display_label": "United States, sites undisclosed",
+    "coordinate_note": "Country centroid. This is not a project-site coordinate.",
+    "source_url": "https://blog.google/company-news/outreach-and-initiatives/sustainability/google-kairos-power-nuclear-energy-agreement/"
+  },
+  {
+    "deal_id": "google-elementl-site-development",
+    "latitude": 39.5,
+    "longitude": -98.35,
+    "precision": "country",
+    "display_label": "United States, three sites undisclosed",
+    "coordinate_note": "Country centroid. This is not a project-site coordinate.",
+    "source_url": "https://blog.google/feed/google-and-elementl-nuclear-energy-site-development/"
+  },
+  {
+    "deal_id": "meta-constellation-clinton-ppa",
+    "latitude": 40.172,
+    "longitude": -88.835,
+    "precision": "site",
+    "display_label": "Clinton Clean Energy Center, Illinois",
+    "coordinate_note": "Published facility location.",
+    "source_url": "https://about.fb.com/news/2025/06/meta-constellation-partner-clean-energy-project/"
+  },
+  {
+    "deal_id": "meta-terrapower-natrium-fleet",
+    "latitude": 39.5,
+    "longitude": -98.35,
+    "precision": "country",
+    "display_label": "United States, sites undisclosed",
+    "coordinate_note": "Country centroid. This is not a project-site coordinate.",
+    "source_url": "https://www.terrapower.com/terrapower-announces-deal-with-meta"
+  },
+  {
+    "deal_id": "meta-oklo-pike-county-campus",
+    "latitude": 39.07,
+    "longitude": -83.05,
+    "precision": "county",
+    "display_label": "Pike County, Ohio",
+    "coordinate_note": "County centroid. The exact campus coordinate is not represented.",
+    "source_url": "https://oklo.com/newsroom/news-details/2026/Oklo-Meta-Announce-Agreement-in-Support-of-1-2-GW-Nuclear-Energy-Development-in-Southern-Ohio/default.aspx"
+  },
+  {
+    "deal_id": "meta-vistra-pjm-nuclear-ppas",
+    "latitude": 40.8,
+    "longitude": -80.8,
+    "precision": "region",
+    "display_label": "Ohio and Pennsylvania portfolio",
+    "coordinate_note": "Regional marker for three disclosed facilities. Open the evidence for the facility list.",
+    "source_url": "https://investor.vistracorp.com/2026-01-09-Vistra-and-Meta-Announce-Agreements-to-Support-Nuclear-Plants-in-PJM-and-Add-New-Nuclear-Generation-to-the-Grid"
+  },
+  {
+    "deal_id": "terrapower-sabey-collaboration",
+    "latitude": 36,
+    "longitude": -105,
+    "precision": "region",
+    "display_label": "Rocky Mountain region and Texas",
+    "coordinate_note": "Broad regional marker. No project site has been selected publicly.",
+    "source_url": "https://www.terrapower.com/terrapower-and-sabey-data-centers-agreement-for-natrium-wide-scale-deployment"
+  },
+  {
+    "deal_id": "oklo-switch-master-agreement",
+    "latitude": 39.5,
+    "longitude": -98.35,
+    "precision": "country",
+    "display_label": "United States, sites undisclosed",
+    "coordinate_note": "Country centroid. This is not a project-site coordinate.",
+    "source_url": "https://oklo.com/newsroom/news-details/2024/Oklo-and-Switch-Form-Landmark-Strategic-Relationship-to-Deploy-12-Gigawatts-of-Advanced-Nuclear-Power-One-of-the-Largest-Corporate-Clean-Power-Agreements-Ever-Signed/default.aspx"
+  },
+  {
+    "deal_id": "oklo-equinix-energy-rights",
+    "latitude": 39.5,
+    "longitude": -98.35,
+    "precision": "country",
+    "display_label": "Covered U.S. facilities, sites undisclosed",
+    "coordinate_note": "Country centroid. The agreement does not identify a project site.",
+    "source_url": "https://www.sec.gov/Archives/edgar/data/1849056/000110465924047344/tm2324337d21_ex10-19.htm"
+  },
+  {
+    "deal_id": "oklo-prometheus-hyperscale-loi",
+    "latitude": 43,
+    "longitude": -107.5,
+    "precision": "state",
+    "display_label": "Wyoming, site undisclosed",
+    "coordinate_note": "State centroid. This is not a campus coordinate.",
+    "source_url": "https://oklo.com/newsroom/news-details/2024/Oklo-Partners-with-Wyoming-Hyperscale-to-Deliver-100-Megawatts-to-its-Data-Centers/default.aspx"
+  },
+  {
+    "deal_id": "google-tva-kairos-hermes-2",
+    "latitude": 35.96,
+    "longitude": -84.29,
+    "precision": "site",
+    "display_label": "Hermes 2, Oak Ridge, Tennessee",
+    "coordinate_note": "Published project location.",
+    "source_url": "https://www.kairospower.com/updates/google-kairos-power-tva-collaborate-to-meet-americas-growing-energy-needs"
+  },
+  {
+    "deal_id": "google-nextera-duane-arnold-restart",
+    "latitude": 42.101,
+    "longitude": -91.778,
+    "precision": "site",
+    "display_label": "Duane Arnold Energy Center, Iowa",
+    "coordinate_note": "Published facility location.",
+    "source_url": "https://newsroom.nexteraenergy.com/NextEra-Energy-and-Google-Announce-New-Collaboration-to-Accelerate-Nuclear-Energy-Deployment-in-the-U-S"
+  },
+  {
+    "deal_id": "standard-power-nuscale-entra1-sites",
+    "latitude": 40.8,
+    "longitude": -80.8,
+    "precision": "region",
+    "display_label": "Ohio and Pennsylvania, sites undisclosed",
+    "coordinate_note": "Regional marker for two planned facilities. Exact sites are not represented.",
+    "source_url": "https://www.nuscalepower.com/press-releases/2023/standard-power-chooses-nuscales-approved-smr-technology-and-entra1-energy-to-energize-data-centers"
+  }
+]

@@ -1,21 +1,21 @@
 import { Suspense } from "react";
 import { DealExplorer, DealExplorerFallback } from "@/components/deal-explorer";
 import { DownloadButtons } from "@/components/download-buttons";
-import { SourceDashboard } from "@/components/source-dashboard";
-import { dashboardSources, deals, totals } from "@/lib/data";
+import { NuclearAtlas } from "@/components/nuclear-atlas";
+import { atlasLocations, dashboardSources, deals, totals } from "@/lib/data";
 import { formatGw } from "@/lib/format";
 
 export default function Home() {
   return (
     <main>
-      <SourceDashboard sources={dashboardSources} />
+      <NuclearAtlas deals={deals} locations={atlasLocations} sources={dashboardSources} />
 
-      <section aria-labelledby="deal-summary-title" className="border-b border-border bg-card/35">
-        <div className="mx-auto max-w-[1600px] px-4 py-8 sm:px-6 lg:px-10">
+      <section id="deal-ledger" aria-labelledby="deal-summary-title" className="scroll-mt-14 border-b border-border bg-card/35">
+        <div className="mx-auto max-w-[1800px] px-4 py-8 sm:px-6 lg:px-10">
           <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
             <div>
-              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">One current dataset</p>
-              <h2 id="deal-summary-title" className="mt-2 font-heading text-3xl font-semibold">Nuclear power deals for data centers</h2>
+              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">Download and audit</p>
+              <h2 id="deal-summary-title" className="mt-2 font-heading text-3xl font-semibold">Project evidence ledger</h2>
             </div>
             <DownloadButtons />
           </div>
