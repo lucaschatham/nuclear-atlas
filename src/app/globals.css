@@ -23,37 +23,23 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+  --color-evidence-exact: var(--evidence-exact);
+  --color-evidence-approximate: var(--evidence-approximate);
+  --color-evidence-conflict: var(--evidence-conflict);
+  --color-evidence-stale: var(--evidence-stale);
+  --color-source-healthy: var(--source-healthy);
+  --color-source-failed: var(--source-failed);
+  --color-map-water: var(--map-water);
   --font-sans: var(--font-plex-sans);
   --font-mono: var(--font-plex-mono);
-  --font-heading: var(--font-newsreader);
+  --font-heading: var(--font-plex-sans);
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) * 1.4);
 }
 
-:root {
-  --background: oklch(0.965 0.012 86);
-  --foreground: oklch(0.2 0.015 63);
-  --card: oklch(0.985 0.008 85);
-  --card-foreground: oklch(0.2 0.015 63);
-  --popover: oklch(0.985 0.008 85);
-  --popover-foreground: oklch(0.2 0.015 63);
-  --primary: oklch(0.29 0.035 57);
-  --primary-foreground: oklch(0.975 0.01 86);
-  --secondary: oklch(0.92 0.018 82);
-  --secondary-foreground: oklch(0.27 0.024 61);
-  --muted: oklch(0.925 0.014 83);
-  --muted-foreground: oklch(0.48 0.018 65);
-  --accent: oklch(0.89 0.035 75);
-  --accent-foreground: oklch(0.25 0.026 56);
-  --destructive: oklch(0.55 0.18 26);
-  --border: oklch(0.82 0.02 79);
-  --input: oklch(0.84 0.018 80);
-  --ring: oklch(0.48 0.07 73);
-  --radius: 0.25rem;
-}
-
+:root,
 .dark {
   --background: oklch(0.145 0.012 59);
   --foreground: oklch(0.93 0.015 80);
@@ -73,6 +59,16 @@
   --border: oklch(0.34 0.018 64);
   --input: oklch(0.3 0.017 63);
   --ring: oklch(0.69 0.055 72);
+  --evidence-exact: rgb(190 242 100);
+  --evidence-approximate: rgb(251 146 60);
+  --evidence-conflict: rgb(248 113 113);
+  --evidence-stale: rgb(251 191 36);
+  --source-healthy: rgb(74 222 128);
+  --source-failed: rgb(248 113 113);
+  --map-water: rgb(7 20 19);
+  --map-foreground: rgb(245 245 244);
+  --map-background: rgb(12 17 14);
+  --radius: 0.625rem;
 }
 
 @layer base {
@@ -86,8 +82,6 @@
 
   body {
     @apply bg-background text-foreground;
-    background-image: linear-gradient(to right, color-mix(in oklch, var(--border) 18%, transparent) 1px, transparent 1px);
-    background-size: 72px 100%;
   }
 
   ::selection {
@@ -122,6 +116,10 @@
   height: 100%;
 }
 
+.atlas-map-surface .maplibregl-canvas {
+  filter: invert(0.82) hue-rotate(175deg) brightness(0.68) saturate(0.65) contrast(1.1);
+}
+
 .maplibregl-ctrl-group {
   border: 1px solid rgb(255 255 255 / 0.18) !important;
   border-radius: 0 !important;
@@ -145,30 +143,27 @@
   color: inherit !important;
 }
 
-.atlas-dom-marker {
-  width: 14px;
-  height: 14px;
-  border: 2px solid #0e130f;
+.atlas-evidence-marker {
+  width: 0.875rem;
+  height: 0.875rem;
+  border: 2px solid var(--map-background);
   border-radius: 999px;
-  background: #d9ff68;
-  box-shadow: 0 0 0 1px rgb(255 255 255 / 0.35), 0 4px 12px rgb(0 0 0 / 0.55);
+  background: var(--evidence-exact);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--foreground) 35%, transparent), 0 4px 14px rgb(0 0 0 / 0.55);
   cursor: pointer;
-  transition: width 140ms ease, height 140ms ease, box-shadow 140ms ease;
+  transition: width 140ms ease, height 140ms ease, box-shadow 140ms ease, opacity 140ms ease;
 }
 
-.atlas-dom-marker.maplibregl-marker {
-  z-index: 2;
-}
-
-.atlas-dom-marker[data-precision="approximate"] {
-  background: #ffb15a;
+.atlas-evidence-marker[data-precision="approximate"] {
+  background: var(--evidence-approximate);
   opacity: 0.88;
 }
 
-.atlas-dom-marker[data-selected="true"],
-.atlas-dom-marker:focus-visible {
-  width: 22px;
-  height: 22px;
-  outline: 2px solid #edf1e8;
+.atlas-evidence-marker[data-selected="true"],
+.atlas-evidence-marker:focus-visible {
+  width: 1.375rem;
+  height: 1.375rem;
+  outline: 2px solid var(--map-foreground);
   outline-offset: 2px;
+  z-index: 2;
 }

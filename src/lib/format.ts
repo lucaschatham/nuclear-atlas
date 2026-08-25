@@ -44,6 +44,16 @@ export function formatDate(value: string) {
   }).format(new Date(`${value}T00:00:00Z`));
 }
 
+export function formatFreshnessDate(value: string) {
+  const date = /^\d{4}-\d{2}-\d{2}$/.test(value) ? new Date(`${value}T00:00:00Z`) : new Date(value);
+  return new Intl.DateTimeFormat("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    timeZone: "UTC",
+  }).format(date);
+}
+
 export function formatGw(value: number) {
   return `${(value / 1000).toFixed(2)} GW`;
 }
