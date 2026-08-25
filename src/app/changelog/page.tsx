@@ -1,26 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ExternalLink } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { changelog, getDeal } from "@/lib/data";
 import { formatDate } from "@/lib/format";
 
-export const metadata: Metadata = { title: "Changelog", description: "Every published change to the open nuclear data center deal dataset." };
+export const metadata: Metadata = { title: "Changelog", description: "Every published change to the Nuclear Atlas dataset." };
 
 export default function ChangelogPage() {
   const entries = [...changelog].sort((a, b) => b.date.localeCompare(a.date));
-  return (
-    <main className="mx-auto max-w-5xl px-4 py-12 sm:px-6 lg:px-10 lg:py-20">
-      <header className="border-b border-border pb-10">
-        <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">Dataset history</p>
-        <h1 className="mt-4 font-heading text-6xl font-semibold tracking-[-0.03em] sm:text-7xl">Changelog</h1>
-        <p className="mt-5 max-w-2xl text-base leading-7 text-muted-foreground">Every addition and correction stays visible. The graveyard and the edit history are both data.</p>
-      </header>
-      <ol className="divide-y divide-border">
-        {entries.map((entry, index) => {
-          const deal = getDeal(entry.deal);
-          return <li key={`${entry.deal}-${index}`} className="grid gap-3 py-6 sm:grid-cols-[130px_1fr]"><time className="font-mono text-xs text-muted-foreground">{formatDate(entry.date)}</time><div><Link href={`/deal/${entry.deal}`} className="font-medium underline-offset-4 hover:underline">{deal?.name ?? entry.deal}</Link><p className="mt-2 text-sm leading-6 text-muted-foreground">{entry.what_changed}</p><a className="mt-3 inline-flex items-center gap-1.5 text-xs underline decoration-border underline-offset-4 hover:decoration-foreground" href={entry.source} target="_blank" rel="noreferrer">Source <ExternalLink className="size-3" /></a></div></li>;
-        })}
-      </ol>
-    </main>
-  );
+  return <main className="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6 lg:px-10 lg:py-12"><header className="space-y-4"><Badge variant="outline">Dataset history</Badge><h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">Changelog</h1><p className="max-w-2xl text-base leading-7 text-muted-foreground">Additions, corrections, and superseded claims stay visible.</p></header><Card className="mt-8"><CardHeader><CardTitle>Published changes</CardTitle><CardDescription>{entries.length} immutable change records.</CardDescription></CardHeader><CardContent><ol className="divide-y divide-border">{entries.map((entry, index) => { const deal = getDeal(entry.deal); return <li key={`${entry.deal}-${index}`} className="grid gap-3 py-5 sm:grid-cols-[8rem_1fr]"><time className="font-mono text-xs text-muted-foreground">{formatDate(entry.date)}</time><div><Button className="h-auto justify-start p-0 text-left" variant="link" nativeButton={false} render={<Link href={`/deal/${entry.deal}`} />}>{deal?.name ?? entry.deal}</Button><p className="mt-2 text-sm leading-6 text-muted-foreground">{entry.what_changed}</p><Button className="mt-2 px-0" size="sm" variant="link" nativeButton={false} render={<a href={entry.source} target="_blank" rel="noreferrer" />}>Source<ExternalLink data-icon="inline-end" /></Button></div></li>; })}</ol></CardContent></Card></main>;
 }

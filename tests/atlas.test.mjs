@@ -41,8 +41,9 @@ test("atlas maps every deal without inventing precise undisclosed locations", as
 })
 
 test("production atlas keeps lifecycle navigation primary and personas optional", async () => {
-  const [component, page, packageJson] = await Promise.all([
-    read("src/components/nuclear-atlas.tsx"),
+  const [component, model, page, packageJson] = await Promise.all([
+    read("src/features/atlas/atlas-workspace.tsx"),
+    read("src/lib/atlas-workspace.ts"),
     read("src/app/page.tsx"),
     readJson("package.json"),
   ])
@@ -59,39 +60,40 @@ test("production atlas keeps lifecycle navigation primary and personas optional"
 
   let cursor = -1
   for (const stage of lifecycle) {
-    const next = component.indexOf(stage)
+    const next = model.indexOf(stage)
     assert.ok(next > cursor, `${stage} is missing or out of lifecycle order`)
     cursor = next
   }
 
-  assert.match(component, /View as/)
-  assert.match(component, /All evidence/)
+  assert.match(component, /personaConfig/)
+  assert.match(model, /All evidence/)
   assert.match(component, /Coverage gap, not a known zero/)
-  assert.match(component, /Reset world/)
-  assert.match(component, /maplibre-gl/)
-  assert.match(page, /NuclearAtlas/)
+  assert.match(component, /AtlasMap/)
+  assert.match(component, /AtlasDataTable/)
+  assert.match(page, /AtlasWorkspace/)
   assert.equal(packageJson.dependencies["maplibre-gl"]?.length > 0, true)
 })
 
-test("atlas exposes source evidence and preserves the existing deal explorer", async () => {
-  const [component, page, layout] = await Promise.all([
-    read("src/components/nuclear-atlas.tsx"),
+test("atlas exposes source evidence through one shared map and table workspace", async () => {
+  const [component, inspector, page, layout] = await Promise.all([
+    read("src/features/atlas/atlas-workspace.tsx"),
+    read("src/features/atlas/atlas-inspectors.tsx"),
     read("src/app/page.tsx"),
     read("src/app/layout.tsx"),
   ])
 
   assert.match(component, /source/i)
   assert.match(component, /evidence/i)
-  assert.match(component, /last verified/i)
-  assert.match(component, /href={`\/deal\//)
-  assert.match(page, /DealExplorer/)
-  assert.match(page, /DownloadButtons/)
+  assert.match(inspector, /Last verified/i)
+  assert.match(inspector, /href={`\/deal\//)
+  assert.match(component, /DownloadButtons/)
+  assert.doesNotMatch(page, /DealExplorer/)
   assert.match(layout, /https:\/\/nuclearatlas\.lucaschatham\.com/)
 })
 
 test("map surface fills the atlas panel after MapLibre adds its root class", async () => {
   const [mapComponent, globalCss] = await Promise.all([
-    read("src/components/atlas-map.tsx"),
+    read("src/features/atlas/atlas-map.tsx"),
     read("src/app/globals.css"),
   ])
 

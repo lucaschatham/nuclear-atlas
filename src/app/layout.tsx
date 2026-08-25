@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Mono, IBM_Plex_Sans, Newsreader } from "next/font/google";
+import { IBM_Plex_Mono, IBM_Plex_Sans } from "next/font/google";
 import { SiteHeader } from "@/components/site-header";
-import { ThemeProvider } from "@/components/theme-provider";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import "maplibre-gl/dist/maplibre-gl.css";
 import "./globals.css";
@@ -18,12 +17,6 @@ const plexMono = IBM_Plex_Mono({
   weight: ["400", "500", "600"],
 });
 
-const newsreader = Newsreader({
-  variable: "--font-newsreader",
-  subsets: ["latin"],
-  weight: ["500", "600"],
-});
-
 export const metadata: Metadata = {
   metadataBase: new URL("https://nuclearatlas.lucaschatham.com"),
   title: {
@@ -37,16 +30,14 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className="dark">
       <body
-        className={`${plexSans.variable} ${plexMono.variable} ${newsreader.variable} min-h-full bg-background font-sans text-foreground antialiased`}
+        className={`${plexSans.variable} ${plexMono.variable} min-h-full bg-background font-sans text-foreground antialiased`}
       >
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
-          <TooltipProvider>
-            <SiteHeader />
-            {children}
-          </TooltipProvider>
-        </ThemeProvider>
+        <TooltipProvider>
+          <SiteHeader />
+          {children}
+        </TooltipProvider>
       </body>
     </html>
   );

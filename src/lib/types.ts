@@ -61,3 +61,16 @@ export type AtlasLocation = {
   coordinate_note: string;
   source_url: string;
 };
+
+export type SourceDashboardItem = {
+  id: string;
+  name: string;
+  publisher: string;
+  endpoint: string;
+  category: string;
+  plainEnglish: string;
+  operationalState: "candidate" | "probed" | "manual_only" | "approved_automated" | "paused" | "retired";
+  claimTypes: string[];
+  lastCheckedAt: string | null;
+  healthy: boolean | null;
+};
