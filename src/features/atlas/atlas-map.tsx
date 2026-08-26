@@ -12,8 +12,13 @@ type AtlasMapProps = {
   selectedRecordId: string | null;
   resetRevision: number;
   onSelect: (id: string) => void;
-  onFailure: () => void;
+  onFailure: (reason: "startup" | "resource") => void;
 };
+
+const RESOURCE_OBSERVATION_WINDOW_MS = 4000;
+const RESOURCE_FAILURE_THRESHOLD = 2;
+const RESOURCE_FAILURE_CONFIRMATION_DELAY_MS = 1500;
+const BASEMAP_STARTUP_TIMEOUT_MS = 15_000;
 
 export function AtlasMap({ records, selectedRecordId, resetRevision, onSelect, onFailure }: AtlasMapProps) {
   const containerRef = React.useRef<HTMLDivElement>(null);
@@ -27,9 +32,11 @@ export function AtlasMap({ records, selectedRecordId, resetRevision, onSelect, o
 
   React.useEffect(() => {
     if (!containerRef.current || mapRef.current) return;
+    maplibregl.setWorkerUrl(`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/maplibre/maplibre-gl-worker.mjs`);
+    containerRef.current.dataset.basemapReady = "false";
     const map = new maplibregl.Map({
       container: containerRef.current,
-      style: "https://tiles.openfreemap.org/styles/liberty",
+      style: "https://tiles.openfreemap.org/styles/bright",
       center: [-30, 24],
       zoom: 1.25,
       minZoom: 0.8,
@@ -43,31 +50,48 @@ export function AtlasMap({ records, selectedRecordId, resetRevision, onSelect, o
     let resourceErrors: number[] = [];
     let resourceSuccesses: number[] = [];
     let resourceFailureTimer: number | null = null;
-    const reportFailure = () => {
+    const reportFailure = (reason: "startup" | "resource" = "resource") => {
       if (failureReported) return;
       failureReported = true;
-      onFailureRef.current();
+      onFailureRef.current(reason);
     };
     const handleMapError = () => {
       const now = Date.now();
-      resourceErrors = [...resourceErrors.filter((timestamp) => now - timestamp < 4000), now];
-      if (resourceErrors.length < 6 || resourceFailureTimer !== null) return;
+      resourceErrors = [
+        ...resourceErrors.filter((timestamp) => now - timestamp < RESOURCE_OBSERVATION_WINDOW_MS),
+        now,
+      ];
+      if (resourceErrors.length < RESOURCE_FAILURE_THRESHOLD || resourceFailureTimer !== null) return;
       resourceFailureTimer = window.setTimeout(() => {
         resourceFailureTimer = null;
-        const cutoff = Date.now() - 4000;
+        const cutoff = Date.now() - RESOURCE_OBSERVATION_WINDOW_MS;
         resourceErrors = resourceErrors.filter((timestamp) => timestamp >= cutoff);
         resourceSuccesses = resourceSuccesses.filter((timestamp) => timestamp >= cutoff);
-        if (resourceErrors.length >= 6 && resourceSuccesses.length === 0) reportFailure();
-      }, 1000);
+        if (resourceErrors.length >= RESOURCE_FAILURE_THRESHOLD && resourceSuccesses.length === 0) reportFailure();
+      }, RESOURCE_FAILURE_CONFIRMATION_DELAY_MS);
     };
     const handleSourceData = (event: maplibregl.MapSourceDataEvent) => {
       if (event.sourceDataType !== "content" || !event.tile) return;
       const now = Date.now();
-      resourceSuccesses = [...resourceSuccesses.filter((timestamp) => now - timestamp < 4000), now];
+      resourceSuccesses = [
+        ...resourceSuccesses.filter((timestamp) => now - timestamp < RESOURCE_OBSERVATION_WINDOW_MS),
+        now,
+      ];
     };
     const styleTimeout = window.setTimeout(() => {
       if (!styleReady) reportFailure();
     }, 8000);
+    // A loaded style and HTML markers do not prove the worker drew geography.
+    // Worker startup can stall without emitting MapLibre resource errors.
+    const basemapTimeout = window.setTimeout(() => reportFailure("startup"), BASEMAP_STARTUP_TIMEOUT_MS);
+    const handleRender = () => {
+      if (!styleReady) return;
+      const hasGeography = map.queryRenderedFeatures().some((feature) => feature.source === "openmaptiles");
+      if (!hasGeography) return;
+      window.clearTimeout(basemapTimeout);
+      if (containerRef.current) containerRef.current.dataset.basemapReady = "true";
+      map.off("render", handleRender);
+    };
 
     map.once("style.load", () => {
       styleReady = true;
@@ -77,15 +101,18 @@ export function AtlasMap({ records, selectedRecordId, resetRevision, onSelect, o
     });
     map.on("error", handleMapError);
     map.on("sourcedata", handleSourceData);
+    map.on("render", handleRender);
 
     const resizeObserver = new ResizeObserver(() => map.resize());
     resizeObserver.observe(containerRef.current);
     return () => {
       resizeObserver.disconnect();
       window.clearTimeout(styleTimeout);
+      window.clearTimeout(basemapTimeout);
       if (resourceFailureTimer !== null) window.clearTimeout(resourceFailureTimer);
       map.off("error", handleMapError);
       map.off("sourcedata", handleSourceData);
+      map.off("render", handleRender);
       markersRef.current.forEach((marker) => marker.remove());
       markersRef.current = [];
       map.remove();

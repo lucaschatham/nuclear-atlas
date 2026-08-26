@@ -11,6 +11,7 @@ const eslintConfig = defineConfig([
     ".next/**",
     "out/**",
     "build/**",
+    "public/maplibre/**", // Generated, unmodified third-party worker assets.
     "next-env.d.ts",
   ]),
 ]);

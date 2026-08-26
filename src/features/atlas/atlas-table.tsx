@@ -41,7 +41,7 @@ export function AtlasDataTable({
   }
 
   return (
-    <ScrollArea className="h-full min-h-[32rem]">
+    <ScrollArea className="h-full min-h-[32rem] bg-background">
       <Table>
         <TableHeader className="sticky top-0 z-10 bg-background/95 backdrop-blur">
           <TableRow>

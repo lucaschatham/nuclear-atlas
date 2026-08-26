@@ -83,6 +83,8 @@ type AtlasWorkspaceProps = {
   sources: SourceDashboardItem[];
 };
 
+type AtlasDispatch = React.Dispatch<Parameters<typeof reduceAtlasState>[1]>;
+
 function useMediaQuery(query: string) {
   const subscribe = React.useCallback((onChange: () => void) => {
     const media = window.matchMedia(query);
@@ -106,14 +108,38 @@ function stageLabel(stage: LifecycleStage) {
   return lifecycleStages.find((item) => item.id === stage)?.label ?? stage;
 }
 
+function AtlasViewToggle({ state, dispatch, className }: {
+  state: AtlasWorkspaceState;
+  dispatch: AtlasDispatch;
+  className?: string;
+}) {
+  return (
+    <ToggleGroup
+      value={[state.view]}
+      onValueChange={(value) => value[0] && dispatch({ type: "set-view", view: value[0] as "map" | "table" })}
+      variant="outline"
+      spacing={0}
+      aria-label="Atlas view"
+      className={className}
+    >
+      <ToggleGroupItem value="map" aria-label="Map view"><MapIcon />Map</ToggleGroupItem>
+      <ToggleGroupItem value="table" aria-label="Table view"><List />Table</ToggleGroupItem>
+    </ToggleGroup>
+  );
+}
+
 function FilterControls({ state, dispatch, records }: {
   state: AtlasWorkspaceState;
-  dispatch: React.Dispatch<Parameters<typeof reduceAtlasState>[1]>;
+  dispatch: AtlasDispatch;
   records: AtlasRecord[];
 }) {
   const technologies = React.useMemo(() => Array.from(new Set(records.map((record) => record.technology))), [records]);
-  const selectedTechnology = state.filters.technologies[0] ?? "all";
-  const selectedStrength = state.filters.evidenceStrengths[0] ?? "all";
+  const selectedTechnology: Deal["technology"] | "all" = state.filters.technologies.length === 0
+    ? "all"
+    : state.filters.technologies[0];
+  const selectedStrength: BindingTier | "all" = state.filters.evidenceStrengths.length === 0
+    ? "all"
+    : state.filters.evidenceStrengths[0];
   const selectedPrecision = state.filters.locationPrecisions.length === 1 && state.filters.locationPrecisions[0] === "site"
     ? "site"
     : state.filters.locationPrecisions.length > 0
@@ -121,7 +147,7 @@ function FilterControls({ state, dispatch, records }: {
       : "all";
 
   return (
-    <div className="grid gap-3 lg:grid-cols-[minmax(15rem,1fr)_repeat(4,auto)]">
+    <div className="grid items-center gap-2 xl:grid-cols-[minmax(18rem,1fr)_10rem_11rem_12rem_10rem_auto]">
       <InputGroup className="h-9">
         <InputGroupAddon><Search /></InputGroupAddon>
         <InputGroupInput
@@ -138,7 +164,7 @@ function FilterControls({ state, dispatch, records }: {
       </InputGroup>
 
       <Select value={state.personaLens} onValueChange={(value) => dispatch({ type: "set-persona", persona: value as PersonaLens })}>
-        <SelectTrigger className="h-9 w-full lg:w-44" aria-label="View as persona"><SelectValue /></SelectTrigger>
+        <SelectTrigger className="h-9 w-full" aria-label="View as persona"><SelectValue /></SelectTrigger>
         <SelectContent align="start">
           {Object.keys(personaConfig).map((persona) => <SelectItem key={persona} value={persona}>View as: {persona}</SelectItem>)}
         </SelectContent>
@@ -148,7 +174,9 @@ function FilterControls({ state, dispatch, records }: {
         const next = value == null ? "all" : String(value);
         dispatch({ type: "set-technologies", technologies: next === "all" ? [] : [next as Deal["technology"]] });
       }}>
-        <SelectTrigger className="h-9 w-full lg:w-48" aria-label="Technology"><SelectValue /></SelectTrigger>
+        <SelectTrigger className="h-9 w-full" aria-label="Technology">
+          <SelectValue>{selectedTechnology === "all" ? "All technologies" : technologyLabels[selectedTechnology as Deal["technology"]]}</SelectValue>
+        </SelectTrigger>
         <SelectContent align="start">
           <SelectItem value="all">All technologies</SelectItem>
           {technologies.map((technology) => <SelectItem key={technology} value={technology}>{technologyLabels[technology]}</SelectItem>)}
@@ -159,7 +187,9 @@ function FilterControls({ state, dispatch, records }: {
         const next = value == null ? "all" : String(value);
         dispatch({ type: "set-strengths", strengths: next === "all" ? [] : [next as BindingTier] });
       }}>
-        <SelectTrigger className="h-9 w-full lg:w-48" aria-label="Evidence strength"><SelectValue /></SelectTrigger>
+        <SelectTrigger className="h-9 w-full" aria-label="Evidence strength">
+          <SelectValue>{selectedStrength === "all" ? "All evidence strengths" : selectedStrength}</SelectValue>
+        </SelectTrigger>
         <SelectContent align="start">
           <SelectItem value="all">All evidence strengths</SelectItem>
           {(Object.keys(bindingLabels) as BindingTier[]).map((strength) => <SelectItem key={strength} value={strength}>{strength} · {bindingLabels[strength]}</SelectItem>)}
@@ -170,13 +200,17 @@ function FilterControls({ state, dispatch, records }: {
         type: "set-precisions",
         precisions: value === "site" ? ["site"] : value === "approximate" ? approximatePrecisions : [],
       })}>
-        <SelectTrigger className="h-9 w-full lg:w-40" aria-label="Location precision"><SelectValue /></SelectTrigger>
+        <SelectTrigger className="h-9 w-full" aria-label="Location precision">
+          <SelectValue>{selectedPrecision === "all" ? "All locations" : selectedPrecision === "site" ? "Exact sites" : "Approximate areas"}</SelectValue>
+        </SelectTrigger>
         <SelectContent align="end">
           <SelectItem value="all">All locations</SelectItem>
           <SelectItem value="site">Exact sites</SelectItem>
           <SelectItem value="approximate">Approximate areas</SelectItem>
         </SelectContent>
       </Select>
+
+      <AtlasViewToggle state={state} dispatch={dispatch} />
     </div>
   );
 }
@@ -241,7 +275,7 @@ function HydratedAtlasWorkspace({ records, sources }: AtlasWorkspaceProps) {
     }
     return parseAtlasSearch(window.location.search, createInitialAtlasState(storedPersona));
   });
-  const [mapFailed, setMapFailed] = React.useState(false);
+  const [mapFailed, setMapFailed] = React.useState<false | "startup" | "resource">(false);
   const [mapAttempt, setMapAttempt] = React.useState(0);
   const desktopPanels = useMediaQuery("(min-width: 1024px)");
   const wideFilters = useMediaQuery("(min-width: 1280px)");
@@ -282,7 +316,7 @@ function HydratedAtlasWorkspace({ records, sources }: AtlasWorkspaceProps) {
             <p className="mt-1 max-w-5xl text-xs leading-5 text-muted-foreground sm:text-sm">Built from public evidence. Every record shows its source, date, and location precision. Coverage gaps remain visible.</p>
           </div>
           <ButtonGroup>
-            <Button type="button" variant="outline" className="h-10" onClick={() => dispatch({ type: "open-inspector", inspector: "sources" })}>
+            <Button type="button" variant="outline" size="lg" onClick={() => dispatch({ type: "open-inspector", inspector: "sources" })}>
               <Database data-icon="inline-start" />
               <span className="text-left"><span className="block text-xs">{sources.length} data sources</span><span className="block text-[0.6875rem] font-normal text-muted-foreground">{healthySources}/{automatedSources.length} daily checks healthy</span></span>
             </Button>
@@ -292,11 +326,15 @@ function HydratedAtlasWorkspace({ records, sources }: AtlasWorkspaceProps) {
       </header>
 
       <Tabs value={state.lifecycleStage} onValueChange={(value) => dispatch({ type: "set-stage", stage: value as LifecycleStage })} className="gap-0">
-        <div className="overflow-x-auto border-b bg-card/25 px-2 sm:px-6 lg:px-8">
-          <TabsList variant="line" className="h-12 min-w-max gap-0 p-0">
+        <div className="overflow-x-auto border-b bg-card/25 px-2 py-2 sm:px-6 lg:px-8">
+          <TabsList className="h-auto min-w-max gap-1 bg-transparent p-0">
             {lifecycleStages.map((stage, index) => (
-              <TabsTrigger key={stage.id} value={stage.id} className="h-12 px-3 sm:px-4">
-                <span className="font-mono text-[0.6875rem] text-muted-foreground">{String(index + 1).padStart(2, "0")}</span>
+              <TabsTrigger
+                key={stage.id}
+                value={stage.id}
+                className="group h-9 flex-none border-border bg-card px-3 shadow-xs hover:bg-muted data-active:border-primary data-active:bg-primary data-active:text-primary-foreground sm:px-4"
+              >
+                <span className="font-mono text-[0.6875rem] text-muted-foreground group-data-active:text-primary-foreground">{String(index + 1).padStart(2, "0")}</span>
                 {stage.label}
               </TabsTrigger>
             ))}
@@ -306,26 +344,20 @@ function HydratedAtlasWorkspace({ records, sources }: AtlasWorkspaceProps) {
 
       <div className="border-b bg-background px-4 py-3 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-[1920px]">
-          <div className="hidden xl:block"><FilterControls state={state} dispatch={dispatch} records={records} /></div>
-          <div className="flex flex-wrap items-center justify-between gap-2 xl:mt-3">
-            <div className="flex items-center gap-2">
-              <Button type="button" className="xl:hidden" variant="outline" onClick={() => dispatch({ type: "open-mobile-panel", panel: "filters" })}><Filter /> Filters{filtersActive > 0 ? ` (${filtersActive})` : ""}</Button>
-              <Button type="button" className="lg:hidden" variant="outline" onClick={() => dispatch({ type: "open-mobile-panel", panel: "layers" })}><Layers3 /> Layers</Button>
+          {wideFilters ? (
+            <FilterControls state={state} dispatch={dispatch} records={records} />
+          ) : (
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <div className="flex items-center gap-2">
+                <Button type="button" variant="outline" onClick={() => dispatch({ type: "open-mobile-panel", panel: "filters" })}><Filter /> Filters{filtersActive > 0 ? ` (${filtersActive})` : ""}</Button>
+                {!desktopPanels && <Button type="button" variant="outline" onClick={() => dispatch({ type: "open-mobile-panel", panel: "layers" })}><Layers3 /> Layers</Button>}
+              </div>
+              <div className="flex items-center gap-2">
+                {filtersActive > 0 && <Button type="button" variant="ghost" size="sm" onClick={() => dispatch({ type: "clear-filters" })}><RotateCcw /> Clear {filtersActive}</Button>}
+                <AtlasViewToggle state={state} dispatch={dispatch} />
+              </div>
             </div>
-            <div className="flex items-center gap-2 xl:ml-auto">
-              {filtersActive > 0 && <Button type="button" variant="ghost" size="sm" onClick={() => dispatch({ type: "clear-filters" })}><RotateCcw /> Clear {filtersActive}</Button>}
-              <ToggleGroup
-                value={[state.view]}
-                onValueChange={(value) => value[0] && dispatch({ type: "set-view", view: value[0] as "map" | "table" })}
-                variant="outline"
-                spacing={0}
-                aria-label="Atlas view"
-              >
-                <ToggleGroupItem value="map" aria-label="Map view"><MapIcon />Map</ToggleGroupItem>
-                <ToggleGroupItem value="table" aria-label="Table view"><List />Table</ToggleGroupItem>
-              </ToggleGroup>
-            </div>
-          </div>
+          )}
         </div>
       </div>
 
@@ -364,7 +396,19 @@ function HydratedAtlasWorkspace({ records, sources }: AtlasWorkspaceProps) {
               <MapIcon />
               <AlertTitle>Map tiles are unavailable</AlertTitle>
               <AlertDescription>The same filtered evidence remains available in Table view.</AlertDescription>
-              <AlertAction><Button type="button" variant="outline" size="sm" onClick={() => { setMapFailed(false); setMapAttempt((value) => value + 1); dispatch({ type: "set-view", view: "map" }); }}>Retry</Button></AlertAction>
+              <AlertAction><Button type="button" variant="outline" size="sm" onClick={() => {
+                if (mapFailed === "startup") {
+                  // MapLibre's shared dispatcher can retain an unresponsive worker.
+                  // A new page clears it; URL state preserves the user's filters.
+                  const search = serializeAtlasSearch({ ...state, view: "map" });
+                  window.history.replaceState(null, "", `${window.location.pathname}${search ? `?${search}` : ""}`);
+                  window.location.reload();
+                  return;
+                }
+                setMapFailed(false);
+                setMapAttempt((value) => value + 1);
+                dispatch({ type: "set-view", view: "map" });
+              }}>Retry</Button></AlertAction>
             </Alert>
           )}
           {state.view === "map" ? (
@@ -374,7 +418,7 @@ function HydratedAtlasWorkspace({ records, sources }: AtlasWorkspaceProps) {
               selectedRecordId={state.selectedRecordId}
               resetRevision={state.mapResetRevision}
               onSelect={(id) => dispatch({ type: "select-record", id })}
-              onFailure={() => { setMapFailed(true); dispatch({ type: "set-view", view: "table" }); }}
+              onFailure={(reason) => { setMapFailed(reason); dispatch({ type: "set-view", view: "table" }); }}
             />
           ) : (
             <AtlasDataTable records={visibleRecords} selectedRecordId={state.selectedRecordId} onSelect={(id) => dispatch({ type: "select-record", id })} />

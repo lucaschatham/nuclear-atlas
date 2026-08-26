@@ -17,6 +17,7 @@
 /.next/
 /out/
 /public/data/
+/public/maplibre/
 /.credibility-artifacts/
 
 # production

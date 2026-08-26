@@ -13,6 +13,7 @@
   --color-popover-foreground: var(--popover-foreground);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
+  --color-radioactive-glow: var(--radioactive-glow);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
   --color-muted: var(--muted);
@@ -39,35 +40,36 @@
   --radius-xl: calc(var(--radius) * 1.4);
 }
 
-:root,
-.dark {
-  --background: oklch(0.145 0.012 59);
-  --foreground: oklch(0.93 0.015 80);
-  --card: oklch(0.18 0.014 61);
-  --card-foreground: oklch(0.93 0.015 80);
-  --popover: oklch(0.19 0.015 61);
-  --popover-foreground: oklch(0.93 0.015 80);
-  --primary: oklch(0.88 0.035 77);
-  --primary-foreground: oklch(0.16 0.014 60);
-  --secondary: oklch(0.23 0.017 61);
-  --secondary-foreground: oklch(0.92 0.014 80);
-  --muted: oklch(0.215 0.015 61);
-  --muted-foreground: oklch(0.67 0.018 72);
-  --accent: oklch(0.27 0.035 69);
-  --accent-foreground: oklch(0.94 0.018 79);
-  --destructive: oklch(0.64 0.18 27);
-  --border: oklch(0.34 0.018 64);
-  --input: oklch(0.3 0.017 63);
-  --ring: oklch(0.69 0.055 72);
-  --evidence-exact: rgb(190 242 100);
-  --evidence-approximate: rgb(251 146 60);
-  --evidence-conflict: rgb(248 113 113);
-  --evidence-stale: rgb(251 191 36);
-  --source-healthy: rgb(74 222 128);
-  --source-failed: rgb(248 113 113);
-  --map-water: rgb(7 20 19);
-  --map-foreground: rgb(245 245 244);
-  --map-background: rgb(12 17 14);
+:root {
+  color-scheme: light;
+  --background: oklch(0.985 0.006 92);
+  --foreground: oklch(0.205 0.018 72);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.205 0.018 72);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.205 0.018 72);
+  --primary: oklch(0.60 0.20 128);
+  --primary-foreground: var(--foreground);
+  --radioactive-glow: oklch(0.86 0.24 125);
+  --secondary: oklch(0.95 0.012 92);
+  --secondary-foreground: oklch(0.25 0.02 76);
+  --muted: oklch(0.958 0.009 92);
+  --muted-foreground: oklch(0.47 0.018 72);
+  --accent: oklch(0.925 0.044 111);
+  --accent-foreground: oklch(0.28 0.055 108);
+  --destructive: oklch(0.56 0.205 28);
+  --border: oklch(0.875 0.012 86);
+  --input: oklch(0.825 0.015 84);
+  --ring: oklch(0.50 0.16 128);
+  --evidence-exact: oklch(0.41 0.125 125);
+  --evidence-approximate: oklch(0.46 0.13 52);
+  --evidence-conflict: oklch(0.58 0.2 28);
+  --evidence-stale: oklch(0.47 0.12 79);
+  --source-healthy: oklch(0.43 0.125 146);
+  --source-failed: oklch(0.58 0.2 28);
+  --map-water: oklch(0.93 0.023 218);
+  --map-foreground: oklch(0.23 0.025 205);
+  --map-background: oklch(0.975 0.012 105);
   --radius: 0.625rem;
 }
 
@@ -116,27 +118,20 @@
   height: 100%;
 }
 
-.atlas-map-surface .maplibregl-canvas {
-  filter: invert(0.82) hue-rotate(175deg) brightness(0.68) saturate(0.65) contrast(1.1);
-}
-
 .maplibregl-ctrl-group {
-  border: 1px solid rgb(255 255 255 / 0.18) !important;
-  border-radius: 0 !important;
-  background: rgb(16 23 19 / 0.92) !important;
+  border: 1px solid color-mix(in oklch, var(--border) 88%, transparent) !important;
+  border-radius: var(--radius-md) !important;
+  background: color-mix(in oklch, var(--card) 94%, transparent) !important;
+  box-shadow: 0 6px 20px rgb(38 45 35 / 0.12) !important;
 }
 
 .maplibregl-ctrl-group button + button {
-  border-top-color: rgb(255 255 255 / 0.12) !important;
-}
-
-.maplibregl-ctrl-group button span {
-  filter: invert(1);
+  border-top-color: var(--border) !important;
 }
 
 .maplibregl-ctrl-attrib {
-  background: rgb(16 23 19 / 0.82) !important;
-  color: rgb(255 255 255 / 0.62) !important;
+  background: color-mix(in oklch, var(--card) 90%, transparent) !important;
+  color: var(--muted-foreground) !important;
 }
 
 .maplibregl-ctrl-attrib a {
@@ -149,7 +144,7 @@
   border: 2px solid var(--map-background);
   border-radius: 999px;
   background: var(--evidence-exact);
-  box-shadow: 0 0 0 1px color-mix(in srgb, var(--foreground) 35%, transparent), 0 4px 14px rgb(0 0 0 / 0.55);
+  box-shadow: 0 0 0 1px color-mix(in oklch, var(--foreground) 24%, transparent), 0 4px 14px rgb(38 45 35 / 0.2);
   cursor: pointer;
   transition: width 140ms ease, height 140ms ease, box-shadow 140ms ease, opacity 140ms ease;
 }

@@ -100,3 +100,34 @@ test("map surface fills the atlas panel after MapLibre adds its root class", asy
   assert.match(mapComponent, /atlas-map-surface/)
   assert.match(globalCss, /\.atlas-map-surface\.maplibregl-map\s*\{[^}]*position:\s*absolute[^}]*inset:\s*0/s)
 })
+
+test("production ships one coherent light theme", async () => {
+  const [layout, globalCss, mapComponent] = await Promise.all([
+    read("src/app/layout.tsx"),
+    read("src/app/globals.css"),
+    read("src/features/atlas/atlas-map.tsx"),
+  ])
+
+  assert.doesNotMatch(layout, /className="dark"/)
+  assert.doesNotMatch(globalCss, /:root,\s*\n?\.dark/)
+  assert.doesNotMatch(globalCss, /\.atlas-map-surface \.maplibregl-canvas\s*\{[^}]*filter:/s)
+  assert.match(mapComponent, /styles\/bright/)
+  assert.match(globalCss, /--background:\s*oklch\(0\.98/)
+  assert.match(globalCss, /--primary:\s*oklch\(0\.60 0\.20 128\)/)
+  assert.match(globalCss, /--primary-foreground:\s*var\(--foreground\)/)
+  assert.match(globalCss, /--radioactive-glow:\s*oklch\(0\.86 0\.24 125\)/)
+})
+
+test("site identity uses the reusable nuclear mark", async () => {
+  const [header, mark] = await Promise.all([
+    read("src/components/site-header.tsx"),
+    read("src/components/nuclear-mark.tsx"),
+  ])
+
+  assert.match(header, /<NuclearMark/)
+  assert.doesNotMatch(header, /Database/)
+  assert.match(mark, /Atom/)
+  assert.match(mark, /bg-gradient-to-br/)
+  assert.match(mark, /bg-radioactive-glow/)
+  assert.match(mark, /shadow-sm/)
+})

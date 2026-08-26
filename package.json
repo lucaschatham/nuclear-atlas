@@ -18,8 +18,10 @@
     "credibility:record-manual": "node scripts/credibility/record-manual.mjs",
     "credibility:proof": "node scripts/credibility/proof.mjs",
     "generate:downloads": "node scripts/generate-downloads.mjs",
-    "predev": "npm run generate:downloads",
-    "prebuild": "npm run validate:data && npm run validate:credibility && npm run validate:ui && npm run generate:downloads"
+    "generate:methodology": "tsx scripts/generate-methodology.mjs --diagrams",
+    "generate:methodology:docs": "tsx scripts/generate-methodology.mjs",
+    "predev": "node scripts/prepare-maplibre.mjs && npm run generate:downloads && npm run generate:methodology:docs",
+    "prebuild": "node scripts/prepare-maplibre.mjs && npm run validate:data && npm run validate:credibility && npm run validate:ui && npm run generate:downloads && npm run generate:methodology:docs"
   },
   "dependencies": {
     "@base-ui/react": "^1.6.0",
@@ -45,6 +47,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.3.0",
+    "mermaid": "^11.17.2",
     "tailwindcss": "^4",
     "tsx": "^4.23.12",
     "typescript": "^5"

@@ -30,7 +30,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en">
       <body
         className={`${plexSans.variable} ${plexMono.variable} min-h-full bg-background font-sans text-foreground antialiased`}
       >
