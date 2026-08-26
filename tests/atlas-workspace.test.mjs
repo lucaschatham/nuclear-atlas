@@ -21,26 +21,30 @@ async function readJson(path) {
 }
 
 test("atlas records preserve every deal and public location precision", async () => {
-  const [deals, locations] = await Promise.all([
+  const [deals, release] = await Promise.all([
     readJson("data/deals.json"),
-    readJson("data/atlas-locations.json"),
+    readJson("data/atlas-release.json"),
   ])
-  const records = createAtlasRecords(deals, locations)
+  const records = createAtlasRecords(release)
+  const projectRecords = records.filter((record) => record.stage === "projects")
 
-  assert.equal(records.length, deals.length)
-  assert.deepEqual(records.map((record) => record.id).sort(), deals.map((deal) => deal.id).sort())
+  assert.equal(projectRecords.length, deals.length)
+  assert.deepEqual(projectRecords.map((record) => record.id).sort(), deals.map((deal) => deal.id).sort())
   assert.ok(records.every((record) => record.locationPrecision !== undefined))
   assert.ok(records.every((record) => record.sourceIds.length > 0))
+
+  const vendorSearch = filterAtlasRecords(records, {
+    ...createInitialAtlasState(),
+    filters: { ...createInitialAtlasState().filters, query: "X-energy" },
+  })
+  assert.ok(vendorSearch.some((record) => record.id === "amazon-energy-northwest-cascade"))
 })
 
 test("map and table derive their rows from one deterministic filter", async () => {
-  const [deals, locations] = await Promise.all([
-    readJson("data/deals.json"),
-    readJson("data/atlas-locations.json"),
-  ])
-  const records = createAtlasRecords(deals, locations)
+  const release = await readJson("data/atlas-release.json")
+  const records = createAtlasRecords(release)
   const state = createInitialAtlasState()
-  const technology = records[0].technology
+  const technology = records.find((record) => record.stage === "projects").technology
   const filtered = filterAtlasRecords(records, {
     ...state,
     filters: { ...state.filters, technologies: [technology] },
@@ -84,6 +88,7 @@ test("URL state round-trips filters and persona stage overrides", () => {
       query: "crane restart",
       technologies: ["restart", "smr"],
       evidenceStrengths: ["B3", "B4"],
+      statuses: [],
       locationPrecisions: ["site"],
       sourceAuthorities: [],
     },
@@ -106,6 +111,16 @@ test("URL precision state normalizes to supported control modes", () => {
   assert.deepEqual(parseAtlasSearch("?authority=official_regulatory").filters.sourceAuthorities, [])
 })
 
+test("URL parsing ignores filters that the selected lifecycle stage cannot display", () => {
+  const projects = parseAtlasSearch("?stage=projects&status=operating&evidence=B3")
+  const operations = parseAtlasSearch("?stage=operations&status=operating&evidence=B3")
+
+  assert.deepEqual(projects.filters.evidenceStrengths, ["B3"])
+  assert.deepEqual(projects.filters.statuses, [])
+  assert.deepEqual(operations.filters.evidenceStrengths, [])
+  assert.deepEqual(operations.filters.statuses, ["operating"])
+})
+
 test("record-set identity changes only for stages and filters", () => {
   const initial = createInitialAtlasState()
   const inspector = reduceAtlasState(initial, { type: "open-inspector", inspector: "sources" })
@@ -124,14 +139,36 @@ test("layer visibility preserves at least one location class", () => {
   assert.equal(locationPrecisionsForLayers(false, false), null)
 })
 
-test("unsupported lifecycle stages return a coverage gap, not an empty-data claim", async () => {
-  const [deals, locations] = await Promise.all([
-    readJson("data/deals.json"),
-    readJson("data/atlas-locations.json"),
-  ])
-  const records = createAtlasRecords(deals, locations)
+test("every lifecycle stage returns real records from one shared filter", async () => {
+  const release = await readJson("data/atlas-release.json")
+  const records = createAtlasRecords(release)
   const state = { ...createInitialAtlasState(), lifecycleStage: "spent-fuel" }
 
-  assert.deepEqual(filterAtlasRecords(records, state), [])
-  assert.equal(state.lifecycleStage === "projects", false)
+  const spentFuel = filterAtlasRecords(records, state)
+  assert.ok(spentFuel.length >= 3)
+  assert.ok(spentFuel.every((record) => record.stage === "spent-fuel"))
+})
+
+test("non-project type filters use the record type, not its material or technology", async () => {
+  const release = await readJson("data/atlas-release.json")
+  const records = createAtlasRecords(release)
+  const fuelRecords = records.filter((record) => record.stage === "fuel-supply")
+  const type = fuelRecords[0].typeLabel
+  const state = {
+    ...createInitialAtlasState(),
+    lifecycleStage: "fuel-supply",
+    filters: { ...createInitialAtlasState().filters, technologies: [type] },
+  }
+
+  const filtered = filterAtlasRecords(records, state)
+  assert.ok(filtered.length > 0)
+  assert.ok(filtered.every((record) => record.typeLabel === type))
+})
+
+test("spent-fuel type filters expose NRC license classes", async () => {
+  const release = await readJson("data/atlas-release.json")
+  const records = createAtlasRecords(release)
+  const spentFuelTypes = new Set(records.filter((record) => record.stage === "spent-fuel").map((record) => record.typeLabel))
+
+  assert.deepEqual(spentFuelTypes, new Set(["general_license", "site_specific_license", "general_and_site_specific"]))
 })

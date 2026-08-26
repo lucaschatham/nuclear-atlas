@@ -74,3 +74,77 @@ export type SourceDashboardItem = {
   lastCheckedAt: string | null;
   healthy: boolean | null;
 };
+
+export type AtlasRecordCitation = {
+  id: string;
+  sourceId: string;
+  publisher: string;
+  sourceName: string;
+  url: string;
+  locator: string | null;
+  supportsFields: string[];
+  sourceDateOriginal: string | null;
+  sourceDatePrecision: string | null;
+  effectiveDate: string | null;
+  retrievedAtUtc: string | null;
+  reviewStatus: string;
+};
+
+export type AtlasReleaseRecord = {
+  id: string;
+  stage: string;
+  name: string;
+  status: string | null;
+  typeLabel: string | null;
+  technology: string | null;
+  evidenceStrength: string | null;
+  summary: string | null;
+  asOf: string | null;
+  reviewStatus: string;
+  location: {
+    latitude: number;
+    longitude: number;
+    precision: "site" | "county" | "state" | "region" | "country";
+    label: string;
+    coordinateNote: string;
+  } | null;
+  sourceIds: string[];
+  citations: AtlasRecordCitation[];
+  metrics: { label: string; value: string | number; unit: string | null }[];
+  details: { label: string; value: string }[];
+  href: string | null;
+};
+
+export type AtlasReleaseSource = {
+  id: string;
+  publisher: string;
+  name: string;
+  authorityClass: string;
+  url: string;
+  reuseStatus: string;
+  geographicScope: string;
+  sourceAsOf: string | null;
+  retrievedAtUtc: string | null;
+  plainEnglish: string | null;
+};
+
+export type AtlasRelease = {
+  schemaVersion: number;
+  releaseId: string;
+  reviewStatus: string;
+  approvedBy: string | null;
+  sourceCutoffUtc: string | null;
+  generatedAtUtc: string | null;
+  workbookSha256: string;
+  canonicalModelSha256: string;
+  sourceCount: number;
+  sources: AtlasReleaseSource[];
+  stages: Record<string, {
+    stage: string;
+    label: string;
+    status: "published" | "coverage_only" | "draft";
+    records: AtlasReleaseRecord[];
+    recordCount: number;
+    sourceIds: string[];
+  }>;
+};

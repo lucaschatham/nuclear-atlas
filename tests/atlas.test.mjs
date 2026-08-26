@@ -67,7 +67,7 @@ test("production atlas keeps lifecycle navigation primary and personas optional"
 
   assert.match(component, /personaConfig/)
   assert.match(model, /All evidence/)
-  assert.match(component, /Coverage gap, not a known zero/)
+  assert.match(component, /No published records match/)
   assert.match(component, /AtlasMap/)
   assert.match(component, /AtlasDataTable/)
   assert.match(page, /AtlasWorkspace/)
@@ -84,8 +84,8 @@ test("atlas exposes source evidence through one shared map and table workspace",
 
   assert.match(component, /source/i)
   assert.match(component, /evidence/i)
-  assert.match(inspector, /Last verified/i)
-  assert.match(inspector, /href={`\/deal\//)
+  assert.match(inspector, /Snapshot as of/i)
+  assert.match(inspector, /record\.href/)
   assert.match(component, /DownloadButtons/)
   assert.doesNotMatch(page, /DealExplorer/)
   assert.match(layout, /https:\/\/nuclearatlas\.lucaschatham\.com/)
@@ -130,4 +130,20 @@ test("site identity uses the reusable nuclear mark", async () => {
   assert.match(mark, /bg-gradient-to-br/)
   assert.match(mark, /bg-radioactive-glow/)
   assert.match(mark, /shadow-sm/)
+})
+
+test("production deployment requires an explicitly approved workbook release", async () => {
+  const [workflow, validator, release] = await Promise.all([
+    read(".github/workflows/ci.yml"),
+    read("scripts/validate-atlas-release.mjs"),
+    readJson("data/atlas-release.json"),
+  ])
+
+  assert.equal(release.reviewStatus, "approved")
+  assert.equal(release.approvedBy, "Lucas Chatham")
+  assert.match(workflow, /npm run validate:atlas-release\n/)
+  assert.match(workflow, /validate:atlas-release:production/)
+  assert.ok(workflow.indexOf("validate:atlas-release:production") < workflow.indexOf("actions\/upload-pages-artifact"))
+  assert.match(validator, /requireApproved/)
+  assert.match(validator, /requires explicit workbook approval/)
 })

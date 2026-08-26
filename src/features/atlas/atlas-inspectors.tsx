@@ -2,17 +2,22 @@
 
 import Link from "next/link";
 import { ArrowUpRight, Database, ExternalLink, MapPin, ShieldCheck } from "lucide-react";
-import { EvidenceBadge, FreshnessLabel, LocationPrecisionBadge, SourceHealth } from "@/components/atlas-ui/evidence";
+import { EvidenceBadge, LocationPrecisionBadge, SourceAuthorityBadge } from "@/components/atlas-ui/evidence";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import type { AtlasRecord, LifecycleStage, PersonaLens } from "@/lib/atlas-workspace";
-import type { SourceDashboardItem } from "@/lib/types";
-import { formatMw } from "@/lib/format";
+import type { AtlasRelease } from "@/lib/types";
 
-function formatDate(value: string) {
-  return new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", year: "numeric" }).format(new Date(`${value}T12:00:00Z`));
+function formatValue(value: string | number, unit: string | null) {
+  const formatted = typeof value === "number" ? value.toLocaleString("en-US") : value;
+  return `${formatted}${unit ? ` ${unit}` : ""}`;
+}
+
+function humanize(value: string | null) {
+  return value ? value.replaceAll("_", " ").replace(/\b\w/g, (letter) => letter.toUpperCase()) : "Unknown";
 }
 
 function DetailField({ label, children }: { label: string; children: React.ReactNode }) {
@@ -75,7 +80,8 @@ export function EvidenceInspector({ record }: { record: AtlasRecord }) {
         <div>
           <div className="flex flex-wrap gap-2">
             <LocationPrecisionBadge precision={record.locationPrecision} />
-            <EvidenceBadge strength={record.evidenceStrength} />
+            {record.evidenceStrength ? <EvidenceBadge strength={record.evidenceStrength} /> : <Badge variant="secondary">{humanize(record.status)}</Badge>}
+            {record.reviewStatus !== "approved" && <Badge variant="outline">{humanize(record.reviewStatus)}</Badge>}
           </div>
           <h2 className="mt-4 text-xl font-semibold leading-tight tracking-tight">{record.name}</h2>
           <p className="mt-2 flex items-start gap-2 text-sm text-muted-foreground"><MapPin className="mt-0.5 size-4 shrink-0" />{record.locationLabel}</p>
@@ -83,71 +89,68 @@ export function EvidenceInspector({ record }: { record: AtlasRecord }) {
         </div>
 
         <dl className="divide-y divide-border border-y">
-          <DetailField label="Firm capacity">{formatMw(record.firmMw)}</DetailField>
-          <DetailField label="Optioned capacity">{formatMw(record.optionedMw)}</DetailField>
-          <DetailField label="Target operation">{record.targetOperation ?? "Not disclosed"}</DetailField>
-          <DetailField label="Last verified">{formatDate(record.lastVerified)}</DetailField>
+          {record.metrics.map((metric) => <DetailField key={metric.label} label={metric.label}>{formatValue(metric.value, metric.unit)}</DetailField>)}
+          {record.details.map((item) => <DetailField key={item.label} label={item.label}>{item.value}</DetailField>)}
+          <DetailField label="Snapshot as of">{record.asOf ?? "Unknown"}</DetailField>
         </dl>
 
         <div>
           <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-wider text-muted-foreground"><ShieldCheck className="size-4 text-evidence-exact" />Evidence</div>
-          <p className="mt-3 text-sm leading-6 text-foreground/85">{record.deal.bindingness.evidence}</p>
+          <p className="mt-3 text-sm leading-6 text-foreground/85">{record.summary ?? "This record reproduces the cited public source without inferring missing values."}</p>
           <div className="mt-4 space-y-2">
-            {record.deal.sources.slice(0, 3).map((source) => (
+            {record.citations.map((citation) => (
               <Button
-                key={source.url}
-                render={<a href={source.url} target="_blank" rel="noreferrer" />}
+                key={citation.id}
+                render={<a href={citation.url} target="_blank" rel="noreferrer" />}
                 nativeButton={false}
                 variant="outline"
                 className="h-auto w-full justify-between py-2 text-left"
               >
-                <span className="min-w-0"><span className="block truncate">{source.publisher}</span><span className="block truncate text-xs font-normal text-muted-foreground">{source.date}</span></span>
+                <span className="min-w-0"><span className="block truncate">{citation.publisher}</span><span className="block truncate text-xs font-normal text-muted-foreground">{citation.sourceDateOriginal ?? citation.locator ?? "Source date not stated"}</span></span>
                 <ExternalLink />
               </Button>
             ))}
           </div>
         </div>
 
-        <Button render={<Link href={`/deal/${record.id}`} />} nativeButton={false} className="w-full justify-between">
-          Open full evidence record
-          <ArrowUpRight />
-        </Button>
+        {record.href && (
+          <Button render={<Link href={record.href} />} nativeButton={false} className="w-full justify-between">
+            Open full evidence record
+            <ArrowUpRight />
+          </Button>
+        )}
       </article>
     </ScrollArea>
   );
 }
 
-function sourceScore(source: SourceDashboardItem, stage: LifecycleStage) {
-  const terms = stage === "projects" ? ["project", "contract", "fund", "award", "offtake"] : stage.split("-");
-  const haystack = `${source.category} ${source.plainEnglish} ${source.claimTypes.join(" ")}`.toLowerCase();
-  return terms.some((term) => haystack.includes(term)) ? 1 : 0;
-}
-
-export function SourceInspector({ sources, stage }: { sources: SourceDashboardItem[]; stage: LifecycleStage }) {
-  const ranked = [...sources].sort((a, b) => sourceScore(b, stage) - sourceScore(a, stage));
+export function SourceInspector({ release, stage }: { release: AtlasRelease; stage: LifecycleStage }) {
+  const stageSourceIds = new Set(release.stages[stage]?.sourceIds ?? []);
+  const ranked = [...release.sources].sort((a, b) => Number(stageSourceIds.has(b.id)) - Number(stageSourceIds.has(a.id)) || a.publisher.localeCompare(b.publisher));
   return (
     <ScrollArea className="h-full">
       <div className="p-4">
         <div>
           <div className="text-xs font-medium uppercase tracking-wider text-muted-foreground">Source registry</div>
           <h2 className="mt-2 text-xl font-semibold tracking-tight">What feeds this atlas</h2>
-          <p className="mt-2 text-sm leading-6 text-muted-foreground">A daily check means we looked for a change. It does not mean the publisher updates daily.</p>
+          <p className="mt-2 text-sm leading-6 text-muted-foreground">This is a dated snapshot, not a live feed. Sources shown first support the selected lifecycle stage.</p>
+          <p className="mt-2 font-mono text-xs text-muted-foreground">Release {release.releaseId} · cutoff {release.sourceCutoffUtc ?? "unknown"}</p>
         </div>
         <Separator className="my-5" />
         <div className="space-y-3">
           {ranked.map((source) => (
-            <Card key={source.id} size="sm">
+            <Card key={source.id} size="sm" className={stageSourceIds.has(source.id) ? "border-primary/50" : undefined}>
               <CardHeader>
                 <CardDescription>{source.publisher}</CardDescription>
                 <CardTitle>{source.name}</CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
-                <p className="text-sm leading-5 text-muted-foreground">{source.plainEnglish}</p>
+                <p className="text-sm leading-5 text-muted-foreground">{source.plainEnglish ?? "Public source metadata retained for this snapshot."}</p>
                 <div className="flex items-center justify-between gap-3">
-                  <SourceHealth source={source} />
-                  <FreshnessLabel value={source.lastCheckedAt} />
+                  <SourceAuthorityBadge authority={source.authorityClass} />
+                  <span className="font-mono text-xs text-muted-foreground">As of {source.sourceAsOf ?? "not stated"}</span>
                 </div>
-                <Button render={<a href={source.endpoint} target="_blank" rel="noreferrer" />} nativeButton={false} variant="outline" size="sm" className="w-full justify-between">
+                <Button render={<a href={source.url} target="_blank" rel="noreferrer" />} nativeButton={false} variant="outline" size="sm" className="w-full justify-between">
                   Open source
                   <ExternalLink />
                 </Button>

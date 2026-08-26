@@ -46,7 +46,7 @@ import {
   type LocationPrecision,
   type PersonaLens,
 } from "@/lib/atlas-workspace";
-import type { BindingTier, Deal, SourceDashboardItem } from "@/lib/types";
+import type { AtlasRelease } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { AtlasGuide, EvidenceInspector, SourceInspector } from "@/features/atlas/atlas-inspectors";
 import { AtlasDataTable } from "@/features/atlas/atlas-table";
@@ -56,7 +56,7 @@ const AtlasMap = dynamic(() => import("@/features/atlas/atlas-map").then((module
   loading: () => <Skeleton className="h-full min-h-[32rem] rounded-none" aria-label="Loading globe" />,
 });
 
-const technologyLabels: Record<Deal["technology"], string> = {
+const projectTechnologyLabels: Record<string, string> = {
   smr: "Small modular reactor",
   large_lwr: "Large light-water reactor",
   restart: "Restart",
@@ -66,7 +66,7 @@ const technologyLabels: Record<Deal["technology"], string> = {
   other: "Other",
 };
 
-const bindingLabels: Record<BindingTier, string> = {
+const bindingLabels: Record<string, string> = {
   B0: "Exploratory statement",
   B1: "Non-binding collaboration",
   B2: "Development commitment",
@@ -80,7 +80,7 @@ const approximatePrecisions: LocationPrecision[] = ["county", "state", "region",
 
 type AtlasWorkspaceProps = {
   records: AtlasRecord[];
-  sources: SourceDashboardItem[];
+  release: AtlasRelease;
 };
 
 type AtlasDispatch = React.Dispatch<Parameters<typeof reduceAtlasState>[1]>;
@@ -100,12 +100,17 @@ function activeFilterCount(state: AtlasWorkspaceState) {
     Boolean(state.filters.query),
     state.filters.technologies.length > 0,
     state.filters.evidenceStrengths.length > 0,
+    state.filters.statuses.length > 0,
     state.filters.locationPrecisions.length > 0,
   ].filter(Boolean).length;
 }
 
 function stageLabel(stage: LifecycleStage) {
   return lifecycleStages.find((item) => item.id === stage)?.label ?? stage;
+}
+
+function humanize(value: string) {
+  return projectTechnologyLabels[value] ?? value.replaceAll("_", " ").replace(/\b\w/g, (letter) => letter.toUpperCase());
 }
 
 function AtlasViewToggle({ state, dispatch, className }: {
@@ -133,13 +138,17 @@ function FilterControls({ state, dispatch, records }: {
   dispatch: AtlasDispatch;
   records: AtlasRecord[];
 }) {
-  const technologies = React.useMemo(() => Array.from(new Set(records.map((record) => record.technology))), [records]);
-  const selectedTechnology: Deal["technology"] | "all" = state.filters.technologies.length === 0
+  const projectsStage = state.lifecycleStage === "projects";
+  const technologies = React.useMemo(() => Array.from(new Set(records.map((record) => projectsStage ? record.technology : record.typeLabel).filter((value): value is string => Boolean(value)))), [projectsStage, records]);
+  const statuses = React.useMemo(() => Array.from(new Set(records.map((record) => record.status).filter((value): value is string => Boolean(value)))), [records]);
+  const strengths = React.useMemo(() => Array.from(new Set(records.map((record) => record.evidenceStrength).filter((value): value is string => Boolean(value)))), [records]);
+  const selectedTechnology: string = state.filters.technologies.length === 0
     ? "all"
     : state.filters.technologies[0];
-  const selectedStrength: BindingTier | "all" = state.filters.evidenceStrengths.length === 0
+  const selectedStrength: string = state.filters.evidenceStrengths.length === 0
     ? "all"
     : state.filters.evidenceStrengths[0];
+  const selectedStatus: string = state.filters.statuses.length === 0 ? "all" : state.filters.statuses[0];
   const selectedPrecision = state.filters.locationPrecisions.length === 1 && state.filters.locationPrecisions[0] === "site"
     ? "site"
     : state.filters.locationPrecisions.length > 0
@@ -153,8 +162,8 @@ function FilterControls({ state, dispatch, records }: {
         <InputGroupInput
           value={state.filters.query}
           onChange={(event) => dispatch({ type: "set-query", query: event.target.value })}
-          placeholder="Search projects, places, organizations"
-          aria-label="Search projects, places, or organizations"
+          placeholder={`Search ${stageLabel(state.lifecycleStage).toLowerCase()}, places, organizations`}
+          aria-label={`Search ${stageLabel(state.lifecycleStage)}, places, or organizations`}
         />
         {state.filters.query && (
           <InputGroupAddon align="inline-end">
@@ -172,29 +181,44 @@ function FilterControls({ state, dispatch, records }: {
 
       <Select value={selectedTechnology} onValueChange={(value) => {
         const next = value == null ? "all" : String(value);
-        dispatch({ type: "set-technologies", technologies: next === "all" ? [] : [next as Deal["technology"]] });
+        dispatch({ type: "set-technologies", technologies: next === "all" ? [] : [next] });
       }}>
-        <SelectTrigger className="h-9 w-full" aria-label="Technology">
-          <SelectValue>{selectedTechnology === "all" ? "All technologies" : technologyLabels[selectedTechnology as Deal["technology"]]}</SelectValue>
+        <SelectTrigger className="h-9 w-full" aria-label={projectsStage ? "Technology" : "Record type"}>
+          <SelectValue>{selectedTechnology === "all" ? projectsStage ? "All technologies" : "All types" : humanize(selectedTechnology)}</SelectValue>
         </SelectTrigger>
         <SelectContent align="start">
-          <SelectItem value="all">All technologies</SelectItem>
-          {technologies.map((technology) => <SelectItem key={technology} value={technology}>{technologyLabels[technology]}</SelectItem>)}
+          <SelectItem value="all">{projectsStage ? "All technologies" : "All types"}</SelectItem>
+          {technologies.map((technology) => <SelectItem key={technology} value={technology}>{humanize(technology)}</SelectItem>)}
         </SelectContent>
       </Select>
 
-      <Select value={selectedStrength} onValueChange={(value) => {
-        const next = value == null ? "all" : String(value);
-        dispatch({ type: "set-strengths", strengths: next === "all" ? [] : [next as BindingTier] });
-      }}>
-        <SelectTrigger className="h-9 w-full" aria-label="Evidence strength">
-          <SelectValue>{selectedStrength === "all" ? "All evidence strengths" : selectedStrength}</SelectValue>
-        </SelectTrigger>
-        <SelectContent align="start">
-          <SelectItem value="all">All evidence strengths</SelectItem>
-          {(Object.keys(bindingLabels) as BindingTier[]).map((strength) => <SelectItem key={strength} value={strength}>{strength} · {bindingLabels[strength]}</SelectItem>)}
-        </SelectContent>
-      </Select>
+      {state.lifecycleStage === "projects" ? (
+        <Select value={selectedStrength} onValueChange={(value) => {
+          const next = value == null ? "all" : String(value);
+          dispatch({ type: "set-strengths", strengths: next === "all" ? [] : [next] });
+        }}>
+          <SelectTrigger className="h-9 w-full" aria-label="Evidence strength">
+            <SelectValue>{selectedStrength === "all" ? "All evidence strengths" : selectedStrength}</SelectValue>
+          </SelectTrigger>
+          <SelectContent align="start">
+            <SelectItem value="all">All evidence strengths</SelectItem>
+            {strengths.map((strength) => <SelectItem key={strength} value={strength}>{strength} · {bindingLabels[strength] ?? "Public evidence"}</SelectItem>)}
+          </SelectContent>
+        </Select>
+      ) : (
+        <Select value={selectedStatus} onValueChange={(value) => {
+          const next = value == null ? "all" : String(value);
+          dispatch({ type: "set-statuses", statuses: next === "all" ? [] : [next] });
+        }}>
+          <SelectTrigger className="h-9 w-full" aria-label="Status">
+            <SelectValue>{selectedStatus === "all" ? "All statuses" : humanize(selectedStatus)}</SelectValue>
+          </SelectTrigger>
+          <SelectContent align="start">
+            <SelectItem value="all">All statuses</SelectItem>
+            {statuses.map((status) => <SelectItem key={status} value={status}>{humanize(status)}</SelectItem>)}
+          </SelectContent>
+        </Select>
+      )}
 
       <Select value={selectedPrecision} onValueChange={(value) => dispatch({
         type: "set-precisions",
@@ -215,11 +239,12 @@ function FilterControls({ state, dispatch, records }: {
   );
 }
 
-function LayerControls({ state, dispatch, records, visibleCount }: {
+function LayerControls({ state, dispatch, records, visibleCount, stageName }: {
   state: AtlasWorkspaceState;
   dispatch: React.Dispatch<Parameters<typeof reduceAtlasState>[1]>;
   records: AtlasRecord[];
   visibleCount: number;
+  stageName: string;
 }) {
   const exact = state.filters.locationPrecisions.length === 0 || state.filters.locationPrecisions.includes("site");
   const approximate = state.filters.locationPrecisions.length === 0 || state.filters.locationPrecisions.some((precision) => precision !== "site");
@@ -234,7 +259,7 @@ function LayerControls({ state, dispatch, records, visibleCount }: {
   return (
     <div className="space-y-1 p-3">
       <div className="flex items-center justify-between rounded-lg px-2 py-2 text-sm">
-        <span className="flex items-center gap-2"><span className="size-2.5 rounded-full bg-primary" />Project evidence</span>
+        <span className="flex items-center gap-2"><span className="size-2.5 rounded-full bg-primary" />{stageName} records</span>
         <span className="font-mono text-xs text-muted-foreground">{visibleCount}</span>
       </div>
       <label className="flex min-h-11 items-center justify-between gap-3 rounded-lg px-2 py-2 text-sm hover:bg-muted/60">
@@ -251,7 +276,7 @@ function LayerControls({ state, dispatch, records, visibleCount }: {
   );
 }
 
-export function AtlasWorkspace({ records, sources }: AtlasWorkspaceProps) {
+export function AtlasWorkspace({ records, release }: AtlasWorkspaceProps) {
   const hydrated = React.useSyncExternalStore(
     React.useCallback(() => () => undefined, []),
     () => true,
@@ -262,10 +287,10 @@ export function AtlasWorkspace({ records, sources }: AtlasWorkspaceProps) {
     return <div className="min-h-[48rem] bg-background"><Skeleton className="h-48 rounded-none" /><Skeleton className="mt-px h-[38rem] rounded-none" /></div>;
   }
 
-  return <HydratedAtlasWorkspace records={records} sources={sources} />;
+  return <HydratedAtlasWorkspace records={records} release={release} />;
 }
 
-function HydratedAtlasWorkspace({ records, sources }: AtlasWorkspaceProps) {
+function HydratedAtlasWorkspace({ records, release }: AtlasWorkspaceProps) {
   const [state, dispatch] = React.useReducer(reduceAtlasState, undefined, () => {
     let storedPersona: string | null = null;
     try {
@@ -295,13 +320,11 @@ function HydratedAtlasWorkspace({ records, sources }: AtlasWorkspaceProps) {
     [records, state.lifecycleStage, state.filters],
   );
   const selectedRecord = records.find((record) => record.id === state.selectedRecordId) ?? null;
-  const automatedSources = sources.filter((source) => source.operationalState === "approved_automated");
-  const healthySources = automatedSources.filter((source) => source.healthy === true).length;
   const filtersActive = activeFilterCount(state);
   const currentStageLabel = stageLabel(state.lifecycleStage);
 
   const inspectorContent = state.inspector === "sources"
-    ? <SourceInspector sources={sources} stage={state.lifecycleStage} />
+    ? <SourceInspector release={release} stage={state.lifecycleStage} />
     : selectedRecord
       ? <EvidenceInspector record={selectedRecord} />
       : <AtlasGuide stageLabel={currentStageLabel} count={visibleRecords.length} persona={state.personaLens} onOpenSources={() => dispatch({ type: "open-inspector", inspector: "sources" })} />;
@@ -318,9 +341,9 @@ function HydratedAtlasWorkspace({ records, sources }: AtlasWorkspaceProps) {
           <ButtonGroup>
             <Button type="button" variant="outline" size="lg" onClick={() => dispatch({ type: "open-inspector", inspector: "sources" })}>
               <Database data-icon="inline-start" />
-              <span className="text-left"><span className="block text-xs">{sources.length} data sources</span><span className="block text-[0.6875rem] font-normal text-muted-foreground">{healthySources}/{automatedSources.length} daily checks healthy</span></span>
+              <span className="text-left"><span className="block text-xs">{release.sourceCount} snapshot sources</span><span className="block text-[0.6875rem] font-normal text-muted-foreground">{release.reviewStatus === "approved" ? "Released" : "Draft for review"} through {release.sourceCutoffUtc ?? "published cutoff"}</span></span>
             </Button>
-            <DownloadButtons compact />
+            <DownloadButtons compact stage={state.lifecycleStage} />
           </ButtonGroup>
         </div>
       </header>
@@ -345,7 +368,7 @@ function HydratedAtlasWorkspace({ records, sources }: AtlasWorkspaceProps) {
       <div className="border-b bg-background px-4 py-3 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-[1920px]">
           {wideFilters ? (
-            <FilterControls state={state} dispatch={dispatch} records={records} />
+            <FilterControls state={state} dispatch={dispatch} records={records.filter((record) => record.stage === state.lifecycleStage)} />
           ) : (
             <div className="flex flex-wrap items-center justify-between gap-2">
               <div className="flex items-center gap-2">
@@ -377,18 +400,13 @@ function HydratedAtlasWorkspace({ records, sources }: AtlasWorkspaceProps) {
               <TooltipContent>{state.layersCollapsed ? "Open layers" : "Collapse layers"}</TooltipContent>
             </Tooltip>
           </div>
-          {!state.layersCollapsed && <LayerControls state={state} dispatch={dispatch} records={records} visibleCount={visibleRecords.length} />}
+          {!state.layersCollapsed && <LayerControls state={state} dispatch={dispatch} records={records.filter((record) => record.stage === state.lifecycleStage)} visibleCount={visibleRecords.length} stageName={currentStageLabel} />}
         </aside>
 
         <div className="relative min-w-0 bg-map-water">
-          {state.lifecycleStage !== "projects" && (
+          {visibleRecords.length === 0 && (
             <div className="absolute inset-x-4 bottom-4 z-20 mx-auto max-w-xl">
-              <EvidenceAlert title="Coverage gap, not a known zero">{currentStageLabel} sources are registered, but this release does not yet publish verified site-level records for this layer.</EvidenceAlert>
-            </div>
-          )}
-          {state.lifecycleStage === "projects" && visibleRecords.length === 0 && (
-            <div className="absolute inset-x-4 bottom-4 z-20 mx-auto max-w-xl">
-              <EvidenceAlert title="No published records match">Change the filters. Nuclear Atlas has not concluded that no project exists.</EvidenceAlert>
+              <EvidenceAlert title="No published records match">Change the filters. This snapshot has not concluded that no {currentStageLabel.toLowerCase()} activity exists.</EvidenceAlert>
             </div>
           )}
           {mapFailed && (
@@ -444,14 +462,14 @@ function HydratedAtlasWorkspace({ records, sources }: AtlasWorkspaceProps) {
       <Sheet open={!wideFilters && state.mobilePanel === "filters"} onOpenChange={(open) => !open && dispatch({ type: "close-mobile-panel" })}>
         <SheetContent side="bottom" className="max-h-[85dvh] overflow-y-auto xl:hidden">
           <SheetHeader><SheetTitle>Filter the atlas</SheetTitle><SheetDescription>Every filter applies to both Map and Table views.</SheetDescription></SheetHeader>
-          <div className="space-y-4 px-4 pb-6"><FilterControls state={state} dispatch={dispatch} records={records} /></div>
+          <div className="space-y-4 px-4 pb-6"><FilterControls state={state} dispatch={dispatch} records={records.filter((record) => record.stage === state.lifecycleStage)} /></div>
         </SheetContent>
       </Sheet>
 
       <Sheet open={!desktopPanels && state.mobilePanel === "layers"} onOpenChange={(open) => !open && dispatch({ type: "close-mobile-panel" })}>
         <SheetContent side="bottom" className="lg:hidden">
           <SheetHeader><SheetTitle>Map layers</SheetTitle><SheetDescription>Control how exact and approximate locations appear.</SheetDescription></SheetHeader>
-          <LayerControls state={state} dispatch={dispatch} records={records} visibleCount={visibleRecords.length} />
+          <LayerControls state={state} dispatch={dispatch} records={records.filter((record) => record.stage === state.lifecycleStage)} visibleCount={visibleRecords.length} stageName={currentStageLabel} />
         </SheetContent>
       </Sheet>
 

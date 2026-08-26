@@ -1,11 +1,14 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises"
 
+import { csvCell } from "./csv.mjs"
+
 import { buildProofStatusFromFiles } from "./credibility/proof.mjs"
 
 const root = new URL("../", import.meta.url)
 const readJson = async (path) => JSON.parse(await readFile(new URL(path, root), "utf8"))
-const [deals, sourceRegistry, sourceStatus, sourceProbes, evidenceEvents, proofStatus] = await Promise.all([
+const [deals, atlasRelease, sourceRegistry, sourceStatus, sourceProbes, evidenceEvents, proofStatus] = await Promise.all([
   readJson("data/deals.json"),
+  readJson("data/atlas-release.json"),
   readJson("data/credibility/sources.json"),
   readJson("data/credibility/source-status.json"),
   readJson("data/credibility/source-probes.json"),
@@ -41,12 +44,6 @@ const columns = [
   "source_urls",
 ]
 
-const quote = (value) => {
-  if (value === null || value === undefined) return ""
-  const text = String(value)
-  return /[",\n]/.test(text) ? `"${text.replaceAll('"', '""')}"` : text
-}
-
 const rows = deals.map((deal) => ({
   id: deal.id,
   name: deal.name,
@@ -74,11 +71,50 @@ const rows = deals.map((deal) => ({
   source_urls: deal.sources.map((source) => source.url).join(" | "),
 }))
 
-const csv = [columns.join(","), ...rows.map((row) => columns.map((column) => quote(row[column])).join(","))].join("\n")
+const csv = [columns.join(","), ...rows.map((row) => columns.map((column) => csvCell(row[column])).join(","))].join("\n")
 
 await mkdir(outputDirectory, { recursive: true })
 await writeFile(new URL("deals.json", outputDirectory), `${JSON.stringify(deals, null, 2)}\n`)
 await writeFile(new URL("deals.csv", outputDirectory), `${csv}\n`)
+
+const atlasOutputDirectory = new URL("atlas/", outputDirectory)
+await mkdir(atlasOutputDirectory, { recursive: true })
+const atlasColumns = [
+  "id", "stage", "name", "status", "type", "technology", "review_status", "location_label",
+  "location_precision", "latitude", "longitude", "as_of", "source_ids", "citation_urls",
+]
+for (const [stageId, bundle] of Object.entries(atlasRelease.stages)) {
+  const publicRecords = bundle.records.map((record) => ({
+    id: record.id,
+    stage: record.stage,
+    name: record.name,
+    status: record.status,
+    type: record.typeLabel,
+    technology: record.technology,
+    review_status: record.reviewStatus,
+    location_label: record.location?.label ?? null,
+    location_precision: record.location?.precision ?? null,
+    latitude: record.location?.latitude ?? null,
+    longitude: record.location?.longitude ?? null,
+    as_of: record.asOf,
+    source_ids: record.sourceIds.join(" | "),
+    citation_urls: record.citations.map((citation) => citation.url).join(" | "),
+  }))
+  const atlasCsv = [atlasColumns.join(","), ...publicRecords.map((row) => atlasColumns.map((column) => csvCell(row[column])).join(","))].join("\n")
+  await writeFile(new URL(`${stageId}.json`, atlasOutputDirectory), `${JSON.stringify(bundle.records, null, 2)}\n`)
+  await writeFile(new URL(`${stageId}.csv`, atlasOutputDirectory), `${atlasCsv}\n`)
+}
+await writeFile(new URL("release.json", atlasOutputDirectory), `${JSON.stringify({
+  schemaVersion: atlasRelease.schemaVersion,
+  releaseId: atlasRelease.releaseId,
+  reviewStatus: atlasRelease.reviewStatus,
+  approvedBy: atlasRelease.approvedBy,
+  sourceCutoffUtc: atlasRelease.sourceCutoffUtc,
+  generatedAtUtc: atlasRelease.generatedAtUtc,
+  workbookSha256: atlasRelease.workbookSha256,
+  canonicalModelSha256: atlasRelease.canonicalModelSha256,
+  sourceCount: atlasRelease.sourceCount,
+}, null, 2)}\n`)
 
 const publicSourceRegistry = sourceRegistry.map((source) => ({
   id: source.id,
@@ -107,4 +143,4 @@ await writeFile(new URL("source-status.json", outputDirectory), `${JSON.stringif
 await writeFile(new URL("source-probes.json", outputDirectory), `${JSON.stringify(sourceProbes, null, 2)}\n`)
 await writeFile(new URL("evidence-events.json", outputDirectory), `${JSON.stringify(publicEvidenceEvents, null, 2)}\n`)
 await writeFile(new URL("credibility-proof.json", outputDirectory), `${JSON.stringify(proofStatus, null, 2)}\n`)
-console.log(`Generated deal downloads and credibility outputs for ${deals.length} deals and ${sourceRegistry.length} sources.`)
+console.log(`Generated lifecycle downloads for ${Object.values(atlasRelease.stages).reduce((sum, stage) => sum + stage.records.length, 0)} records, ${deals.length} deal aliases, and ${sourceRegistry.length} credibility sources.`)

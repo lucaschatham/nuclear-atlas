@@ -1,13 +1,15 @@
 import changelogJson from "../../data/changelog.json";
 import dealsJson from "../../data/deals.json";
 import atlasLocationsJson from "../../data/atlas-locations.json";
+import atlasReleaseJson from "../../data/atlas-release.json";
 import sourceGuideJson from "../../data/credibility/source-guide.json";
 import sourceStatusJson from "../../data/credibility/source-status.json";
 import sourcesJson from "../../data/credibility/sources.json";
-import type { AtlasLocation, ChangelogEntry, Deal, SourceDashboardItem } from "@/lib/types";
+import type { AtlasLocation, AtlasRelease, ChangelogEntry, Deal, SourceDashboardItem } from "@/lib/types";
 
 export const deals = dealsJson as Deal[];
 export const atlasLocations = atlasLocationsJson as AtlasLocation[];
+export const atlasRelease = atlasReleaseJson as AtlasRelease;
 export const changelog = changelogJson as ChangelogEntry[];
 
 const sourceGuide = new Map(sourceGuideJson.map((entry) => [entry.source_id, entry]));

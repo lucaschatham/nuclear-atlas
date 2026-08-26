@@ -1,4 +1,4 @@
-import type { AtlasLocation, Deal } from "@/lib/types";
+import type { AtlasRelease, AtlasReleaseRecord } from "@/lib/types";
 
 export const lifecycleStages = [
   { id: "projects", label: "Projects" },
@@ -12,7 +12,7 @@ export const lifecycleStages = [
 
 export type LifecycleStage = (typeof lifecycleStages)[number]["id"];
 export type AtlasView = "map" | "table";
-export type LocationPrecision = AtlasLocation["precision"];
+export type LocationPrecision = NonNullable<AtlasReleaseRecord["location"]>["precision"];
 export type InspectorView = "closed" | "guide" | "record" | "sources";
 export type MobilePanel = "closed" | "filters" | "layers";
 
@@ -33,28 +33,19 @@ export const personaConfig = {
 
 export type PersonaLens = keyof typeof personaConfig;
 
-export interface AtlasRecord {
-  id: string;
-  name: string;
+export interface AtlasRecord extends Omit<AtlasReleaseRecord, "location"> {
   locationLabel: string;
   locationPrecision: LocationPrecision;
   coordinateNote: string;
   latitude: number;
   longitude: number;
-  technology: Deal["technology"];
-  evidenceStrength: Deal["bindingness"]["tier"];
-  firmMw: number | null;
-  optionedMw: number | null;
-  targetOperation: string | null;
-  lastVerified: string;
-  sourceIds: string[];
-  deal: Deal;
 }
 
 export interface AtlasFilters {
   query: string;
-  technologies: Deal["technology"][];
-  evidenceStrengths: Deal["bindingness"]["tier"][];
+  technologies: string[];
+  evidenceStrengths: string[];
+  statuses: string[];
   locationPrecisions: LocationPrecision[];
   sourceAuthorities: string[];
 }
@@ -77,8 +68,9 @@ export type AtlasWorkspaceAction =
   | { type: "set-stage"; stage: LifecycleStage }
   | { type: "set-persona"; persona: PersonaLens }
   | { type: "set-query"; query: string }
-  | { type: "set-technologies"; technologies: Deal["technology"][] }
-  | { type: "set-strengths"; strengths: Deal["bindingness"]["tier"][] }
+  | { type: "set-technologies"; technologies: string[] }
+  | { type: "set-strengths"; strengths: string[] }
+  | { type: "set-statuses"; statuses: string[] }
   | { type: "set-precisions"; precisions: LocationPrecision[] }
   | { type: "select-record"; id: string }
   | { type: "open-inspector"; inspector: Exclude<InspectorView, "closed"> }
@@ -94,6 +86,7 @@ const emptyFilters = (): AtlasFilters => ({
   query: "",
   technologies: [],
   evidenceStrengths: [],
+  statuses: [],
   locationPrecisions: [],
   sourceAuthorities: [],
 });
@@ -118,45 +111,37 @@ export function createInitialAtlasState(storedPersona?: string | null): AtlasWor
   };
 }
 
-export function createAtlasRecords(deals: Deal[], locations: AtlasLocation[]): AtlasRecord[] {
-  const dealsById = new Map(deals.map((deal) => [deal.id, deal]));
-  return locations.flatMap((location) => {
-    const deal = dealsById.get(location.deal_id);
-    if (!deal) return [];
+export function createAtlasRecords(release: AtlasRelease): AtlasRecord[] {
+  return lifecycleStages.flatMap(({ id }) => release.stages[id]?.records ?? []).flatMap((record) => {
+    if (!record.location) return [];
     return [{
-      id: deal.id,
-      name: deal.name,
-      locationLabel: location.display_label,
-      locationPrecision: location.precision,
-      coordinateNote: location.coordinate_note,
-      latitude: location.latitude,
-      longitude: location.longitude,
-      technology: deal.technology,
-      evidenceStrength: deal.bindingness.tier,
-      firmMw: deal.mw_firm,
-      optionedMw: deal.mw_optioned,
-      targetOperation: deal.dates.target_cod,
-      lastVerified: deal.last_verified,
-      sourceIds: deal.sources.map((source) => source.url),
-      deal,
+      ...record,
+      locationLabel: record.location.label,
+      locationPrecision: record.location.precision,
+      coordinateNote: record.location.coordinateNote,
+      latitude: record.location.latitude,
+      longitude: record.location.longitude,
     }];
   });
 }
 
 export function filterAtlasRecordsByCriteria(records: AtlasRecord[], lifecycleStage: LifecycleStage, filters: AtlasFilters): AtlasRecord[] {
-  if (lifecycleStage !== "projects") return [];
   const query = filters.query.trim().toLowerCase();
   return records.filter((record) => {
     const searchable = [
       record.name,
       record.locationLabel,
-      record.deal.parties.offtaker,
-      record.deal.parties.developer,
-      record.deal.parties.technology_vendor,
+      record.status,
+      record.typeLabel,
+      record.technology,
+      record.summary,
+      ...record.details.map((item) => item.value),
     ].filter(Boolean).join(" ").toLowerCase();
-    return (!query || searchable.includes(query))
-      && (filters.technologies.length === 0 || filters.technologies.includes(record.technology))
-      && (filters.evidenceStrengths.length === 0 || filters.evidenceStrengths.includes(record.evidenceStrength))
+    return record.stage === lifecycleStage
+      && (!query || searchable.includes(query))
+      && (filters.technologies.length === 0 || filters.technologies.includes(record.stage === "projects" ? (record.technology ?? "") : (record.typeLabel ?? "")))
+      && (filters.evidenceStrengths.length === 0 || (record.evidenceStrength && filters.evidenceStrengths.includes(record.evidenceStrength)))
+      && (filters.statuses.length === 0 || (record.status && filters.statuses.includes(record.status)))
       && (filters.locationPrecisions.length === 0 || filters.locationPrecisions.includes(record.locationPrecision));
   });
 }
@@ -171,6 +156,7 @@ export function atlasRecordSetKey(state: AtlasWorkspaceState): string {
     state.filters.query,
     state.filters.technologies,
     state.filters.evidenceStrengths,
+    state.filters.statuses,
     state.filters.locationPrecisions,
   ]);
 }
@@ -190,7 +176,7 @@ export function reduceAtlasState(state: AtlasWorkspaceState, action: AtlasWorksp
     case "set-view":
       return { ...state, view: action.view, mobilePanel: "closed" };
     case "set-stage":
-      return clearSelection({ ...state, lifecycleStage: action.stage });
+      return clearSelection({ ...state, lifecycleStage: action.stage, filters: emptyFilters() });
     case "set-persona":
       return clearSelection({ ...state, personaLens: action.persona, lifecycleStage: personaConfig[action.persona].stage, filters: emptyFilters() });
     case "set-query":
@@ -199,6 +185,8 @@ export function reduceAtlasState(state: AtlasWorkspaceState, action: AtlasWorksp
       return clearSelection({ ...state, filters: { ...state.filters, technologies: action.technologies } });
     case "set-strengths":
       return clearSelection({ ...state, filters: { ...state.filters, evidenceStrengths: action.strengths } });
+    case "set-statuses":
+      return clearSelection({ ...state, filters: { ...state.filters, statuses: action.statuses } });
     case "set-precisions":
       return clearSelection({ ...state, filters: { ...state.filters, locationPrecisions: action.precisions } });
     case "select-record":
@@ -224,8 +212,7 @@ export function reduceAtlasState(state: AtlasWorkspaceState, action: AtlasWorksp
 
 const views = new Set<AtlasView>(["map", "table"]);
 const stages = new Set<LifecycleStage>(lifecycleStages.map((stage) => stage.id));
-const technologies = new Set<Deal["technology"]>(["smr", "large_lwr", "restart", "uprate", "existing_plant_ppa", "multiple", "other"]);
-const strengths = new Set<Deal["bindingness"]["tier"]>(["B0", "B1", "B2", "B3", "B4", "B5", "BX"]);
+const strengths = new Set(["B0", "B1", "B2", "B3", "B4", "B5", "BX"]);
 const precisions = new Set<LocationPrecision>(["site", "county", "state", "region", "country"]);
 
 function parseList<T extends string>(params: URLSearchParams, key: string, allowed: ReadonlySet<T>): T[] {
@@ -252,14 +239,16 @@ export function parseAtlasSearch(search: string, fallback = createInitialAtlasSt
   const state: AtlasWorkspaceState = isPersonaLens(lens)
     ? { ...fallback, personaLens: lens, lifecycleStage: personaConfig[lens].stage }
     : fallback;
+  const lifecycleStage = stage && stages.has(stage) ? stage : state.lifecycleStage;
   return {
     ...state,
     view: view && views.has(view) ? view : state.view,
-    lifecycleStage: stage && stages.has(stage) ? stage : state.lifecycleStage,
+    lifecycleStage,
     filters: {
       query: params.get("q") ?? "",
-      technologies: parseList(params, "tech", technologies),
-      evidenceStrengths: parseList(params, "evidence", strengths),
+      technologies: params.get("tech")?.split(",").filter(Boolean) ?? [],
+      evidenceStrengths: lifecycleStage === "projects" ? parseList(params, "evidence", strengths) : [],
+      statuses: lifecycleStage === "projects" ? [] : params.get("status")?.split(",").filter(Boolean) ?? [],
       locationPrecisions: parseLocationPrecisions(params),
       sourceAuthorities: [],
     },
@@ -273,7 +262,8 @@ export function serializeAtlasSearch(state: AtlasWorkspaceState): string {
   if (state.view !== "map") params.set("view", state.view);
   if (state.filters.query) params.set("q", state.filters.query);
   if (state.filters.technologies.length) params.set("tech", state.filters.technologies.join(","));
-  if (state.filters.evidenceStrengths.length) params.set("evidence", state.filters.evidenceStrengths.join(","));
+  if (state.lifecycleStage === "projects" && state.filters.evidenceStrengths.length) params.set("evidence", state.filters.evidenceStrengths.join(","));
+  if (state.lifecycleStage !== "projects" && state.filters.statuses.length) params.set("status", state.filters.statuses.join(","));
   if (state.filters.locationPrecisions.length) params.set("precision", state.filters.locationPrecisions.join(","));
   return params.toString();
 }

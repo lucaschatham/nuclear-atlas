@@ -6,10 +6,12 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import type { LifecycleStage } from "@/lib/atlas-workspace";
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
-export function DownloadButtons({ compact = false }: { compact?: boolean }) {
+export function DownloadButtons({ compact = false, stage = "projects" }: { compact?: boolean; stage?: LifecycleStage }) {
+  const basename = `atlas/${stage}`;
   return (
     <DropdownMenu>
       <DropdownMenuTrigger
@@ -22,10 +24,10 @@ export function DownloadButtons({ compact = false }: { compact?: boolean }) {
         <ChevronDown data-icon="inline-end" />
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem render={<a href={`${basePath}/data/deals.csv`} download />}>
+        <DropdownMenuItem render={<a href={`${basePath}/data/${basename}.csv`} download />}>
           <FileSpreadsheet /> Download CSV
         </DropdownMenuItem>
-        <DropdownMenuItem render={<a href={`${basePath}/data/deals.json`} download />}>
+        <DropdownMenuItem render={<a href={`${basePath}/data/${basename}.json`} download />}>
           <FileJson /> Download JSON
         </DropdownMenuItem>
       </DropdownMenuContent>

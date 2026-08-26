@@ -29,8 +29,14 @@ jobs:
       - run: npm ci
       - run: npm test
       - run: npm run validate:data
+      - run: npm run validate:atlas-release
       - run: npm run lint
       - run: npm run build
+      # A draft workbook intentionally fails here. The owner approves the Sheet,
+      # re-exports it, and regenerates the release only after product signoff.
+      - name: Require an approved Atlas release before deployment
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: npm run validate:atlas-release:production
       - if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         uses: actions/upload-pages-artifact@v3
         with:

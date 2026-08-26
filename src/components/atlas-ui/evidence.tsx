@@ -42,6 +42,11 @@ export function EvidenceBadge({ strength }: { strength: AtlasRecord["evidenceStr
   );
 }
 
+export function SourceAuthorityBadge({ authority }: { authority: string }) {
+  const label = authority.replaceAll("_", " ").replace(/\b\w/g, (letter) => letter.toUpperCase());
+  return <Badge variant="outline">{label}</Badge>;
+}
+
 export function SourceHealth({ source, showLabel = true }: { source: SourceDashboardItem; showLabel?: boolean }) {
   const healthy = source.healthy === true;
   const failed = source.healthy === false;

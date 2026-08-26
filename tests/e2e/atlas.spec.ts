@@ -53,10 +53,13 @@ test("map and table expose the same launch records", async ({ page }, testInfo) 
   }).toBeLessThan(80);
 });
 
-test("unsupported stages state a coverage gap", async ({ page }) => {
+test("every lifecycle stage exposes cited snapshot records", async ({ page }) => {
   await page.goto("/");
   await page.getByRole("tab", { name: /Fuel Supply/ }).click();
-  await expect(page.getByText("Coverage gap, not a known zero")).toBeVisible();
+  await page.getByLabel("Table view", { exact: true }).click();
+  await expect(page.locator("[data-slot=table-body] tr")).toHaveCount(4);
+  await page.locator("[data-slot=table-body] tr").first().click();
+  await expect(page.getByText("Evidence", { exact: true }).last()).toBeVisible();
 });
 
 test("workspace has no serious accessibility violations", async ({ page }) => {
