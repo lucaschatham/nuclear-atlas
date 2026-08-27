@@ -15,7 +15,7 @@ export const lifecycleTableConfig = [
   { table: "DECOMMISSIONING", stage: "decommissioning", id: "decom_id", label: "Decommissioning" },
 ]
 
-const requiredHeaders = {
+export const requiredHeaders = {
   RELEASE: ["release_id", "schema_version", "source_cutoff_utc", "generated_at_utc", "canonical_model_sha256", "review_status", "approved_by", "notes"],
   SOURCES: ["source_id", "publisher", "source_name", "authority_class", "source_url", "terms_url", "reuse_status", "geographic_scope", "source_as_of", "retrieved_at_utc", "notes"],
   SITES: ["site_id", "site_name", "aliases", "country_code", "country_name", "admin1", "locality", "latitude", "longitude", "location_precision", "site_category", "public_status", "nrc_docket", "eia_plant_id", "notes"],
@@ -23,7 +23,7 @@ const requiredHeaders = {
   PROJECTS: ["project_id", "project_name", "site_id", "reactor_id", "project_type", "offtaker", "developer", "technology_vendor", "utility", "epc", "offtaker_type", "technology", "firm_mw", "optioned_mw", "structure_type", "binding_tier", "binding_evidence", "announced_date", "target_operation", "status", "location_label", "latitude", "longitude", "location_precision", "coordinate_note", "analyst_note", "last_verified", "review_status"],
   FUEL_SUPPLY: ["facility_id", "site_id", "facility_name", "fuel_cycle_stage", "material_or_product", "status", "capacity_value", "capacity_unit", "capacity_basis", "docket_number", "status_as_of", "latitude", "longitude", "location_precision", "location_label", "coordinate_note", "review_status"],
   LICENSE_BUILD: ["license_action_id", "site_id", "reactor_id", "project_id", "facility_name", "regulator", "jurisdiction", "docket_number", "action_type", "reactor_design", "normalized_status", "source_status_text", "application_date", "decision_date", "effective_date", "status_as_of", "latitude", "longitude", "location_precision", "location_label", "coordinate_note", "review_status"],
-  OPERATIONS: ["operation_id", "reactor_id", "site_id", "reactor_name", "period_start", "period_end", "period_frequency", "operating_status", "net_generation_mwh", "capacity_factor_pct", "outage_mw", "outage_type", "status_as_of", "latitude", "longitude", "location_precision", "location_label", "coordinate_note", "review_status"],
+  OPERATIONS: ["operation_id", "reactor_id", "site_id", "reactor_name", "period_start", "period_end", "period_frequency", "operating_status", "net_generation_mwh", "capacity_factor_pct", "outage_mw", "outage_type", "action_matrix_period", "action_matrix_code", "action_matrix_label", "public_findings_period", "public_finding_count", "greater_than_green_count", "latest_finding_date", "status_as_of", "latitude", "longitude", "location_precision", "location_label", "coordinate_note", "review_status"],
   SPENT_FUEL: ["storage_id", "site_id", "reactor_id", "facility_name", "installation_type", "storage_method", "license_number", "license_type", "inventory_value", "inventory_unit", "inventory_date", "status", "latitude", "longitude", "location_precision", "location_label", "coordinate_note", "review_status"],
   WASTE_DISPOSAL: ["facility_id", "site_id", "facility_name", "facility_type", "operating_status", "disposal_method", "waste_classes_accepted", "service_area", "jurisdiction", "status_as_of", "latitude", "longitude", "location_precision", "location_label", "coordinate_note", "review_status"],
   DECOMMISSIONING: ["decom_id", "site_id", "reactor_id", "facility_name", "strategy", "current_phase", "shutdown_date", "license_termination_target", "estimated_cost", "estimated_cost_currency", "trust_fund_balance", "trust_fund_date", "status_as_of", "latitude", "longitude", "location_precision", "location_label", "coordinate_note", "review_status"],
@@ -39,7 +39,7 @@ const numericFields = {
   PROJECTS: ["firm_mw", "optioned_mw", "latitude", "longitude"],
   FUEL_SUPPLY: ["capacity_value", "latitude", "longitude"],
   LICENSE_BUILD: ["latitude", "longitude"],
-  OPERATIONS: ["net_generation_mwh", "capacity_factor_pct", "outage_mw", "latitude", "longitude"],
+  OPERATIONS: ["net_generation_mwh", "capacity_factor_pct", "outage_mw", "action_matrix_code", "public_finding_count", "greater_than_green_count", "latitude", "longitude"],
   SPENT_FUEL: ["inventory_value", "latitude", "longitude"],
   WASTE_DISPOSAL: ["latitude", "longitude"],
   DECOMMISSIONING: ["estimated_cost", "trust_fund_balance", "latitude", "longitude"],
@@ -369,9 +369,9 @@ function buildRecords(table, rows, context) {
       return baseRecord({
         table, id: row.operation_id, name: row.reactor_name, stage: "operations", row, citations, sourceById, siteById,
         status: row.operating_status, typeLabel: reactor?.reactor_type ?? "Reactor", technology: reactor?.reactor_type ?? reactor?.technology,
-        summary: `Official operating-unit snapshot for ${row.reactor_name}.`, asOf: row.status_as_of,
-        metrics: [metric("Net generation", numberOrNull(row.net_generation_mwh), "MWh"), metric("Capacity factor", numberOrNull(row.capacity_factor_pct), "%"), metric("Outage", numberOrNull(row.outage_mw), "MW")],
-        details: [detail("Reactor type", reactor?.reactor_type), detail("Model", reactor?.reactor_model), detail("Reporting period", [row.period_start, row.period_end].filter(Boolean).join(" to ")), detail("Outage type", row.outage_type)],
+        summary: "NRC operating status and public oversight snapshot. A zero count means no public row in the frozen dataset, not proof that no issue existed. Security finding details are not publicly available.", asOf: row.status_as_of,
+        metrics: [metric("Net capacity", numberOrNull(reactor?.net_capacity_mw), "MW"), metric("Public findings / violations", numberOrNull(row.public_finding_count)), metric("Greater-than-Green", numberOrNull(row.greater_than_green_count)), metric("Net generation", numberOrNull(row.net_generation_mwh), "MWh"), metric("Capacity factor", numberOrNull(row.capacity_factor_pct), "%"), metric("Outage", numberOrNull(row.outage_mw), "MW")],
+        details: [detail("Reactor type", reactor?.reactor_type), detail("Model", reactor?.reactor_model), detail("NRC oversight response", row.action_matrix_label), detail("Action Matrix period", row.action_matrix_period), detail("Public findings period", row.public_findings_period), detail("Latest public finding", row.latest_finding_date), detail("Reporting period", [row.period_start, row.period_end].filter(Boolean).join(" to ")), detail("Outage type", row.outage_type)],
       })
     }
     if (table === "SPENT_FUEL") return baseRecord({

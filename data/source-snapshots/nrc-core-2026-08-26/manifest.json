@@ -1,0 +1,58 @@
+{
+  "snapshot_id": "nrc-core-2026-08-26",
+  "retrieved_at_utc": "2026-08-26T23:50:00Z",
+  "sources": [
+    {
+      "file": "current-operating.html",
+      "url": "https://www.nrc.gov/reactors/operating/list-power-reactor-units",
+      "source_as_of": "2026-08-26",
+      "bytes": 104223,
+      "expected_records": 95,
+      "sha256": "94ad5896c4cb79c280d5e395c0b3723732e9b4afdd205c3954b425b3da41402e"
+    },
+    {
+      "file": "reactors-operating.xlsx",
+      "url": "https://www.nrc.gov/sites/default/files/doc_library/cdn/legacy/reading-rm/doc-collections/datasets/reactors-operating.xlsx",
+      "source_as_of": "2022",
+      "bytes": 47027,
+      "worksheet": "query (1)",
+      "expected_rows_including_header": 94,
+      "sha256": "de4407197363bc30de150e275ddb8c1e3c7890869c83d297f119cf8a35fb4760"
+    },
+    {
+      "file": "reactors-decommissioning.xlsx",
+      "url": "https://www.nrc.gov/sites/default/files/doc_library/cdn/legacy/reading-rm/doc-collections/datasets/reactors-decommissioning.xlsx",
+      "source_as_of": "2022",
+      "bytes": 17808,
+      "worksheet": "query (9)",
+      "expected_rows_including_header": 36,
+      "sha256": "c5f18f9932072444d217548543d76b39098d164cc105e5f02a0f6eb1446ec075"
+    },
+    {
+      "file": "action-matrix.xlsx",
+      "url": "https://www.nrc.gov/sites/default/files/doc_library/cdn/data/reactors/operating/dataset/action-matrix.xlsx",
+      "source_as_of": "2025Q1",
+      "bytes": 48204,
+      "worksheet": "action-matrix",
+      "expected_rows_including_header": 99,
+      "sha256": "bf03083f8c811978b86ecee85889086e1a37f86ab91318ae21d4f86dfe7899b7"
+    },
+    {
+      "file": "findings-violations.xlsx",
+      "url": "https://www.nrc.gov/sites/default/files/doc_library/cdn/data/reactors/operating/dataset/findings-violations.xlsx",
+      "source_as_of": "2025-05-13",
+      "bytes": 2522681,
+      "worksheet": "findings-violations",
+      "expected_rows_including_header": 18241,
+      "sha256": "178e206757f134246a4d9947fc475641cebc2c4ddd7c16e4e8d8a21d90f2676f"
+    },
+    {
+      "file": "fuel-cycle.html",
+      "url": "https://www.nrc.gov/info-finder/fc/index",
+      "source_as_of": "2026-06-18",
+      "bytes": 189879,
+      "expected_records": 12,
+      "sha256": "ff412c9c8e8fedf97dc85f84b5d90b78c3b3e795f7f7021fbc160adf898426bd"
+    }
+  ]
+}

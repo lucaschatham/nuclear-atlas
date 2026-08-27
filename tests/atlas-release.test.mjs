@@ -27,6 +27,10 @@ test("the static release publishes cited records for every lifecycle stage", asy
 
   assert.deepEqual(Object.keys(release.stages), stages)
   assert.equal(release.stages.projects.records.length, 17)
+  assert.equal(release.stages["fuel-supply"].records.length, 12)
+  assert.equal(release.stages.operations.records.length, 95)
+  assert.equal(release.stages["spent-fuel"].records.length, 80)
+  assert.equal(release.stages.decommissioning.records.length, 35)
   assert.deepEqual(
     release.stages.projects.records.map((record) => record.id).sort(),
     deals.map((deal) => deal.id).sort(),
@@ -48,6 +52,23 @@ test("the static release publishes cited records for every lifecycle stage", asy
       assert.ok(record.location, `${record.id} has no renderable location`)
     }
   }
+})
+
+test("the NRC operations snapshot reports oversight facts without inventing a safety score", async () => {
+  const release = await readJson("data/atlas-release.json")
+  const records = release.stages.operations.records
+
+  assert.equal(records.length, 95, "the current NRC operating-unit list contains 95 units")
+  assert.ok(records.every((record) => record.status === "operating"))
+  assert.ok(records.every((record) => record.details.some((detail) => detail.label === "NRC oversight response")))
+  const recordsWithFindings = records.filter((record) => record.sourceIds.includes("src_nrc_findings_2024"))
+  const recordsWithoutFindings = records.filter((record) => !record.sourceIds.includes("src_nrc_findings_2024"))
+  assert.equal(recordsWithFindings.length, 95)
+  assert.equal(recordsWithoutFindings.length, 0)
+  assert.ok(recordsWithFindings.every((record) => record.metrics.some((metric) => metric.label === "Public findings / violations")))
+  assert.ok(recordsWithoutFindings.every((record) => !record.metrics.some((metric) => metric.label === "Public findings / violations")))
+  assert.ok(records.every((record) => /Security finding details are not publicly available\./.test(record.summary)))
+  assert.ok(records.every((record) => !JSON.stringify(record).toLowerCase().includes("safety score")))
 })
 
 test("the spent-fuel snapshot reconciles to the NRC ISFSI license map", async () => {

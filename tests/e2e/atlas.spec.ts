@@ -57,7 +57,7 @@ test("every lifecycle stage exposes cited snapshot records", async ({ page }) =>
   await page.goto("/");
   await page.getByRole("tab", { name: /Fuel Supply/ }).click();
   await page.getByLabel("Table view", { exact: true }).click();
-  await expect(page.locator("[data-slot=table-body] tr")).toHaveCount(4);
+  await expect(page.locator("[data-slot=table-body] tr")).toHaveCount(12);
   await page.locator("[data-slot=table-body] tr").first().click();
   await expect(page.getByText("Evidence", { exact: true }).last()).toBeVisible();
 });
