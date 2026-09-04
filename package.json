@@ -24,7 +24,12 @@
     "generate:methodology": "tsx scripts/generate-methodology.mjs --diagrams",
     "generate:methodology:docs": "tsx scripts/generate-methodology.mjs",
     "predev": "node scripts/prepare-maplibre.mjs && npm run generate:downloads && npm run generate:methodology:docs",
-    "prebuild": "node scripts/prepare-maplibre.mjs && npm run validate:data && npm run validate:credibility && npm run validate:ui && npm run generate:downloads && npm run generate:methodology:docs"
+    "prebuild": "node scripts/prepare-maplibre.mjs && npm run validate:data && npm run validate:credibility && npm run validate:ui && npm run generate:downloads && npm run generate:methodology:docs",
+    "db": "python3 -B scripts/local-store.py",
+    "db:init": "python3 -B scripts/local-store.py init",
+    "db:seed": "python3 -B scripts/local-store.py import-release",
+    "db:status": "python3 -B scripts/local-store.py status",
+    "db:backup": "python3 -B scripts/local-store.py backup"
   },
   "dependencies": {
     "@base-ui/react": "^1.6.0",

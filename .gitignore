@@ -46,3 +46,7 @@ next-env.d.ts
 .gstack/
 /test-results/
 /playwright-report/
+
+# Local SQLite collection archive, raw snapshots, exports, and backups
+/.local-data/
+__pycache__/

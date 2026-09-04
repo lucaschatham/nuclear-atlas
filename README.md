@@ -28,6 +28,10 @@ npm run build
 
 The static export is written to `out/`.
 
+## Local collection storage
+
+Run `npm run db:seed` to archive the existing release in a local SQLite database, then `npm run db:status` to inspect it. No database server is required. See [the database schema](docs/database-schema.md) for tables and relationships, and [the local store guide](docs/local-data-store.md) for source imports, queries, exports, and backups. The existing workbook and static publication workflow remain in place.
+
 ## Data
 
 `data/deals.json` contains one object per deal. The schema is published at `data/schema.json` and enforced in CI. Core fields cover:
