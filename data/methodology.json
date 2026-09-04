@@ -1,50 +1,271 @@
 {
-  "version": "0.1",
+  "version": "0.2",
   "status": "Working draft",
   "objective": "Help people understand nuclear projects, compare public evidence, and see what remains unknown across the nuclear lifecycle.",
   "workflow": [
-    {"id": "collect", "title": "Collect", "detail": "GitHub Actions checks approved adapters every 24 hours. Validate responses, identify changes, and record failures.", "caveat": "Only approved sources are automated. Other connections show intended coverage, not live ingestion."},
-    {"id": "store", "title": "Storage & processing", "detail": "Git stores receipts and review candidates. Every attempt records its source, time, result, and hash. Permitted raw snapshots use 90-day Actions artifacts.", "caveat": "OPEN DECISION: durable storage. No database migration is approved."},
-    {"id": "review", "title": "Human review", "detail": "Review source records, dates, and entity matches in a pull request. Curate project JSON and append reviewed evidence history.", "caveat": "Hold conflicts for review. A successful download never authorizes publication."},
-    {"id": "publish", "title": "Publish", "detail": "Build the static site from curated project JSON. Export JSON, CSV, source status, and the separate evidence ledger.", "caveat": "PLANNED: automatic evidence-to-project projection. It is not connected today."},
-    {"id": "explore", "title": "Dashboard", "detail": "Lifecycle, persona, and filters select one collection for Map and Table. A marker or row opens the same evidence inspector with sources, dates, and location precision.", "caveat": "Projects are published. Other lifecycle stages have coverage gaps, not known zeros."}
+    {
+      "id": "collect",
+      "title": "Collect",
+      "detail": "Gather public records from approved sources and record when each source was checked.",
+      "caveat": "The collection workflow is configured for daily checks. A schedule does not prove a recent successful run."
+    },
+    {
+      "id": "store",
+      "title": "Keep the original",
+      "detail": "Preserve imported records in local SQLite, with original JSON snapshots and their source dates.",
+      "caveat": "Scheduled collection receipts remain in Git. Local imports are separate; automatic collection into SQLite is not connected."
+    },
+    {
+      "id": "review",
+      "title": "Review the evidence",
+      "detail": "Check the source, dates, and facility match. Keep unknowns and conflicts visible.",
+      "caveat": "Human review is required before publication. Google Sheets and the reviewed workbook remain the authoring layer."
+    },
+    {
+      "id": "publish",
+      "title": "Publish a snapshot",
+      "detail": "Validate the reviewed release and generate the static website and public downloads.",
+      "caveat": "Automatic publication of new source claims is not connected. Existing public releases remain dated."
+    },
+    {
+      "id": "explore",
+      "title": "Explore the lifecycle",
+      "detail": "Use Map and Table to find records and inspect the public evidence behind them.",
+      "caveat": "All seven stages contain records. Coverage remains uneven and primarily U.S.; an empty result is not a known zero."
+    }
   ],
   "storage": [
-    {"id": "current-git", "title": "Git is the current audit store", "status": "Current", "detail": "The application repository contains source definitions, JSONL retrieval receipts, JSON review candidates, the evidence ledger, and curated deals. The daily workflow proposes collection changes through a review branch.", "location": "data/credibility/ and data/deals.json"},
-    {"id": "current-artifacts", "title": "Raw snapshots are temporary", "status": "Current", "detail": "Permitted changed-source responses go to Actions artifacts with a configured 90-day retention. This is review storage, not a durable archive. Source-specific reuse rules still apply.", "location": ".credibility-artifacts/ → GitHub Actions artifacts"},
-    {"id": "current-public", "title": "The website serves static files", "status": "Current", "detail": "Next.js builds reviewed public JSON, CSV, and pages. Visitors do not query a database or receive private source credentials.", "location": "public/data/ → static export"},
-    {"id": "storage-choice", "title": "Long-term storage is not selected", "status": "Decision needed", "detail": "A private data repository with release archives is one proposal, not a deployed system. Compare it with a database plus object storage before deciding. Git-only storage is a constraint to revisit explicitly, not silently discard.", "location": "No storage migration in this release"}
+    {
+      "id": "current-local",
+      "title": "Local SQLite collection archive",
+      "status": "Current",
+      "detail": "Imported source records, collection metadata, and citations are stored locally. Original JSON snapshots sit beside the database, with dated SQLite backups. This archive does not publish to the website.",
+      "location": ".local-data/nuclear-atlas.sqlite and .local-data/snapshots/"
+    },
+    {
+      "id": "current-git",
+      "title": "Git retains collection receipts",
+      "status": "Current",
+      "detail": "The existing scheduled collection workflow stores retrieval receipts, review candidates, and evidence history in Git. It is not automatically connected to the local SQLite archive.",
+      "location": "data/credibility/"
+    },
+    {
+      "id": "current-public",
+      "title": "Reviewed workbook and static releases",
+      "status": "Current",
+      "detail": "Google Sheets and the reviewed workbook remain the authoring layer. Approved release JSON generates the public website and downloads. Visitors do not query SQLite or Google Sheets.",
+      "location": "data/releases/atlas-release.xlsx and data/atlas-release.json"
+    },
+    {
+      "id": "storage-choice",
+      "title": "Retention and recovery beyond this computer",
+      "status": "Decision needed",
+      "detail": "Local database backups exist. An off-device backup destination, per-source raw-file retention, and unattended collection into SQLite remain to be defined. Existing permitted Actions artifacts retain their configured 90-day lifetime.",
+      "location": "No off-device SQLite backup is configured"
+    }
   ],
   "decisions": [
-    {"title": "History and queries", "question": "Do we only serve current snapshots, or need reliable queries across years of records?", "acceptance": "Measure daily records, growth, and the historical queries a real user needs."},
-    {"title": "Retention and recovery", "question": "Which raw records can we retain, for how long, and how do we restore them?", "acceptance": "Approve per-source retention, export an archive, and prove a hash-checked restore."},
-    {"title": "Publication authority", "question": "Who can approve evidence, and what may deterministic code publish?", "acceptance": "Keep human review; test permissions, conflicts, rollback, and failure without an AI reviewer."},
-    {"title": "Time and identity", "question": "How do we reconcile dates and entities without inventing precision?", "acceptance": "Define stable IDs, preserve original dates, and test offset and daylight-saving conversions."}
+    {
+      "title": "History and queries",
+      "question": "Do we only serve current snapshots, or need reliable queries across years of records?",
+      "acceptance": "Measure daily records, growth, and the historical queries a real user needs."
+    },
+    {
+      "title": "Retention and recovery",
+      "question": "Which raw records can we retain, for how long, and how do we restore them?",
+      "acceptance": "Approve per-source retention, export an archive, and prove a hash-checked restore."
+    },
+    {
+      "title": "Publication authority",
+      "question": "Who can approve evidence, and what may deterministic code publish?",
+      "acceptance": "Keep human review; test permissions, conflicts, rollback, and failure without an AI reviewer."
+    },
+    {
+      "title": "Time and identity",
+      "question": "How do we reconcile dates and entities without inventing precision?",
+      "acceptance": "Define stable IDs, preserve original dates, and test offset and daylight-saving conversions."
+    }
   ],
   "ui": [
-    {"title": "Discover", "status": "Current", "detail": "Lifecycle tabs come first. A persona lens sets a starting view; search, technology, evidence strength, and location precision narrow it. Sources are available from the health trigger."},
-    {"title": "Explore", "status": "Current", "detail": "Map and Table share records and selection. Desktop has a layer rail and inspector; mobile uses drawers and a full-height evidence sheet."},
-    {"title": "Verify", "status": "Current", "detail": "The inspector exposes cited records, verification dates, contractual support, and location precision. Users can download public data or open the full project page."},
-    {"title": "Understand missing coverage", "status": "Planned", "detail": "Replace empty-map warnings with a Coverage Workspace showing relevant sources, blockers, and the next publication milestone. Do not turn missing coverage into a count of zero."}
+    {
+      "title": "Discover",
+      "status": "Current",
+      "detail": "Lifecycle tabs come first. A persona lens sets a starting view; search, technology, evidence strength, and location precision narrow it. Sources are available from the health trigger."
+    },
+    {
+      "title": "Explore",
+      "status": "Current",
+      "detail": "Map and Table share records and selection. Desktop has a layer rail and inspector; mobile uses drawers and a full-height evidence sheet."
+    },
+    {
+      "title": "Verify",
+      "status": "Current",
+      "detail": "The inspector exposes cited records, verification dates, contractual support, and location precision. Users can download public data or open the full project page."
+    },
+    {
+      "title": "Understand missing coverage",
+      "status": "Planned",
+      "detail": "Replace empty-map warnings with a Coverage Workspace showing relevant sources, blockers, and the next publication milestone. Do not turn missing coverage into a count of zero."
+    }
   ],
   "rules": [
-    {"title": "Source authority has limits", "detail": "A license proves a regulatory action, not project profitability. Company statements remain company claims. Third-party trackers help discover evidence; they do not replace it."},
-    {"title": "Unknown stays unknown", "detail": "Do not infer private prices, supplier lead times, available fuel, or spare spent fuel capacity. Separate contracted capacity from options and preliminary plans."},
-    {"title": "Time without invented precision", "detail": "Target contract: machine instants use UTC with a Z suffix; source originals stay intact. Keep date-only, month-only, and year-only values at their original precision. TemporalValue migration remains planned."},
-    {"title": "Daily checking is not daily source data", "detail": "A schedule requests checks every 24 hours. Each source has its own publication cadence. Last checked, source updated, effective, and published are different dates."},
-    {"title": "Corrections remain visible", "detail": "Retain evidence history and cite the replacement. Source outages must not erase approved facts. Conflicts and ambiguous entity matches require a human decision."},
-    {"title": "AI reviews, humans authorize", "detail": "A future scheduled Codex reviewer may summarize failures and recommend work. It must not resolve conflicts, approve timezone assumptions, or merge factual changes. That reviewer is not deployed yet."}
+    {
+      "title": "Source authority has limits",
+      "detail": "A license proves a regulatory action, not project profitability. Company statements remain company claims. Third-party trackers help discover evidence; they do not replace it."
+    },
+    {
+      "title": "Unknown stays unknown",
+      "detail": "Do not infer private prices, supplier lead times, available fuel, or spare spent fuel capacity. Separate contracted capacity from options and preliminary plans."
+    },
+    {
+      "title": "Keep dates distinct",
+      "detail": "A source publication date, an effective date, and a retrieval time answer different questions. Preserve date-only values and original periods; UTC instants retain their Z suffix."
+    },
+    {
+      "title": "Show how fresh the evidence is",
+      "detail": "Sources publish on different schedules. Checking a source today does not make its older records current. Collection failures must remain visible."
+    },
+    {
+      "title": "Corrections remain visible",
+      "detail": "Retain evidence history and cite the replacement. Source outages must not erase approved facts. Conflicts and ambiguous entity matches require a human decision."
+    },
+    {
+      "title": "People approve factual changes",
+      "detail": "A successful download or an AI summary does not authorize publication. Human review checks the supporting evidence and resolves ambiguous matches before a new release."
+    }
   ],
   "stages": {
-    "projects": {"status": "Published", "audience": "Energy buyers, developers, capital providers", "questions": ["Who is buying power from whom?", "How binding is the commitment?", "What capacity and target dates are actually supported?"], "next": "Connect material claims to reviewed evidence IDs before expanding publication."},
-    "fuel-supply": {"status": "Coverage gap", "audience": "Fuel procurement teams and suppliers", "questions": ["Which facilities provide each step of the fuel cycle?", "Which fuel types do planned reactors require?", "Which publicly documented constraints affect supply?"], "next": "Approve facility-level sources and comparable fuel definitions. Private supply availability stays unknown."},
-    "build-license": {"status": "Coverage gap", "audience": "Developers, suppliers, regulators", "questions": ["Which applications and permits have been filed?", "Which approvals and construction milestones are complete?", "What is the next documented decision or deadline?"], "next": "Match regulatory documents to stable project and docket identifiers."},
-    "operations": {"status": "Coverage gap", "audience": "Grid planners, operators, energy buyers", "questions": ["Which reactors report operating power?", "How has reported output changed?", "What official records explain an outage or event?"], "next": "First proposed new stage: review NRC reactor-status candidates and verify plant locations. Collection already exists; dashboard publication does not."},
-    "spent-fuel": {"status": "Coverage gap", "audience": "Fuel managers, communities, regulators", "questions": ["Where are licensed spent fuel storage sites?", "What inventory and storage systems are documented?", "What do licenses explicitly allow?"], "next": "Publish cited site inventory and licensing records. Never infer spare capacity from licensed capacity minus an estimate."},
-    "waste-disposal": {"status": "Coverage gap", "audience": "Waste managers, regulators, communities", "questions": ["Which facilities handle which waste classes?", "What is each facility's regulatory status?", "Which documented acceptance conditions apply?"], "next": "Separate waste classes and storage from disposal; verify facility-level sources."},
-    "decommissioning": {"status": "Coverage gap", "audience": "Site owners, contractors, communities", "questions": ["Which sites are in each decommissioning phase?", "What milestones and target dates are documented?", "What obligations remain for cleanup and stored fuel?"], "next": "Approve phase definitions and traceable site milestones before publishing a timeline."}
+    "projects": {
+      "status": "Published",
+      "audience": "Energy buyers, developers, capital providers",
+      "questions": [
+        "Who is buying power from whom?",
+        "How binding is the commitment?",
+        "What capacity and target dates are actually supported?"
+      ],
+      "next": "The current Projects dataset covers announced fission deals with named large-load buyers or developers. It is not an inventory of every planned reactor."
+    },
+    "fuel-supply": {
+      "status": "Published",
+      "audience": "Fuel procurement teams and suppliers",
+      "questions": [
+        "Which facilities provide each step of the fuel cycle?",
+        "Which fuel types do planned reactors require?",
+        "Which publicly documented constraints affect supply?"
+      ],
+      "next": "Facility listings do not establish available supply, private contracts, or supplier lead times."
+    },
+    "build-license": {
+      "status": "Published",
+      "audience": "Developers, suppliers, regulators",
+      "questions": [
+        "Which applications and permits have been filed?",
+        "Which approvals and construction milestones are complete?",
+        "What is the next documented decision or deadline?"
+      ],
+      "next": "Selected licensing records are published. Applications, approvals, and construction milestones are not comprehensively tracked."
+    },
+    "operations": {
+      "status": "Published",
+      "audience": "Grid planners, operators, energy buyers",
+      "questions": [
+        "Which reactors report operating power?",
+        "How has reported output changed?",
+        "What official records explain an outage or event?"
+      ],
+      "next": "The NRC snapshot includes operating status and oversight records. Live output and complete generation histories are not available here."
+    },
+    "spent-fuel": {
+      "status": "Published",
+      "audience": "Fuel managers, communities, regulators",
+      "questions": [
+        "Where are licensed spent fuel storage sites?",
+        "What inventory and storage systems are documented?",
+        "What do licenses explicitly allow?"
+      ],
+      "next": "Storage licensing records are published. Inventory and remaining capacity are not inferred."
+    },
+    "waste-disposal": {
+      "status": "Published",
+      "audience": "Waste managers, regulators, communities",
+      "questions": [
+        "Which facilities handle which waste classes?",
+        "What is each facility's regulatory status?",
+        "Which documented acceptance conditions apply?"
+      ],
+      "next": "Selected public disposal records are included. Waste acceptance rules and service areas need source-specific interpretation."
+    },
+    "decommissioning": {
+      "status": "Published",
+      "audience": "Site owners, contractors, communities",
+      "questions": [
+        "Which sites are in each decommissioning phase?",
+        "What milestones and target dates are documented?",
+        "What obligations remain for cleanup and stored fuel?"
+      ],
+      "next": "Public status and strategy records are included. Detailed costs, schedules, and historical milestones remain incomplete."
+    }
   },
-  "releaseChecks": ["Reproduce every material claim from a cited source and locator.", "Keep Map and Table record IDs identical under every filter.", "Show location precision, source dates, and collection failures without implying certainty.", "Pass mobile, keyboard, contrast, static-export, and public-download tests.", "Before a storage cutover, reconcile shadow runs and restore archived records.", "Before automatic publication, approve each source, adapter version, and claim type explicitly."],
-  "nonGoals": ["No private-price or supplier-capacity estimates presented as facts.", "No universal readiness, safety, or investment score.", "No claim of complete global or lifecycle coverage.", "No AI-authorized publication of factual changes."],
-  "rubric": [["B0", "Reported without party confirmation"], ["B1", "Announced intent, memorandum, or nonbinding letter"], ["B2", "Funded development or feasibility work without binding offtake"], ["B3", "Signed power purchase or definitive agreement"], ["B4", "Binding agreement plus physical or regulatory progress"], ["B5", "Operating under the agreement"], ["BX", "Dead, lapsed, or superseded, retained as history"]]
+  "releaseChecks": [
+    "Reproduce every material claim from a cited source and locator.",
+    "Keep Map and Table record IDs identical under every filter.",
+    "Show location precision, source dates, and collection failures without implying certainty.",
+    "Pass mobile, keyboard, contrast, static-export, and public-download tests.",
+    "Before a storage cutover, reconcile shadow runs and restore archived records.",
+    "Before automatic publication, approve each source, adapter version, and claim type explicitly."
+  ],
+  "nonGoals": [
+    "No private-price or supplier-capacity estimates presented as facts.",
+    "No universal readiness, safety, or investment score.",
+    "No claim of complete global or lifecycle coverage.",
+    "No AI-authorized publication of factual changes."
+  ],
+  "rubric": [
+    [
+      "B0",
+      "Reported without party confirmation"
+    ],
+    [
+      "B1",
+      "Announced intent, memorandum, or nonbinding letter"
+    ],
+    [
+      "B2",
+      "Funded development or feasibility work without binding offtake"
+    ],
+    [
+      "B3",
+      "Signed power purchase or definitive agreement"
+    ],
+    [
+      "B4",
+      "Binding agreement plus physical or regulatory progress"
+    ],
+    [
+      "B5",
+      "Operating under the agreement"
+    ],
+    [
+      "BX",
+      "Dead, lapsed, or superseded, retained as history"
+    ]
+  ],
+  "audiences": [
+    {
+      "title": "Researchers and analysts",
+      "detail": "Find facilities and projects, compare their public records, and trace claims to original sources."
+    },
+    {
+      "title": "Developers, buyers, and suppliers",
+      "detail": "Explore documented projects, licensing activity, and fuel-cycle facilities. Private commercial availability remains unknown."
+    },
+    {
+      "title": "Communities and journalists",
+      "detail": "Understand what is documented about a site, its lifecycle, and its public regulatory record."
+    },
+    {
+      "title": "Industry professionals",
+      "detail": "Follow related facilities and evidence across operations, spent fuel, waste, and decommissioning."
+    }
+  ]
 }

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ChevronDown, ExternalLink, Search } from "lucide-react";
+import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -24,7 +25,7 @@ import {
   type MethodologySource,
 } from "@/lib/methodology-contract";
 
-export function SourceInventory({ sources }: { sources: MethodologySource[] }) {
+export function SourceInventory({ sources, standalone = false }: { sources: MethodologySource[]; standalone?: boolean }) {
   const [query, setQuery] = useState("");
   const [state, setState] = useState("all");
   const [expandedSource, setExpandedSource] = useState<string | null>(null);
@@ -34,15 +35,13 @@ export function SourceInventory({ sources }: { sources: MethodologySource[] }) {
   return (
     <Card
       id="source-inventory"
-      className="min-w-0 scroll-mt-24 rounded-none border-0 bg-transparent shadow-none"
+      className="min-w-0 scroll-mt-36 rounded-none border-0 bg-transparent shadow-none"
     >
-      <CardHeader>
-        <Badge variant="outline" className="w-fit">
-          01 / Inputs
-        </Badge>
-        <CardTitle>
-          <h2>Public data sources</h2>
-        </CardTitle>
+      <CardHeader className={standalone ? "px-0" : undefined}>
+        {!standalone && <>
+          <Badge variant="outline" className="w-fit">01 / Inputs</Badge>
+          <CardTitle><h2>Public data sources</h2></CardTitle>
+        </>}
         <InputGroup className="mt-2">
           <InputGroupAddon>
             <Search />
@@ -94,10 +93,10 @@ export function SourceInventory({ sources }: { sources: MethodologySource[] }) {
       </CardHeader>
       <CardContent className="px-0">
         <ScrollArea
-          className="h-128 border-r border-primary/50"
+          className={cn("h-128", !standalone && "border-r border-primary/50")}
           aria-label="Source nodes"
         >
-          <div className="space-y-3 pl-4 pb-2">
+          <div className={cn("space-y-3 pb-2", standalone ? "pr-3" : "pl-4")}>
             {filtered.map((source) => (
               <div key={source.id} className="flex items-center">
                 <article
@@ -181,11 +180,11 @@ export function SourceInventory({ sources }: { sources: MethodologySource[] }) {
                     )}
                   </div>
                 </article>
-                <span
+                {!standalone && <span
                   data-source-connection
                   aria-hidden="true"
                   className={`w-6 shrink-0 border-t ${source.state === "approved_automated" ? "border-primary" : "border-dashed border-muted-foreground"}`}
-                />
+                />}
               </div>
             ))}
             {filtered.length === 0 && (

@@ -103,14 +103,14 @@ flowchart LR
   %% source: third-party-nuclear-trackers
   source_33["Independent nuclear trackers and trade reporting<br/>Manual review<br/>Project names and locations to investigate<br/>Reported milestones to check against primary records<br/>Links that help find original evidence"]
   source_33 -.-> step_0
-  step_0["Collect<br/>GitHub Actions checks approved adapters every 24 hours. Validate responses, identify changes, and record failures.<br/>Only approved sources are automated. Other connections show intended coverage, not live ingestion."]
+  step_0["Collect<br/>Gather public records from approved sources and record when each source was checked.<br/>The collection workflow is configured for daily checks. A schedule does not prove a recent successful run."]
   step_0 --> step_1
-  step_1["Storage #38; processing<br/>Git stores receipts and review candidates. Every attempt records its source, time, result, and hash. Permitted raw snapshots use 90-day Actions artifacts.<br/>OPEN DECISION: durable storage. No database migration is approved."]
+  step_1["Keep the original<br/>Preserve imported records in local SQLite, with original JSON snapshots and their source dates.<br/>Scheduled collection receipts remain in Git. Local imports are separate; automatic collection into SQLite is not connected."]
   step_1 --> step_2
-  step_2["Human review<br/>Review source records, dates, and entity matches in a pull request. Curate project JSON and append reviewed evidence history.<br/>Hold conflicts for review. A successful download never authorizes publication."]
+  step_2["Review the evidence<br/>Check the source, dates, and facility match. Keep unknowns and conflicts visible.<br/>Human review is required before publication. Google Sheets and the reviewed workbook remain the authoring layer."]
   step_2 --> step_3
-  step_3["Publish<br/>Build the static site from curated project JSON. Export JSON, CSV, source status, and the separate evidence ledger.<br/>PLANNED: automatic evidence-to-project projection. It is not connected today."]
+  step_3["Publish a snapshot<br/>Validate the reviewed release and generate the static website and public downloads.<br/>Automatic publication of new source claims is not connected. Existing public releases remain dated."]
   step_3 --> step_4
-  step_4["Dashboard<br/>Lifecycle, persona, and filters select one collection for Map and Table. A marker or row opens the same evidence inspector with sources, dates, and location precision.<br/>Projects are published. Other lifecycle stages have coverage gaps, not known zeros."]
+  step_4["Explore the lifecycle<br/>Use Map and Table to find records and inspect the public evidence behind them.<br/>All seven stages contain records. Coverage remains uneven and primarily U.S.; an empty result is not a known zero."]
   class step_0,step_1,step_2,step_3,step_4 action
   class source_0,source_1,source_2,source_3,source_4,source_5,source_6,source_7,source_8,source_9,source_10,source_11,source_12,source_13,source_14,source_15,source_16,source_17,source_18,source_19,source_20,source_21,source_22,source_23,source_24,source_25,source_26,source_27,source_28,source_29,source_30,source_31,source_32,source_33 store

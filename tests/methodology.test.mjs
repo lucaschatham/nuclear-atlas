@@ -128,7 +128,7 @@ test("methodology distinguishes implemented storage from open decisions and life
     methodologyStages
       .filter((stage) => stage.status === "Published")
       .map((stage) => stage.id),
-    ["projects"],
+    methodologyStages.map((stage) => stage.id),
   );
   assert.ok(methodologyStages.every((stage) => stage.questions.length === 3));
   assert.ok(
@@ -142,7 +142,7 @@ test("methodology diagrams ship rendered, offline assets and editable Mermaid so
     assert.match(source, /flowchart LR/);
     assert.match(source, /human review/i);
     assert.match(source, /Map and Table/);
-    assert.match(source, /OPEN DECISION/);
+    assert.match(source, /SQLite/);
     {
       const svg = await read(`public/methodology/${name}.svg`);
       assert.match(svg, /<svg/);

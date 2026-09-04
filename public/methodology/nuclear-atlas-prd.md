@@ -1,6 +1,6 @@
 # Nuclear Atlas: methodology and living PRD
 
-Working draft | Version 0.1
+Working draft | Version 0.2
 
 Help people understand nuclear projects, compare public evidence, and see what remains unknown across the nuclear lifecycle.
 
@@ -8,15 +8,15 @@ This document distinguishes current implementation from planned work. Registered
 
 ## Workflow
 
-1. **Collect.** GitHub Actions checks approved adapters every 24 hours. Validate responses, identify changes, and record failures. Only approved sources are automated. Other connections show intended coverage, not live ingestion.
+1. **Collect.** Gather public records from approved sources and record when each source was checked. The collection workflow is configured for daily checks. A schedule does not prove a recent successful run.
 
-2. **Storage & processing.** Git stores receipts and review candidates. Every attempt records its source, time, result, and hash. Permitted raw snapshots use 90-day Actions artifacts. OPEN DECISION: durable storage. No database migration is approved.
+2. **Keep the original.** Preserve imported records in local SQLite, with original JSON snapshots and their source dates. Scheduled collection receipts remain in Git. Local imports are separate; automatic collection into SQLite is not connected.
 
-3. **Human review.** Review source records, dates, and entity matches in a pull request. Curate project JSON and append reviewed evidence history. Hold conflicts for review. A successful download never authorizes publication.
+3. **Review the evidence.** Check the source, dates, and facility match. Keep unknowns and conflicts visible. Human review is required before publication. Google Sheets and the reviewed workbook remain the authoring layer.
 
-4. **Publish.** Build the static site from curated project JSON. Export JSON, CSV, source status, and the separate evidence ledger. PLANNED: automatic evidence-to-project projection. It is not connected today.
+4. **Publish a snapshot.** Validate the reviewed release and generate the static website and public downloads. Automatic publication of new source claims is not connected. Existing public releases remain dated.
 
-5. **Dashboard.** Lifecycle, persona, and filters select one collection for Map and Table. A marker or row opens the same evidence inspector with sources, dates, and location precision. Projects are published. Other lifecycle stages have coverage gaps, not known zeros.
+5. **Explore the lifecycle.** Use Map and Table to find records and inspect the public evidence behind them. All seven stages contain records. Coverage remains uneven and primarily U.S.; an empty result is not a known zero.
 
 ### One horizontal workflow, on every screen
 
@@ -126,44 +126,44 @@ flowchart LR
   %% source: third-party-nuclear-trackers
   source_33["Independent nuclear trackers and trade reporting<br/>Manual review<br/>Project names and locations to investigate<br/>Reported milestones to check against primary records<br/>Links that help find original evidence"]
   source_33 -.-> step_0
-  step_0["Collect<br/>GitHub Actions checks approved adapters every 24 hours. Validate responses, identify changes, and record failures.<br/>Only approved sources are automated. Other connections show intended coverage, not live ingestion."]
+  step_0["Collect<br/>Gather public records from approved sources and record when each source was checked.<br/>The collection workflow is configured for daily checks. A schedule does not prove a recent successful run."]
   step_0 --> step_1
-  step_1["Storage #38; processing<br/>Git stores receipts and review candidates. Every attempt records its source, time, result, and hash. Permitted raw snapshots use 90-day Actions artifacts.<br/>OPEN DECISION: durable storage. No database migration is approved."]
+  step_1["Keep the original<br/>Preserve imported records in local SQLite, with original JSON snapshots and their source dates.<br/>Scheduled collection receipts remain in Git. Local imports are separate; automatic collection into SQLite is not connected."]
   step_1 --> step_2
-  step_2["Human review<br/>Review source records, dates, and entity matches in a pull request. Curate project JSON and append reviewed evidence history.<br/>Hold conflicts for review. A successful download never authorizes publication."]
+  step_2["Review the evidence<br/>Check the source, dates, and facility match. Keep unknowns and conflicts visible.<br/>Human review is required before publication. Google Sheets and the reviewed workbook remain the authoring layer."]
   step_2 --> step_3
-  step_3["Publish<br/>Build the static site from curated project JSON. Export JSON, CSV, source status, and the separate evidence ledger.<br/>PLANNED: automatic evidence-to-project projection. It is not connected today."]
+  step_3["Publish a snapshot<br/>Validate the reviewed release and generate the static website and public downloads.<br/>Automatic publication of new source claims is not connected. Existing public releases remain dated."]
   step_3 --> step_4
-  step_4["Dashboard<br/>Lifecycle, persona, and filters select one collection for Map and Table. A marker or row opens the same evidence inspector with sources, dates, and location precision.<br/>Projects are published. Other lifecycle stages have coverage gaps, not known zeros."]
+  step_4["Explore the lifecycle<br/>Use Map and Table to find records and inspect the public evidence behind them.<br/>All seven stages contain records. Coverage remains uneven and primarily U.S.; an empty result is not a known zero."]
   class step_0,step_1,step_2,step_3,step_4 action
   class source_0,source_1,source_2,source_3,source_4,source_5,source_6,source_7,source_8,source_9,source_10,source_11,source_12,source_13,source_14,source_15,source_16,source_17,source_18,source_19,source_20,source_21,source_22,source_23,source_24,source_25,source_26,source_27,source_28,source_29,source_30,source_31,source_32,source_33 store
 ```
 
-## Storage is an open decision
+## Storage and recovery
 
-### Git is the current audit store (Current)
+### Local SQLite collection archive (Current)
 
-The application repository contains source definitions, JSONL retrieval receipts, JSON review candidates, the evidence ledger, and curated deals. The daily workflow proposes collection changes through a review branch.
+Imported source records, collection metadata, and citations are stored locally. Original JSON snapshots sit beside the database, with dated SQLite backups. This archive does not publish to the website.
 
-Location: data/credibility/ and data/deals.json
+Location: .local-data/nuclear-atlas.sqlite and .local-data/snapshots/
 
-### Raw snapshots are temporary (Current)
+### Git retains collection receipts (Current)
 
-Permitted changed-source responses go to Actions artifacts with a configured 90-day retention. This is review storage, not a durable archive. Source-specific reuse rules still apply.
+The existing scheduled collection workflow stores retrieval receipts, review candidates, and evidence history in Git. It is not automatically connected to the local SQLite archive.
 
-Location: .credibility-artifacts/ → GitHub Actions artifacts
+Location: data/credibility/
 
-### The website serves static files (Current)
+### Reviewed workbook and static releases (Current)
 
-Next.js builds reviewed public JSON, CSV, and pages. Visitors do not query a database or receive private source credentials.
+Google Sheets and the reviewed workbook remain the authoring layer. Approved release JSON generates the public website and downloads. Visitors do not query SQLite or Google Sheets.
 
-Location: public/data/ → static export
+Location: data/releases/atlas-release.xlsx and data/atlas-release.json
 
-### Long-term storage is not selected (Decision needed)
+### Retention and recovery beyond this computer (Decision needed)
 
-A private data repository with release archives is one proposal, not a deployed system. Compare it with a database plus object storage before deciding. Git-only storage is a constraint to revisit explicitly, not silently discard.
+Local database backups exist. An off-device backup destination, per-source raw-file retention, and unattended collection into SQLite remain to be defined. Existing permitted Actions artifacts retain their configured 90-day lifetime.
 
-Location: No storage migration in this release
+Location: No off-device SQLite backup is configured
 
 ### Decision tests
 
@@ -174,6 +174,24 @@ Location: No storage migration in this release
 - **Publication authority:** Who can approve evidence, and what may deterministic code publish? Keep human review; test permissions, conflicts, rollback, and failure without an AI reviewer.
 
 - **Time and identity:** How do we reconcile dates and entities without inventing precision? Define stable IDs, preserve original dates, and test offset and daylight-saving conversions.
+
+## Who it is for
+
+### Researchers and analysts
+
+Find facilities and projects, compare their public records, and trace claims to original sources.
+
+### Developers, buyers, and suppliers
+
+Explore documented projects, licensing activity, and fuel-cycle facilities. Private commercial availability remains unknown.
+
+### Communities and journalists
+
+Understand what is documented about a site, its lifecycle, and its public regulatory record.
+
+### Industry professionals
+
+Follow related facilities and evidence across operations, spent fuel, waste, and decommissioning.
 
 ## Dashboard interaction contract
 
@@ -203,9 +221,9 @@ For: Energy buyers, developers, capital providers
 - How binding is the commitment?
 - What capacity and target dates are actually supported?
 
-Next: Connect material claims to reviewed evidence IDs before expanding publication.
+Next: The current Projects dataset covers announced fission deals with named large-load buyers or developers. It is not an inventory of every planned reactor.
 
-### Fuel Supply (Coverage gap)
+### Fuel Supply (Published)
 
 For: Fuel procurement teams and suppliers
 
@@ -213,9 +231,9 @@ For: Fuel procurement teams and suppliers
 - Which fuel types do planned reactors require?
 - Which publicly documented constraints affect supply?
 
-Next: Approve facility-level sources and comparable fuel definitions. Private supply availability stays unknown.
+Next: Facility listings do not establish available supply, private contracts, or supplier lead times.
 
-### Build & License (Coverage gap)
+### Build & License (Published)
 
 For: Developers, suppliers, regulators
 
@@ -223,9 +241,9 @@ For: Developers, suppliers, regulators
 - Which approvals and construction milestones are complete?
 - What is the next documented decision or deadline?
 
-Next: Match regulatory documents to stable project and docket identifiers.
+Next: Selected licensing records are published. Applications, approvals, and construction milestones are not comprehensively tracked.
 
-### Operations (Coverage gap)
+### Operations (Published)
 
 For: Grid planners, operators, energy buyers
 
@@ -233,9 +251,9 @@ For: Grid planners, operators, energy buyers
 - How has reported output changed?
 - What official records explain an outage or event?
 
-Next: First proposed new stage: review NRC reactor-status candidates and verify plant locations. Collection already exists; dashboard publication does not.
+Next: The NRC snapshot includes operating status and oversight records. Live output and complete generation histories are not available here.
 
-### Spent Fuel (Coverage gap)
+### Spent Fuel (Published)
 
 For: Fuel managers, communities, regulators
 
@@ -243,9 +261,9 @@ For: Fuel managers, communities, regulators
 - What inventory and storage systems are documented?
 - What do licenses explicitly allow?
 
-Next: Publish cited site inventory and licensing records. Never infer spare capacity from licensed capacity minus an estimate.
+Next: Storage licensing records are published. Inventory and remaining capacity are not inferred.
 
-### Waste & Disposal (Coverage gap)
+### Waste & Disposal (Published)
 
 For: Waste managers, regulators, communities
 
@@ -253,9 +271,9 @@ For: Waste managers, regulators, communities
 - What is each facility's regulatory status?
 - Which documented acceptance conditions apply?
 
-Next: Separate waste classes and storage from disposal; verify facility-level sources.
+Next: Selected public disposal records are included. Waste acceptance rules and service areas need source-specific interpretation.
 
-### Decommissioning (Coverage gap)
+### Decommissioning (Published)
 
 For: Site owners, contractors, communities
 
@@ -263,7 +281,7 @@ For: Site owners, contractors, communities
 - What milestones and target dates are documented?
 - What obligations remain for cleanup and stored fuel?
 
-Next: Approve phase definitions and traceable site milestones before publishing a timeline.
+Next: Public status and strategy records are included. Detailed costs, schedules, and historical milestones remain incomplete.
 
 ## Evidence rules
 
@@ -275,21 +293,21 @@ A license proves a regulatory action, not project profitability. Company stateme
 
 Do not infer private prices, supplier lead times, available fuel, or spare spent fuel capacity. Separate contracted capacity from options and preliminary plans.
 
-### Time without invented precision
+### Keep dates distinct
 
-Target contract: machine instants use UTC with a Z suffix; source originals stay intact. Keep date-only, month-only, and year-only values at their original precision. TemporalValue migration remains planned.
+A source publication date, an effective date, and a retrieval time answer different questions. Preserve date-only values and original periods; UTC instants retain their Z suffix.
 
-### Daily checking is not daily source data
+### Show how fresh the evidence is
 
-A schedule requests checks every 24 hours. Each source has its own publication cadence. Last checked, source updated, effective, and published are different dates.
+Sources publish on different schedules. Checking a source today does not make its older records current. Collection failures must remain visible.
 
 ### Corrections remain visible
 
 Retain evidence history and cite the replacement. Source outages must not erase approved facts. Conflicts and ambiguous entity matches require a human decision.
 
-### AI reviews, humans authorize
+### People approve factual changes
 
-A future scheduled Codex reviewer may summarize failures and recommend work. It must not resolve conflicts, approve timezone assumptions, or merge factual changes. That reviewer is not deployed yet.
+A successful download or an AI summary does not authorize publication. Human review checks the supporting evidence and resolves ambiguous matches before a new release.
 
 ### Bindingness rubric
 

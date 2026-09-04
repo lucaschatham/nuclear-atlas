@@ -9,7 +9,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import type { AtlasRecord, LifecycleStage, PersonaLens } from "@/lib/atlas-workspace";
-import type { AtlasRelease } from "@/lib/types";
+import type { AtlasRecordCitation, AtlasRelease, AtlasReleaseSource } from "@/lib/types";
 
 function formatValue(value: string | number, unit: string | null) {
   const formatted = typeof value === "number" ? value.toLocaleString("en-US") : value;
@@ -73,7 +73,31 @@ export function AtlasGuide({
   );
 }
 
-export function EvidenceInspector({ record }: { record: AtlasRecord }) {
+function CitationEvidence({ citation, source }: { citation: AtlasRecordCitation; source?: AtlasReleaseSource }) {
+  return (
+    <section aria-label={`Citation: ${citation.sourceName}`} className="min-w-0 rounded-lg border bg-card p-3">
+      <h3 className="text-sm font-semibold leading-5">{citation.sourceName}</h3>
+      <p className="mt-1 text-xs leading-5 text-muted-foreground">{citation.publisher}</p>
+      <div className="mt-2 flex flex-wrap gap-2">
+        <SourceAuthorityBadge authority={source?.authorityClass ?? "unknown_authority"} />
+        <Badge variant="outline">{humanize(citation.reviewStatus)}</Badge>
+      </div>
+      <dl className="mt-3 space-y-3 text-xs leading-5">
+        <div><dt className="font-medium">Supports</dt><dd className="break-words text-muted-foreground">{citation.supportsFields.length ? citation.supportsFields.map((field, index) => <span key={`${index}:${field}`} className="block">{field}</span>) : "Not stated"}</dd></div>
+        <div><dt className="font-medium">Document locator</dt><dd className="break-words text-muted-foreground">{citation.locator ?? "Not stated"}</dd></div>
+        <div><dt className="font-medium">Source date (original)</dt><dd className="break-words font-mono text-muted-foreground">{citation.sourceDateOriginal ?? "Not stated"}</dd></div>
+        <div><dt className="font-medium">Source date precision</dt><dd className="text-muted-foreground">{citation.sourceDatePrecision ?? "Not stated"}</dd></div>
+        <div><dt className="font-medium">Effective date</dt><dd className="break-words font-mono text-muted-foreground">{citation.effectiveDate ?? "Not stated"}</dd></div>
+        <div><dt className="font-medium">Retrieved at (UTC)</dt><dd className="break-words font-mono text-muted-foreground">{citation.retrievedAtUtc ?? "Not stated"}</dd></div>
+      </dl>
+      <Button role="link" render={<a href={citation.url} target="_blank" rel="noreferrer" />} nativeButton={false} variant="outline" size="sm" className="mt-3 w-full justify-between">
+        Open source <ExternalLink />
+      </Button>
+    </section>
+  );
+}
+
+export function EvidenceInspector({ record, sources }: { record: AtlasRecord; sources: AtlasReleaseSource[] }) {
   return (
     <ScrollArea className="h-full">
       <article className="space-y-6 p-4">
@@ -97,18 +121,11 @@ export function EvidenceInspector({ record }: { record: AtlasRecord }) {
         <div>
           <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-wider text-muted-foreground"><ShieldCheck className="size-4 text-evidence-exact" />Evidence</div>
           <p className="mt-3 text-sm leading-6 text-foreground/85">{record.summary ?? "This record reproduces the cited public source without inferring missing values."}</p>
-          <div className="mt-4 space-y-2">
+          <p className="mt-3 text-xs leading-5 text-muted-foreground">Dates belong to each citation. A recent retrieval does not make an older source current. Review status describes Atlas review, not regulatory approval.</p>
+          <div className="mt-4 space-y-3">
+            {record.citations.length === 0 && <p className="text-sm text-muted-foreground">No citations published for this record. Evidence remains unknown.</p>}
             {record.citations.map((citation) => (
-              <Button
-                key={citation.id}
-                render={<a href={citation.url} target="_blank" rel="noreferrer" />}
-                nativeButton={false}
-                variant="outline"
-                className="h-auto w-full justify-between py-2 text-left"
-              >
-                <span className="min-w-0"><span className="block truncate">{citation.publisher}</span><span className="block truncate text-xs font-normal text-muted-foreground">{citation.sourceDateOriginal ?? citation.locator ?? "Source date not stated"}</span></span>
-                <ExternalLink />
-              </Button>
+              <CitationEvidence key={citation.id} citation={citation} source={sources.find((source) => source.id === citation.sourceId)} />
             ))}
           </div>
         </div>

@@ -42,7 +42,7 @@ const lines = [
     "```",
     "",
   ]),
-  "## Storage is an open decision",
+  "## Storage and recovery",
   "",
   ...methodology.storage.flatMap((item) => [
     `### ${item.title} (${item.status})`,
@@ -58,6 +58,9 @@ const lines = [
     `- **${item.title}:** ${item.question} ${item.acceptance}`,
     "",
   ]),
+  "## Who it is for",
+  "",
+  ...methodology.audiences.flatMap((audience) => [`### ${audience.title}`, "", audience.detail, ""]),
   "## Dashboard interaction contract",
   "",
   ...methodology.ui.flatMap((item) => [

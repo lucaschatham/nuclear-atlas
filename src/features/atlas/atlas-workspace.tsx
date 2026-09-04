@@ -326,7 +326,7 @@ function HydratedAtlasWorkspace({ records, release }: AtlasWorkspaceProps) {
   const inspectorContent = state.inspector === "sources"
     ? <SourceInspector release={release} stage={state.lifecycleStage} />
     : selectedRecord
-      ? <EvidenceInspector record={selectedRecord} />
+      ? <EvidenceInspector record={selectedRecord} sources={release.sources} />
       : <AtlasGuide stageLabel={currentStageLabel} count={visibleRecords.length} persona={state.personaLens} onOpenSources={() => dispatch({ type: "open-inspector", inspector: "sources" })} />;
 
   return (
