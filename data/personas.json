@@ -1,0 +1,663 @@
+{
+  "reviewedOn": "2026-09-04",
+  "framework": {
+    "name": "IAEA NG-G-5.1 (2021)",
+    "url": "https://www-pub.iaea.org/MTCD/publications/PDF/PUB1967_web.pdf",
+    "scope": "Figure 1 and Section 4",
+    "note": "Non-exhaustive stakeholder framework. Atlas role labels and questions are adaptations, not IAEA personas or rankings."
+  },
+  "sources": {
+    "fuel": {
+      "title": "DOE: HALEU availability and supply chain",
+      "url": "https://www.energy.gov/ne/haleu-frequently-asked-questions"
+    },
+    "supply": {
+      "title": "DOE: Nuclear energy supply chain assessment",
+      "url": "https://www.energy.gov/sites/default/files/2022-02/Nuclear%20Energy%20Supply%20Chain%20Report%20-%20Final.pdf"
+    },
+    "license": {
+      "title": "NRC: How we regulate new reactors",
+      "url": "https://www.nrc.gov/reactors/new-reactors/how-we-regulate"
+    },
+    "market": {
+      "title": "DOE: Advanced nuclear commercialization",
+      "url": "https://www.energy.gov/ne/articles/commercializing-advanced-nuclear-reactors-explained-five-charts"
+    },
+    "operations": {
+      "title": "EIA: Nuclear and uranium data",
+      "url": "https://www.eia.gov/nuclear/data.php"
+    },
+    "public": {
+      "title": "NRC: Public involvement in licensing",
+      "url": "https://www.nrc.gov/about-nrc/regulatory/licensing/pub-involve"
+    },
+    "spent": {
+      "title": "NRC: Storage of spent nuclear fuel",
+      "url": "https://www.nrc.gov/waste/spent-fuel-storage"
+    },
+    "closure": {
+      "title": "NRC: Sites undergoing decommissioning",
+      "url": "https://www.nrc.gov/info-finder/decommissioning/index"
+    },
+    "iaea": {
+      "title": "IAEA: Stakeholder Engagement in Nuclear Programmes (2021)",
+      "url": "https://www-pub.iaea.org/MTCD/publications/PDF/PUB1967_web.pdf"
+    }
+  },
+  "personas": [
+    {
+      "id": "community",
+      "title": "Community Member",
+      "role": "Lives near a proposed or existing nuclear facility",
+      "iaeaCategory": "Local community",
+      "iaeaLocator": "Figure 1, printed p. 6",
+      "job": "Understand what is proposed nearby, possible local effects, and opportunities to participate.",
+      "stages": "Across relevant lifecycle stages",
+      "sources": [
+        "iaea",
+        "public",
+        "license"
+      ],
+      "filters": [
+        "Location",
+        "Project stage",
+        "Public notice date"
+      ],
+      "questions": [
+        {
+          "text": "What is proposed near me, exactly where, and who is responsible?",
+          "status": "Coverage not yet assessed"
+        },
+        {
+          "text": "Is this an announcement, a license application, an approved project, or construction?",
+          "status": "Coverage not yet assessed"
+        },
+        {
+          "text": "What does the environmental review say about water, land use, and construction effects?",
+          "status": "Coverage not yet assessed"
+        },
+        {
+          "text": "What spent fuel or waste would remain at the site, and what plan is documented?",
+          "status": "Coverage not yet assessed"
+        },
+        {
+          "text": "When can I attend a public meeting, submit comments, or contact the responsible authority?",
+          "status": "Coverage not yet assessed"
+        }
+      ]
+    },
+    {
+      "id": "government",
+      "title": "Government Official",
+      "role": "A local, regional, or national official involved in nuclear decisions",
+      "iaeaCategory": "Government",
+      "iaeaLocator": "Figure 1; Section 4.1",
+      "job": "Understand the projects and public responsibilities within a jurisdiction.",
+      "stages": "Across relevant lifecycle stages",
+      "sources": [
+        "iaea",
+        "public",
+        "license"
+      ],
+      "filters": [
+        "Jurisdiction",
+        "Responsible authority",
+        "Decision milestone"
+      ],
+      "questions": [
+        {
+          "text": "Which projects and facilities fall within our jurisdiction?",
+          "status": "Coverage not yet assessed"
+        },
+        {
+          "text": "Which decisions belong to local, regional, or national authorities?",
+          "status": "Coverage not yet assessed"
+        },
+        {
+          "text": "What milestones or public consultations require our participation?",
+          "status": "Coverage not yet assessed"
+        },
+        {
+          "text": "What local infrastructure, employment, and environmental effects are documented?",
+          "status": "Coverage not yet assessed"
+        },
+        {
+          "text": "What responsibilities remain after operations end?",
+          "status": "Coverage not yet assessed"
+        }
+      ]
+    },
+    {
+      "id": "regulator",
+      "title": "Regulatory Reviewer",
+      "role": "Reviews nuclear applications, compliance, or oversight records",
+      "iaeaCategory": "Regulatory body",
+      "iaeaLocator": "Section 4.2",
+      "job": "Find public regulatory records and understand the context of a facility or application.",
+      "stages": "Across relevant lifecycle stages",
+      "sources": [
+        "iaea",
+        "license"
+      ],
+      "filters": [
+        "Docket",
+        "License type",
+        "Regulatory milestone"
+      ],
+      "questions": [
+        {
+          "text": "Which applications and license actions are publicly recorded for a facility?",
+          "status": "Coverage not yet assessed"
+        },
+        {
+          "text": "Who is the applicant or license holder?",
+          "status": "Coverage not yet assessed"
+        },
+        {
+          "text": "What is the documented stage of the regulatory review?",
+          "status": "Coverage not yet assessed"
+        },
+        {
+          "text": "Which source documents support the reported status and dates?",
+          "status": "Coverage not yet assessed"
+        },
+        {
+          "text": "Which related facilities or activities need to be distinguished from this application?",
+          "status": "Coverage not yet assessed"
+        }
+      ]
+    },
+    {
+      "id": "developer",
+      "title": "Project Developer",
+      "role": "Advances a proposed nuclear facility through development",
+      "iaeaCategory": "Owner/operator",
+      "iaeaLocator": "Section 4.3; Atlas specialization",
+      "job": "Compare the public evidence behind projects, dependencies, and development milestones.",
+      "stages": "Across relevant lifecycle stages",
+      "sources": [
+        "iaea",
+        "license",
+        "market"
+      ],
+      "filters": [
+        "Technology",
+        "Development stage",
+        "Target date"
+      ],
+      "questions": [
+        {
+          "text": "Which comparable projects use the technology we are evaluating?",
+          "status": "Coverage not yet assessed"
+        },
+        {
+          "text": "Which projects have progressed from announcement to an application or permit?",
+          "status": "Coverage not yet assessed"
+        },
+        {
+          "text": "What site and environmental review milestones are documented?",
+          "status": "Coverage not yet assessed"
+        },
+        {
+          "text": "Which fuel or electricity purchase commitments have been publicly disclosed?",
+          "status": "Coverage not yet assessed"
+        },
+        {
+          "text": "What supports the reported construction and operating dates?",
+          "status": "Coverage not yet assessed"
+        }
+      ]
+    },
+    {
+      "id": "operator",
+      "title": "Facility Owner or Operator",
+      "role": "Owns or operates a reactor or fuel-cycle facility",
+      "iaeaCategory": "Owner/operator",
+      "iaeaLocator": "Section 4.3",
+      "job": "Understand the published operational, licensing, and lifecycle record of a facility.",
+      "stages": "Across relevant lifecycle stages",
+      "sources": [
+        "iaea",
+        "operations",
+        "spent"
+      ],
+      "filters": [
+        "Facility type",
+        "Operating status",
+        "License date"
+      ],
+      "questions": [
+        {
+          "text": "Which public records describe this facility and its operating status?",
+          "status": "Coverage not yet assessed"
+        },
+        {
+          "text": "What generation, capacity, and outage information is publicly available?",
+          "status": "Coverage not yet assessed"
+        },
+        {
+          "text": "Which license changes or renewals have been documented?",
+          "status": "Coverage not yet assessed"
+        },
+        {
+          "text": "What fuel-cycle and spent-fuel facilities are associated with the site?",
+          "status": "Coverage not yet assessed"
+        },
+        {
+          "text": "What closure or decommissioning milestones are publicly reported?",
+          "status": "Coverage not yet assessed"
+        }
+      ]
+    },
+    {
+      "id": "fuel-buyer",
+      "title": "Fuel Buyer",
+      "role": "Procures fuel or fuel-cycle services for a developer or operator",
+      "iaeaCategory": "Owner/operator",
+      "iaeaLocator": "Section 4.3; Atlas specialization",
+      "job": "Identify potential suppliers and the evidence needed before procurement discussions.",
+      "stages": "Across relevant lifecycle stages",
+      "sources": [
+        "iaea",
+        "fuel",
+        "supply"
+      ],
+      "filters": [
+        "Fuel form",
+        "Enrichment category",
+        "Supply-chain step"
+      ],
+      "questions": [
+        {
+          "text": "Which organizations report uranium supply, conversion, enrichment, or fabrication capabilities?",
+          "status": "Coverage not yet assessed"
+        },
+        {
+          "text": "Which suppliers report producing TRISO fuel, and where are their facilities?",
+          "status": "Coverage not yet assessed"
+        },
+        {
+          "text": "Which suppliers handle low-enriched uranium or HALEU, and at which processing step?",
+          "status": "Coverage not yet assessed"
+        },
+        {
+          "text": "What operating status and licensed or announced capacity are documented?",
+          "status": "Coverage not yet assessed"
+        },
+        {
+          "text": "What must we confirm directly about qualification, available supply, price, and delivery?",
+          "status": "Coverage not yet assessed"
+        }
+      ]
+    },
+    {
+      "id": "supplier",
+      "title": "Supplier or Contractor",
+      "role": "Provides fuel, equipment, engineering, construction, or services",
+      "iaeaCategory": "Suppliers",
+      "iaeaLocator": "Figure 1, printed p. 6",
+      "job": "Find relevant projects and understand their publicly documented requirements.",
+      "stages": "Across relevant lifecycle stages",
+      "sources": [
+        "iaea",
+        "supply",
+        "license"
+      ],
+      "filters": [
+        "Project stage",
+        "Facility type",
+        "Required capability"
+      ],
+      "questions": [
+        {
+          "text": "Which projects could need the capability or service we provide?",
+          "status": "Coverage not yet assessed"
+        },
+        {
+          "text": "Which organizations are developing or operating those projects?",
+          "status": "Coverage not yet assessed"
+        },
+        {
+          "text": "What development and licensing milestones have been reached?",
+          "status": "Coverage not yet assessed"
+        },
+        {
+          "text": "What procurement requirements or supplier announcements are public?",
+          "status": "Coverage not yet assessed"
+        },
+        {
+          "text": "Which target dates are supported by evidence rather than an announcement alone?",
+          "status": "Coverage not yet assessed"
+        }
+      ]
+    },
+    {
+      "id": "energy-buyer",
+      "title": "Electricity Buyer",
+      "role": "Evaluates nuclear electricity for a utility or business",
+      "iaeaCategory": "Business and industry",
+      "iaeaLocator": "Figure 1; Atlas specialization",
+      "job": "Screen projects and understand the evidence behind public electricity commitments.",
+      "stages": "Across relevant lifecycle stages",
+      "sources": [
+        "iaea",
+        "market",
+        "operations"
+      ],
+      "filters": [
+        "Buyer",
+        "Commitment type",
+        "Capacity basis"
+      ],
+      "questions": [
+        {
+          "text": "Which nuclear projects have announced electricity purchase agreements?",
+          "status": "Coverage not yet assessed"
+        },
+        {
+          "text": "Who are the named buyers, developers, and operators?",
+          "status": "Coverage not yet assessed"
+        },
+        {
+          "text": "Does reported capacity refer to the whole plant or a particular agreement?",
+          "status": "Coverage not yet assessed"
+        },
+        {
+          "text": "What delivery date is reported, and which milestones support it?",
+          "status": "Coverage not yet assessed"
+        },
+        {
+          "text": "Which commercial terms and remaining supply require direct confirmation?",
+          "status": "Coverage not yet assessed"
+        }
+      ]
+    },
+    {
+      "id": "worker",
+      "title": "Nuclear Worker",
+      "role": "Works in nuclear construction, operations, or site closure",
+      "iaeaCategory": "Employees",
+      "iaeaLocator": "Figure 1, printed p. 6",
+      "job": "Understand a facility’s stage and the public evidence behind workforce changes.",
+      "stages": "Across relevant lifecycle stages",
+      "sources": [
+        "iaea",
+        "supply",
+        "closure"
+      ],
+      "filters": [
+        "Site",
+        "Lifecycle stage",
+        "Workforce milestone"
+      ],
+      "questions": [
+        {
+          "text": "Which nearby facilities are being built, operated, or decommissioned?",
+          "status": "Coverage not yet assessed"
+        },
+        {
+          "text": "Who is responsible for the site and its major contracts?",
+          "status": "Coverage not yet assessed"
+        },
+        {
+          "text": "What project milestones could affect the timing of work?",
+          "status": "Coverage not yet assessed"
+        },
+        {
+          "text": "What workforce or training requirements have been publicly documented?",
+          "status": "Coverage not yet assessed"
+        },
+        {
+          "text": "What closure or transition plans have been announced for the site?",
+          "status": "Coverage not yet assessed"
+        }
+      ]
+    },
+    {
+      "id": "union",
+      "title": "Union Representative",
+      "role": "Represents workers affected by nuclear development or closure",
+      "iaeaCategory": "Workers’ unions",
+      "iaeaLocator": "Figure 1, printed p. 6",
+      "job": "Track projects and documented workforce commitments affecting members.",
+      "stages": "Across relevant lifecycle stages",
+      "sources": [
+        "iaea",
+        "supply",
+        "closure"
+      ],
+      "filters": [
+        "Employer",
+        "Project milestone",
+        "Workforce commitment"
+      ],
+      "questions": [
+        {
+          "text": "Which projects could create, extend, or end work for our members?",
+          "status": "Coverage not yet assessed"
+        },
+        {
+          "text": "Which employers and contractors are publicly identified?",
+          "status": "Coverage not yet assessed"
+        },
+        {
+          "text": "What workforce commitments appear in public project documents?",
+          "status": "Coverage not yet assessed"
+        },
+        {
+          "text": "What construction or closure schedule underlies those commitments?",
+          "status": "Coverage not yet assessed"
+        },
+        {
+          "text": "Where are opportunities to participate in decisions affecting workers?",
+          "status": "Coverage not yet assessed"
+        }
+      ]
+    },
+    {
+      "id": "researcher",
+      "title": "Researcher or Technical Expert",
+      "role": "Studies nuclear systems, policy, or impacts",
+      "iaeaCategory": "Scientific community",
+      "iaeaLocator": "Figure 1, printed p. 6",
+      "job": "Find traceable records and understand the limits of comparisons.",
+      "stages": "Across relevant lifecycle stages",
+      "sources": [
+        "iaea",
+        "operations",
+        "license"
+      ],
+      "filters": [
+        "Source date",
+        "Evidence type",
+        "Coverage"
+      ],
+      "questions": [
+        {
+          "text": "Which original sources support this record’s claims?",
+          "status": "Coverage not yet assessed"
+        },
+        {
+          "text": "What dates, units, and geographic boundaries apply to the data?",
+          "status": "Coverage not yet assessed"
+        },
+        {
+          "text": "Which records can be compared on a consistent basis?",
+          "status": "Coverage not yet assessed"
+        },
+        {
+          "text": "Where are missing values, conflicting claims, or approximate locations?",
+          "status": "Coverage not yet assessed"
+        },
+        {
+          "text": "Can I reproduce the published snapshot and cite its sources?",
+          "status": "Coverage not yet assessed"
+        }
+      ]
+    },
+    {
+      "id": "university",
+      "title": "University Educator or Student",
+      "role": "Teaches or learns about the nuclear lifecycle",
+      "iaeaCategory": "Universities",
+      "iaeaLocator": "Figure 1, printed p. 6",
+      "job": "Connect nuclear concepts to real facilities and original evidence.",
+      "stages": "Across relevant lifecycle stages",
+      "sources": [
+        "iaea",
+        "operations",
+        "spent"
+      ],
+      "filters": [
+        "Lifecycle stage",
+        "Facility type",
+        "Source"
+      ],
+      "questions": [
+        {
+          "text": "Which real facilities illustrate each stage of the nuclear lifecycle?",
+          "status": "Coverage not yet assessed"
+        },
+        {
+          "text": "How do fuel production, electricity generation, and spent-fuel storage differ?",
+          "status": "Coverage not yet assessed"
+        },
+        {
+          "text": "What does a license or public filing establish about a project?",
+          "status": "Coverage not yet assessed"
+        },
+        {
+          "text": "How can I distinguish an exact site location from an approximate marker?",
+          "status": "Coverage not yet assessed"
+        },
+        {
+          "text": "Which original documents can I use for further study?",
+          "status": "Coverage not yet assessed"
+        }
+      ]
+    },
+    {
+      "id": "journalist",
+      "title": "Journalist",
+      "role": "Reports on nuclear projects, policy, or local impacts",
+      "iaeaCategory": "Media",
+      "iaeaLocator": "Figure 1, printed p. 6",
+      "job": "Verify announcements and connect reporting to original public records.",
+      "stages": "Across relevant lifecycle stages",
+      "sources": [
+        "iaea",
+        "public",
+        "license"
+      ],
+      "filters": [
+        "Announcement date",
+        "Evidence strength",
+        "Responsible organization"
+      ],
+      "questions": [
+        {
+          "text": "What has actually happened, and what is still only proposed?",
+          "status": "Coverage not yet assessed"
+        },
+        {
+          "text": "Which original document supports the headline claim?",
+          "status": "Coverage not yet assessed"
+        },
+        {
+          "text": "Who owns, develops, operates, or regulates the facility?",
+          "status": "Coverage not yet assessed"
+        },
+        {
+          "text": "What is unknown, disputed, or out of date?",
+          "status": "Coverage not yet assessed"
+        },
+        {
+          "text": "What upcoming public decisions or meetings warrant follow-up?",
+          "status": "Coverage not yet assessed"
+        }
+      ]
+    },
+    {
+      "id": "civil-society",
+      "title": "Civil-Society Representative",
+      "role": "Represents an environmental or other public-interest organization",
+      "iaeaCategory": "NGOs",
+      "iaeaLocator": "Figure 1, printed p. 6",
+      "job": "Examine public claims and participate in decisions affecting represented interests.",
+      "stages": "Across relevant lifecycle stages",
+      "sources": [
+        "iaea",
+        "public",
+        "spent"
+      ],
+      "filters": [
+        "Environmental review",
+        "Public notice",
+        "Waste activity"
+      ],
+      "questions": [
+        {
+          "text": "Which proposals or facilities affect the interests we represent?",
+          "status": "Coverage not yet assessed"
+        },
+        {
+          "text": "What environmental and waste-management claims are documented?",
+          "status": "Coverage not yet assessed"
+        },
+        {
+          "text": "What evidence supports claimed benefits and potential burdens?",
+          "status": "Coverage not yet assessed"
+        },
+        {
+          "text": "Which organizations hold responsibility for the relevant decisions?",
+          "status": "Coverage not yet assessed"
+        },
+        {
+          "text": "When and how can our organization participate or submit evidence?",
+          "status": "Coverage not yet assessed"
+        }
+      ]
+    },
+    {
+      "id": "international",
+      "title": "Neighbouring-Country Representative",
+      "role": "Works on nuclear developments with cross-border relevance",
+      "iaeaCategory": "International community (including neighbouring countries)",
+      "iaeaLocator": "Figure 1, printed p. 6",
+      "job": "Identify cross-border context and the public records needed for cooperation.",
+      "stages": "Across relevant lifecycle stages",
+      "sources": [
+        "iaea",
+        "license",
+        "spent"
+      ],
+      "filters": [
+        "Country",
+        "Border region",
+        "Responsible authority"
+      ],
+      "questions": [
+        {
+          "text": "Which facilities or proposals have potential cross-border relevance?",
+          "status": "Coverage not yet assessed"
+        },
+        {
+          "text": "Which national authorities are responsible?",
+          "status": "Coverage not yet assessed"
+        },
+        {
+          "text": "What environmental assessments address effects beyond the host jurisdiction?",
+          "status": "Coverage not yet assessed"
+        },
+        {
+          "text": "What public consultation or cooperation arrangements are documented?",
+          "status": "Coverage not yet assessed"
+        },
+        {
+          "text": "Where do differences in definitions, dates, or reporting limit comparisons?",
+          "status": "Coverage not yet assessed"
+        }
+      ]
+    }
+  ]
+}

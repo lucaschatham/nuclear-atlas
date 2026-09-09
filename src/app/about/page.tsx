@@ -1,3 +1,4 @@
+import { PersonaGuide } from "@/features/methodology/persona-guide";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Download, ExternalLink, ShieldCheck } from "lucide-react";
@@ -59,22 +60,7 @@ export default function AboutPage() {
             </div>
           </details>
         </>,
-        "who-its-for": <section id="product-contract" aria-labelledby="audience-title" className="scroll-mt-36 space-y-5">
-          <div className="max-w-2xl space-y-2">
-            <h2 id="audience-title" className="text-xl font-semibold">For people making sense of nuclear developments</h2>
-            <p className="text-sm leading-6 text-muted-foreground">Start with a question, find a facility or project, and follow the evidence. These are the needs we aim to support; coverage varies.</p>
-          </div>
-          <div className="grid gap-4 md:grid-cols-2">
-            {methodology.audiences.map((audience) => (
-              <Card key={audience.title}><CardHeader><CardTitle><h3>{audience.title}</h3></CardTitle></CardHeader><CardContent className="text-sm leading-6 text-muted-foreground">{audience.detail}</CardContent></Card>
-            ))}
-          </div>
-          <div className="rounded-xl border bg-card p-5">
-            <h3 className="font-semibold">Follow the whole lifecycle</h3>
-            <p className="mt-2 max-w-3xl text-sm leading-6 text-muted-foreground">Explore projects, fuel supply, licensing and construction, operations, spent fuel, waste disposal, and decommissioning. Map and Table use the same filters and open the same evidence record.</p>
-            <Button className="mt-4" role="link" nativeButton={false} render={<Link href="/" />}>Explore the Atlas<ArrowRight /></Button>
-          </div>
-        </section>,
+        "who-its-for": <PersonaGuide />,
         "data-sources": <section aria-labelledby="sources-title" className="space-y-4">
           <div className="max-w-3xl space-y-2">
             <h2 id="sources-title" className="text-xl font-semibold">Where the data comes from</h2>

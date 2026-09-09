@@ -177,21 +177,65 @@ Location: No off-device SQLite backup is configured
 
 ## Who it is for
 
-### Researchers and analysts
+### Community Member
 
-Find facilities and projects, compare their public records, and trace claims to original sources.
+Lives near a proposed or existing nuclear facility. IAEA category: Local community. Figure 1, printed p. 6. Questions are Atlas adaptations.
 
-### Developers, buyers, and suppliers
+### Government Official
 
-Explore documented projects, licensing activity, and fuel-cycle facilities. Private commercial availability remains unknown.
+A local, regional, or national official involved in nuclear decisions. IAEA category: Government. Figure 1; Section 4.1. Questions are Atlas adaptations.
 
-### Communities and journalists
+### Regulatory Reviewer
 
-Understand what is documented about a site, its lifecycle, and its public regulatory record.
+Reviews nuclear applications, compliance, or oversight records. IAEA category: Regulatory body. Section 4.2. Questions are Atlas adaptations.
 
-### Industry professionals
+### Project Developer
 
-Follow related facilities and evidence across operations, spent fuel, waste, and decommissioning.
+Advances a proposed nuclear facility through development. IAEA category: Owner/operator. Section 4.3; Atlas specialization. Questions are Atlas adaptations.
+
+### Facility Owner or Operator
+
+Owns or operates a reactor or fuel-cycle facility. IAEA category: Owner/operator. Section 4.3. Questions are Atlas adaptations.
+
+### Fuel Buyer
+
+Procures fuel or fuel-cycle services for a developer or operator. IAEA category: Owner/operator. Section 4.3; Atlas specialization. Questions are Atlas adaptations.
+
+### Supplier or Contractor
+
+Provides fuel, equipment, engineering, construction, or services. IAEA category: Suppliers. Figure 1, printed p. 6. Questions are Atlas adaptations.
+
+### Electricity Buyer
+
+Evaluates nuclear electricity for a utility or business. IAEA category: Business and industry. Figure 1; Atlas specialization. Questions are Atlas adaptations.
+
+### Nuclear Worker
+
+Works in nuclear construction, operations, or site closure. IAEA category: Employees. Figure 1, printed p. 6. Questions are Atlas adaptations.
+
+### Union Representative
+
+Represents workers affected by nuclear development or closure. IAEA category: Workers’ unions. Figure 1, printed p. 6. Questions are Atlas adaptations.
+
+### Researcher or Technical Expert
+
+Studies nuclear systems, policy, or impacts. IAEA category: Scientific community. Figure 1, printed p. 6. Questions are Atlas adaptations.
+
+### University Educator or Student
+
+Teaches or learns about the nuclear lifecycle. IAEA category: Universities. Figure 1, printed p. 6. Questions are Atlas adaptations.
+
+### Journalist
+
+Reports on nuclear projects, policy, or local impacts. IAEA category: Media. Figure 1, printed p. 6. Questions are Atlas adaptations.
+
+### Civil-Society Representative
+
+Represents an environmental or other public-interest organization. IAEA category: NGOs. Figure 1, printed p. 6. Questions are Atlas adaptations.
+
+### Neighbouring-Country Representative
+
+Works on nuclear developments with cross-border relevance. IAEA category: International community (including neighbouring countries). Figure 1, printed p. 6. Questions are Atlas adaptations.
 
 ## Dashboard interaction contract
 

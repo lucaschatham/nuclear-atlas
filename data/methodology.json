@@ -252,20 +252,64 @@
   ],
   "audiences": [
     {
-      "title": "Researchers and analysts",
-      "detail": "Find facilities and projects, compare their public records, and trace claims to original sources."
+      "title": "Community Member",
+      "detail": "Lives near a proposed or existing nuclear facility. IAEA category: Local community. Figure 1, printed p. 6. Questions are Atlas adaptations."
     },
     {
-      "title": "Developers, buyers, and suppliers",
-      "detail": "Explore documented projects, licensing activity, and fuel-cycle facilities. Private commercial availability remains unknown."
+      "title": "Government Official",
+      "detail": "A local, regional, or national official involved in nuclear decisions. IAEA category: Government. Figure 1; Section 4.1. Questions are Atlas adaptations."
     },
     {
-      "title": "Communities and journalists",
-      "detail": "Understand what is documented about a site, its lifecycle, and its public regulatory record."
+      "title": "Regulatory Reviewer",
+      "detail": "Reviews nuclear applications, compliance, or oversight records. IAEA category: Regulatory body. Section 4.2. Questions are Atlas adaptations."
     },
     {
-      "title": "Industry professionals",
-      "detail": "Follow related facilities and evidence across operations, spent fuel, waste, and decommissioning."
+      "title": "Project Developer",
+      "detail": "Advances a proposed nuclear facility through development. IAEA category: Owner/operator. Section 4.3; Atlas specialization. Questions are Atlas adaptations."
+    },
+    {
+      "title": "Facility Owner or Operator",
+      "detail": "Owns or operates a reactor or fuel-cycle facility. IAEA category: Owner/operator. Section 4.3. Questions are Atlas adaptations."
+    },
+    {
+      "title": "Fuel Buyer",
+      "detail": "Procures fuel or fuel-cycle services for a developer or operator. IAEA category: Owner/operator. Section 4.3; Atlas specialization. Questions are Atlas adaptations."
+    },
+    {
+      "title": "Supplier or Contractor",
+      "detail": "Provides fuel, equipment, engineering, construction, or services. IAEA category: Suppliers. Figure 1, printed p. 6. Questions are Atlas adaptations."
+    },
+    {
+      "title": "Electricity Buyer",
+      "detail": "Evaluates nuclear electricity for a utility or business. IAEA category: Business and industry. Figure 1; Atlas specialization. Questions are Atlas adaptations."
+    },
+    {
+      "title": "Nuclear Worker",
+      "detail": "Works in nuclear construction, operations, or site closure. IAEA category: Employees. Figure 1, printed p. 6. Questions are Atlas adaptations."
+    },
+    {
+      "title": "Union Representative",
+      "detail": "Represents workers affected by nuclear development or closure. IAEA category: Workers’ unions. Figure 1, printed p. 6. Questions are Atlas adaptations."
+    },
+    {
+      "title": "Researcher or Technical Expert",
+      "detail": "Studies nuclear systems, policy, or impacts. IAEA category: Scientific community. Figure 1, printed p. 6. Questions are Atlas adaptations."
+    },
+    {
+      "title": "University Educator or Student",
+      "detail": "Teaches or learns about the nuclear lifecycle. IAEA category: Universities. Figure 1, printed p. 6. Questions are Atlas adaptations."
+    },
+    {
+      "title": "Journalist",
+      "detail": "Reports on nuclear projects, policy, or local impacts. IAEA category: Media. Figure 1, printed p. 6. Questions are Atlas adaptations."
+    },
+    {
+      "title": "Civil-Society Representative",
+      "detail": "Represents an environmental or other public-interest organization. IAEA category: NGOs. Figure 1, printed p. 6. Questions are Atlas adaptations."
+    },
+    {
+      "title": "Neighbouring-Country Representative",
+      "detail": "Works on nuclear developments with cross-border relevance. IAEA category: International community (including neighbouring countries). Figure 1, printed p. 6. Questions are Atlas adaptations."
     }
   ]
 }
