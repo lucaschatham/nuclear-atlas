@@ -29,7 +29,8 @@
     "db:init": "python3 -B scripts/local-store.py init",
     "db:seed": "python3 -B scripts/local-store.py import-release",
     "db:status": "python3 -B scripts/local-store.py status",
-    "db:backup": "python3 -B scripts/local-store.py backup"
+    "db:backup": "python3 -B scripts/local-store.py backup",
+    "collect:adams": "node scripts/collect-adams.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.6.0",

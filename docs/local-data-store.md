@@ -97,3 +97,37 @@ For an isolated test or another storage location, put the directory option befor
 ```sh
 npm run db -- --directory /absolute/path/to/local-store init
 ```
+
+## ADAMS pilot collection
+
+Run `npm run collect:adams` to search one verified pilot docket, Nine Mile Point 1
+(`05000220`), for documents added in the preceding 90 days. Configure
+`NRC_ADAMS_SUBSCRIPTION_KEY` in your environment or gitignored `.env.local` first.
+Obtain a subscription through the [NRC API portal](https://adams-api-developer.nrc.gov/).
+An account alone does not establish authenticated access.
+
+The command requests one bounded search response from the current APS API. It
+always reports partial coverage, regardless of NRC's result count. It does not
+page, retrieve full documents, schedule collection, or change the public release.
+The exact date-added filters appear in the run manifest; source timezone is not
+inferred. Document date and retrieval time remain distinct.
+
+Local `.local-data/adams-runs/pilot-*/` folders contain the exact `response.json`,
+a normalized metadata `records.json`, and a sanitized `manifest.json` with the
+request scope, response hash, retrieval time, and outcome. Preserve this folder
+alongside database backups. Raw search responses may themselves contain indexed
+text; the collector does not request document content separately. SQLite imports
+metadata by `AccessionNumber`, retaining original metadata fields and nulls.
+Empty searches create a receipt without creating an empty SQLite collection.
+Failed requests do not publish data. An import backup failure may leave a committed
+collection; inspect `db:status` before retrying.
+
+To isolate a run, use `npm run collect:adams -- --directory /absolute/local/path`.
+Use a private directory outside the repository's public assets.
+
+Before publishing, inspect an original NRC document and confirm its exact facility
+association and the particular field it supports. Add qualifying evidence through
+the existing workbook citation and release approval workflow. A matching docket
+alone is not evidence of a status change. Never describe this pilot as a live feed
+or complete ADAMS coverage. API access and a live collection must be verified before
+claiming the integration works against NRC.
