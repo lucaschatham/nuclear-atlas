@@ -2,7 +2,7 @@ import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 
 for (const scenario of [
-  { stage: "operations", name: "Nine Mile Point 1", source: "Reactor Oversight Process Action Matrix", date: "2025Q1", precision: "quarter", effective: "2025Q1", locator: "2025Q1; Nine Mile Point 1", field: "action_matrix_code", count: 4 },
+  { stage: "operations", name: "Nine Mile Point 1", source: "Reactor Oversight Process Action Matrix", date: "2025Q1", precision: "quarter", effective: "2025Q1", locator: "2025Q1; Nine Mile Point 1", field: "action_matrix_code", count: 5 },
   { stage: "build-license", name: "Fermi 3", source: "Combined License Holders for New Reactors", date: "2026-07-22", precision: "day", effective: "2015-05-01", locator: "Combined License Holders summary", field: "effective_date", count: 1 },
 ]) {
   test(`audit citation provenance for ${scenario.name}`, async ({ page }, testInfo) => {
@@ -19,6 +19,12 @@ for (const scenario of [
     }
     await expect(citation.getByText(/2026-08-26T.*Z/)).toBeVisible();
     await expect(citation.getByRole("link", { name: "Open source" })).toHaveAttribute("href", /^https:\/\/www\.nrc\.gov\//);
+    if (scenario.name === "Nine Mile Point 1") {
+      const adams = inspector.getByRole("region", { name: "Citation: NRC meeting notice: Nine Mile Point Unit 1 (ML26173A204)", exact: true });
+      await expect(adams.getByText("reactor_name", { exact: true })).toBeVisible();
+      await expect(adams.getByText("2026-06-22", { exact: true })).toBeVisible();
+      await expect(adams.getByRole("link", { name: "Open source" })).toHaveAttribute("href", "https://www.nrc.gov/docs/ML2617/ML26173A204.pdf");
+    }
     const results = await new AxeBuilder({ page }).analyze();
     expect(results.violations.filter((item) => ["serious", "critical"].includes(item.impact ?? ""))).toEqual([]);
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);

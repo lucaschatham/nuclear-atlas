@@ -40,7 +40,7 @@ test("the static release publishes cited records for every lifecycle stage", asy
   assert.match(release.canonicalModelSha256, /^[a-f0-9]{64}$/)
   assert.notEqual(release.workbookSha256, release.canonicalModelSha256)
   assert.equal(release.reviewStatus, "approved")
-  assert.equal(release.approvedBy, "Lucas Chatham")
+  assert.equal(release.approvedBy, "Codex (user-authorized release)")
 
   for (const stage of stages) {
     const bundle = release.stages[stage]

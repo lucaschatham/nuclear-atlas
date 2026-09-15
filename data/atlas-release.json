@@ -1,13 +1,13 @@
 {
   "schemaVersion": 2,
-  "releaseId": "release_2026-08-26_v2",
+  "releaseId": "release_2026-09-15_adams_pilot",
   "reviewStatus": "approved",
-  "approvedBy": "Lucas Chatham",
+  "approvedBy": "Codex (user-authorized release)",
   "sourceCutoffUtc": "2026-08-26T23:50:00Z",
-  "generatedAtUtc": "2026-08-26T23:50:00Z",
-  "workbookSha256": "e0860f32c57f54c3fd81c475d23c5788ecc7204e69889f3f036b55526f48740d",
-  "canonicalModelSha256": "477e329d8dd28f3f549ad34e4fde8ab27528b5b96571fab48086748167f72cc1",
-  "sourceCount": 44,
+  "generatedAtUtc": "2026-09-15T17:06:18.348Z",
+  "workbookSha256": "9eb653254d5a9462a9111330f8c2833fddd3740885a40312afa489ca2d31fd99",
+  "canonicalModelSha256": "b49171ef1a5c8b3f79f0091c65735dbce1b9b0557bf19816a7a83d46a3539b61",
+  "sourceCount": 45,
   "sources": [
     {
       "id": "src_nrc_action_matrix_2025q1",
@@ -536,6 +536,18 @@
       "sourceAsOf": "2024-12-18",
       "retrievedAtUtc": "2026-08-26T21:40:29.244Z",
       "plainEnglish": "Public source used by an existing Projects record."
+    },
+    {
+      "id": "src_adams_ml26173a204",
+      "publisher": "U.S. Nuclear Regulatory Commission",
+      "name": "NRC meeting notice: Nine Mile Point Unit 1 (ML26173A204)",
+      "authorityClass": "official_regulatory",
+      "url": "https://www.nrc.gov/docs/ML2617/ML26173A204.pdf",
+      "reuseStatus": "approved_factual_reuse",
+      "geographicScope": "Nine Mile Point Unit 1, United States",
+      "sourceAsOf": "2026-06-22",
+      "retrievedAtUtc": "2026-09-15T17:02:34.458Z",
+      "plainEnglish": "NRC-authored notice reviewed by Codex: p. 1 title and purpose name Unit 1; p. 2 identifies docket 05000220. Supports reactor identity only, not approval or operating status. Located via one partial ADAMS search response."
     }
   ],
   "stages": {
@@ -3163,7 +3175,8 @@
             "src_nrc_action_matrix_2025q1",
             "src_nrc_operating_units",
             "src_nrc_reactor_demographics_2022",
-            "src_nrc_findings_2024"
+            "src_nrc_findings_2024",
+            "src_adams_ml26173a204"
           ],
           "citations": [
             {
@@ -3242,6 +3255,22 @@
               "sourceDatePrecision": "day",
               "effectiveDate": "2024",
               "retrievedAtUtc": "2026-08-26T23:50:00Z",
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cite_adams_ml26173a204_identity",
+              "sourceId": "src_adams_ml26173a204",
+              "publisher": "U.S. Nuclear Regulatory Commission",
+              "sourceName": "NRC meeting notice: Nine Mile Point Unit 1 (ML26173A204)",
+              "url": "https://www.nrc.gov/docs/ML2617/ML26173A204.pdf",
+              "locator": "ML26173A204, pp. 1–2: title, purpose, and Docket No. 05000220",
+              "supportsFields": [
+                "reactor_name"
+              ],
+              "sourceDateOriginal": "2026-06-22",
+              "sourceDatePrecision": "day",
+              "effectiveDate": null,
+              "retrievedAtUtc": "2026-09-15T17:02:34.458Z",
               "reviewStatus": "approved"
             }
           ],
@@ -17968,7 +17997,8 @@
         "src_nrc_action_matrix_2025q1",
         "src_nrc_operating_units",
         "src_nrc_reactor_demographics_2022",
-        "src_nrc_findings_2024"
+        "src_nrc_findings_2024",
+        "src_adams_ml26173a204"
       ]
     },
     "spent-fuel": {

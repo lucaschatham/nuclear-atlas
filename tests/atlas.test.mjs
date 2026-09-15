@@ -140,7 +140,7 @@ test("production deployment requires an explicitly approved workbook release", a
   ])
 
   assert.equal(release.reviewStatus, "approved")
-  assert.equal(release.approvedBy, "Lucas Chatham")
+  assert.equal(release.approvedBy, "Codex (user-authorized release)")
   assert.match(workflow, /npm run validate:atlas-release\n/)
   assert.match(workflow, /validate:atlas-release:production/)
   assert.ok(workflow.indexOf("validate:atlas-release:production") < workflow.indexOf("actions\/upload-pages-artifact"))

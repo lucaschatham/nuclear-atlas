@@ -36,7 +36,7 @@ class StoreTests(unittest.TestCase):
         self.assertEqual(first, second)
         self.assertEqual(self.db.execute('SELECT count(*) FROM collections').fetchone()[0], 1)
         self.assertEqual(self.db.execute('SELECT count(*) FROM records').fetchone()[0], 247)
-        self.assertEqual(self.db.execute('SELECT count(*) FROM citations').fetchone()[0], 549)
+        self.assertEqual(self.db.execute('SELECT count(*) FROM citations').fetchone()[0], 550)
         output = store.export_original(self.db, self.root, first)
         self.assertEqual(output.read_bytes(), file.read_bytes())
         self.assertEqual(self.db.execute('PRAGMA foreign_key_check').fetchall(), [])
