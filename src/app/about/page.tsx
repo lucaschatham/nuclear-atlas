@@ -43,8 +43,8 @@ export default function AboutPage() {
             </div>
             <WorkflowDiagram />
             <div className="space-y-1 text-sm leading-6">
-              <p className="font-medium">Source cutoff: {sourceCutoff} <span className="font-normal text-muted-foreground">· Published snapshot</span></p>
-              <p className="text-muted-foreground">Sources update at different speeds. This release does not reflect live changes.</p>
+              <p className="font-medium">Baseline snapshot: {sourceCutoff} <span className="font-normal text-muted-foreground">· Targeted updates</span></p>
+              <p className="text-muted-foreground">Five licensing records were reviewed on September 15, 2026. Other records retain their earlier evidence dates. Sources update at different speeds; this is not a live feed.</p>
             </div>
             <Button role="link" nativeButton={false} render={<Link href="/" />}>Explore the Atlas<ArrowRight /></Button>
           </section>
@@ -98,7 +98,7 @@ export default function AboutPage() {
           <section aria-labelledby="adams-coverage-title" className="rounded-lg border p-4">
             <h3 id="adams-coverage-title" className="font-semibold">ADAMS pilot · September 15, 2026</h3>
             <p className="mt-2 text-sm leading-6">{adamsPilot.collectedRecords} records collected locally · {adamsPilot.publishedCitations} identity citation published · 1 docket covered</p>
-            <p className="mt-1 text-sm leading-6 text-muted-foreground">{adamsPilot.facility}, docket {adamsPilot.docket}. One search response from a 90-day date-added window; coverage is partial. Collection is on demand, not a live feed. The August 26 facility-data cutoff is unchanged.</p>
+            <p className="mt-1 text-sm leading-6 text-muted-foreground">{adamsPilot.facility}, docket {adamsPilot.docket}. One search response from a 90-day date-added window; coverage is partial. Collection is on demand, not a live feed. The August 26 baseline is unchanged; separately reviewed licensing updates carry their own evidence dates.</p>
           </section>
           <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">{methodologyStages.map((stage) => (
             <Card key={stage.id} size="sm"><CardHeader><CardDescription>{atlasRelease.stages[stage.id]?.recordCount ?? 0} published records</CardDescription><CardTitle><h3>{stage.label}</h3></CardTitle></CardHeader><CardContent className="text-sm leading-6 text-muted-foreground">{stage.next}</CardContent></Card>

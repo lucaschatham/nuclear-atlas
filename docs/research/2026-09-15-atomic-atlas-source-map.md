@@ -1,0 +1,34 @@
+# Atomic Atlas: priority primary-source map
+
+Verified September 15, 2026. Scope: five suppliers and five projects selected for accessible primary evidence. Atomic Atlas shows no row citations; these are independently located sources, not confirmed citations used by its author. No new factual records were published to the dashboard.
+
+## Highest-value additions
+
+Start with NRC/CNSC licensing milestones and dated supplier capabilities. Retain claim-level dates and distinguish historical agreements from current availability. Three project descriptions need correction or updating; six other entries have support only for the scoped statements below; JSW still needs a successful live-source check.
+
+| Entry | Supported statement | Source | Limitation |
+| --- | --- | --- | --- |
+| Japan Steel Works | JSW describes forged reactor-vessel shell flanges and monoblock forgings. | [JSW product page](https://www.jsw.co.jp/en/product/business/material_engineering/me_0600/) | Do not import the claimed >600t vessel-head weight or customer list without separate evidence. Ingots, presses and finished components have different weight measures. Search-indexed primary text was available, but direct retrieval returned 403 and the browser check did not confirm the text. Recheck before publication. |
+| Doosan Enerbility | NuScale disclosed a December 20, 2024 task order to Doosan for long-lead materials for six upper reactor pressure vessels. | [NuScale SEC filing](https://www.sec.gov/Archives/edgar/data/1822966/000182296624000158/smr-20241220.htm) | Historical agreement evidence; does not prove present spare capacity, finished delivery, current lead times or project operation. Avoid carrying forward the 2022 UAMPS schedule. |
+| BWXT | BWXT describes engineering and manufacturing reactor pressure vessels, steam generators and heat exchangers. | [BWXT capability page](https://www.bwxt.com/sectors/nuclear-energy/components-equipment/) | Does not independently establish every Atomic Atlas customer relationship. A corporate component capability is not the same entity as the existing BWXT fuel facility in Atlas. |
+| Framatome | Framatome describes Le Creusot manufacturing forged or cast parts under nuclear quality regulations for civil and naval reactors. | [Framatome company announcement](https://www.framatome.com/medias/visit-french-president-at-le-creusot-industrial-facility/) | This is historical capability evidence. Header and body dates differ within December 2020; retain month precision. Full current Saint-Marcel scope, customer list and capacity need further verification. A searched steam-generator product-sheet URL returned 404 and is excluded as an accepted source. |
+| Sheffield Forgemasters | Company announcement describes nuclear-grade castings/forgings and signed civil nuclear MOUs with Rolls-Royce SMR and other named developers. | [Sheffield Forgemasters announcement](https://sheffieldforgemasters.com/sheffield-forgemasters-expands-smr-pact-with-holtec/) | Record relationships as MOUs, not delivered orders, qualified production capacity or guaranteed future revenue. Royal Navy relationship not verified in this source. |
+| Dow Seadrift / Long Mott | NRC records receipt of a construction permit application on March 31, 2025, and acceptance for docketing on May 12, 2025. | [NRC application document register](https://www.nrc.gov/reactors/new-reactors/advanced/who-were-working-with/applicant-projects/long-mott/documents) | Replace the Atomic Atlas early-site-permit label. Application receipt and docketing are not permit issuance; do not import its target operation date. |
+| Clinch River BWRX-300 | NRC describes ongoing construction-permit review; its milestone table labels the decision Fall 2026 as a target. An early site permit was issued in 2019. | [NRC project page](https://www.nrc.gov/reactors/new-reactors/advanced/who-were-working-with/applicant-projects/clinch-river) | Atomic Atlas approval wording is unsupported for the construction permit by the inspected regulator page. Keep early-site permit, excavation exemptions and construction permit distinct. Check the docket immediately before any status publication. |
+| Natrium / Kemmerer Unit 1 | NRC records issuance of construction permit CPAR-1 to US SFR Owner on March 9, 2026. | [NRC issuance announcement](https://www.nrc.gov/node/2156776) | Atomic Atlas non-nuclear-construction wording omits the later licensing milestone. This permit does not authorize operation or establish its 2030 completion target. |
+| Darlington New Nuclear | CNSC records an April 2025 licence to construct one BWRX-300 reactor; the inspected page lists one unit under construction. | [CNSC project page](https://www.cnsc-ccsn.gc.ca/eng/reactors/new-reactor-power-plant-projects/new-reactor-power-plant-facilities/darlington-new-nuclear-project/) | One licensed unit must not become four licensed units. An application to operate is not an operating licence. The Atomic Atlas target year remains unverified. |
+| Kairos Hermes | NRC records a December 14, 2023 construction permit for Hermes, a 35 MWth test reactor that will not generate electricity. | [NRC project page](https://www.nrc.gov/reactors/non-power/new-facility-licensing/hermes-kairos) | Keep Hermes separate from Hermes 2 and the commercial KP-FHR design. Do not convert thermal power to electric output or import the target demo year. NRC identifies application docket 05007513. |
+
+## Readiness
+
+The five project sources are structured regulator pages with discrete licensing events. They are stronger first additions than copied target years or aggregate status strings. Supplier sources support capabilities or historical agreements, not available production slots, supplier qualification for every design, prices, or procurement lead times.
+
+Framatome is the weakest freshness match in this shortlist: the accepted source supports a historical capability only. Keep it dated and seek a current technical product page before treating it as current inventory.
+
+Existing Atlas references to BWXT and Framatome are fuel-facility records. The supplier organizations and their component-manufacturing sites must not be silently merged into those facilities. Likewise, the existing Hermes 2 PPA record is not the Hermes test reactor.
+
+Machine-readable research is in `2026-09-15-atomic-atlas-source-map.json`. Each entry includes a specific claim, source URL, locator, original date where established, reviewer attribution and publication status. Remaining Atomic Atlas rows, precise coordinates, funding, and projected dates are outside this verification pass.
+
+## Follow-up release
+
+The five project leads were subsequently rechecked and prepared as distinct licensing actions in `release_2026-09-15_licensing_update`. See [the release evidence notes](2026-09-15-licensing-release.md). Supplier entries remain research leads.

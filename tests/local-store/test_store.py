@@ -35,8 +35,10 @@ class StoreTests(unittest.TestCase):
         second = store.import_release(self.db, self.root, file)
         self.assertEqual(first, second)
         self.assertEqual(self.db.execute('SELECT count(*) FROM collections').fetchone()[0], 1)
-        self.assertEqual(self.db.execute('SELECT count(*) FROM records').fetchone()[0], 247)
-        self.assertEqual(self.db.execute('SELECT count(*) FROM citations').fetchone()[0], 550)
+        release = json.loads(file.read_text())
+        records = [record for stage in release['stages'].values() for record in stage['records']]
+        self.assertEqual(self.db.execute('SELECT count(*) FROM records').fetchone()[0], len(records))
+        self.assertEqual(self.db.execute('SELECT count(*) FROM citations').fetchone()[0], sum(len(record['citations']) for record in records))
         output = store.export_original(self.db, self.root, first)
         self.assertEqual(output.read_bytes(), file.read_bytes())
         self.assertEqual(self.db.execute('PRAGMA foreign_key_check').fetchall(), [])

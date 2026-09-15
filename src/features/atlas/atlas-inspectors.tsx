@@ -107,6 +107,7 @@ export function EvidenceInspector({ record, sources }: { record: AtlasRecord; so
             {record.evidenceStrength ? <EvidenceBadge strength={record.evidenceStrength} /> : <Badge variant="secondary">{humanize(record.status)}</Badge>}
             {record.reviewStatus !== "approved" && <Badge variant="outline">{humanize(record.reviewStatus)}</Badge>}
           </div>
+          {record.stage === "build-license" && <p className="mt-2 text-sm font-medium">{humanize(record.typeLabel)}</p>}
           <h2 className="mt-4 text-xl font-semibold leading-tight tracking-tight">{record.name}</h2>
           <p className="mt-2 flex items-start gap-2 text-sm text-muted-foreground"><MapPin className="mt-0.5 size-4 shrink-0" />{record.locationLabel}</p>
           <p className="mt-3 border-l-2 border-evidence-approximate/60 pl-3 text-xs leading-5 text-muted-foreground">{record.coordinateNote}</p>
@@ -114,7 +115,7 @@ export function EvidenceInspector({ record, sources }: { record: AtlasRecord; so
 
         <dl className="divide-y divide-border border-y">
           {record.metrics.map((metric) => <DetailField key={metric.label} label={metric.label}>{formatValue(metric.value, metric.unit)}</DetailField>)}
-          {record.details.map((item) => <DetailField key={item.label} label={item.label}>{item.value}</DetailField>)}
+          {record.details.map((item) => <DetailField key={item.label} label={item.label === "Decision date" ? "Decision / issuance date" : item.label}>{item.value}</DetailField>)}
           <DetailField label="Snapshot as of">{record.asOf ?? "Unknown"}</DetailField>
         </dl>
 
@@ -150,8 +151,8 @@ export function SourceInspector({ release, stage }: { release: AtlasRelease; sta
         <div>
           <div className="text-xs font-medium uppercase tracking-wider text-muted-foreground">Source registry</div>
           <h2 className="mt-2 text-xl font-semibold tracking-tight">What feeds this atlas</h2>
-          <p className="mt-2 text-sm leading-6 text-muted-foreground">This is a dated snapshot, not a live feed. Sources shown first support the selected lifecycle stage.</p>
-          <p className="mt-2 font-mono text-xs text-muted-foreground">Release {release.releaseId} · cutoff {release.sourceCutoffUtc ?? "unknown"}</p>
+          <p className="mt-2 text-sm leading-6 text-muted-foreground">This is a dated snapshot with targeted updates, not a live feed. Check each record’s evidence dates. Sources shown first support the selected lifecycle stage.</p>
+          <p className="mt-2 font-mono text-xs text-muted-foreground">Release {release.releaseId} · Baseline snapshot: {release.sourceCutoffUtc ?? "unknown"}</p>
         </div>
         <Separator className="my-5" />
         <div className="space-y-3">

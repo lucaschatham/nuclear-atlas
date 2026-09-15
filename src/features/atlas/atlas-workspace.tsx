@@ -341,7 +341,7 @@ function HydratedAtlasWorkspace({ records, release }: AtlasWorkspaceProps) {
           <ButtonGroup>
             <Button type="button" variant="outline" size="lg" onClick={() => dispatch({ type: "open-inspector", inspector: "sources" })}>
               <Database data-icon="inline-start" />
-              <span className="text-left"><span className="block text-xs">{release.sourceCount} snapshot sources</span><span className="block text-[0.6875rem] font-normal text-muted-foreground">{release.reviewStatus === "approved" ? "Released" : "Draft for review"} through {release.sourceCutoffUtc ?? "published cutoff"}</span></span>
+              <span className="text-left"><span className="block text-xs">{release.sourceCount} snapshot sources</span><span className="block text-[0.6875rem] font-normal text-muted-foreground">Baseline {release.sourceCutoffUtc?.slice(0, 10) ?? "unknown"} · see record dates</span></span>
             </Button>
             <DownloadButtons compact stage={state.lifecycleStage} />
           </ButtonGroup>

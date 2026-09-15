@@ -152,7 +152,7 @@ test("existing methodology section links select their containing tab", async ({ 
  test("overview is concise and every tab fits without horizontal scrolling", async ({ page }) => {
   await page.goto("/about/");
   await expect(page.getByRole("list", { name: "Publishing process" }).getByRole("listitem")).toHaveCount(4);
-  await expect(page.getByText("Source cutoff: August 26, 2026", { exact: false })).toBeVisible();
+  await expect(page.getByText("Baseline snapshot: August 26, 2026", { exact: false })).toBeVisible();
   for (const width of [320, 390, 768, 1440]) {
     await page.setViewportSize({ width, height: 900 });
     for (const tab of await page.getByRole("tab").all()) {

@@ -1,0 +1,178 @@
+{
+  "inspected_at_utc": "2026-09-15T17:24:22.385705Z",
+  "discovery_url": "https://www.atomicatlas.fyi/",
+  "scope": "Five suppliers and five regulator-documented projects, selected for accessible primary evidence. Not a complete verification of Atomic Atlas.",
+  "provenance": "Atomic Atlas did not expose row citations. These are independently located corroborating or correcting sources, not a claim about sources used by its author.",
+  "records": [
+    {
+      "id": "supplier-jsw",
+      "kind": "supplier",
+      "name": "Japan Steel Works",
+      "claim_checked": "Nuclear reactor vessel forging capability",
+      "assessment": "indexed_primary_source_requires_live_recheck",
+      "supported_statement": "JSW describes forged reactor-vessel shell flanges and monoblock forgings.",
+      "primary_source": {
+        "url": "https://www.jsw.co.jp/en/product/business/material_engineering/me_0600/",
+        "publisher": "JSW product page",
+        "source_date_original": null,
+        "locator": "Product description and features"
+      },
+      "limits": "Do not import the claimed >600t vessel-head weight or customer list without separate evidence. Ingots, presses and finished components have different weight measures. Search-indexed primary-source text was available, but direct retrieval returned 403 and the browser check did not confirm the product text. Recheck the live source before publication.",
+      "reviewer": "Codex",
+      "publication_status": "research_only"
+    },
+    {
+      "id": "supplier-doosan",
+      "kind": "supplier",
+      "name": "Doosan Enerbility",
+      "claim_checked": "NuScale manufacturing relationship",
+      "assessment": "supported_scoped_claim",
+      "supported_statement": "NuScale disclosed a December 20, 2024 task order to Doosan for long-lead materials for six upper reactor pressure vessels.",
+      "primary_source": {
+        "url": "https://www.sec.gov/Archives/edgar/data/1822966/000182296624000158/smr-20241220.htm",
+        "publisher": "NuScale SEC filing",
+        "source_date_original": "2024-12-20",
+        "locator": "Item 1.01 and Exhibit 10.1"
+      },
+      "limits": "Historical agreement evidence; does not prove present spare capacity, finished delivery, current lead times or project operation. Avoid carrying forward the 2022 UAMPS schedule.",
+      "reviewer": "Codex",
+      "publication_status": "research_only"
+    },
+    {
+      "id": "supplier-bwxt",
+      "kind": "supplier",
+      "name": "BWXT",
+      "claim_checked": "Reactor pressure vessel, steam generator and heat exchanger capability",
+      "assessment": "supported_scoped_claim",
+      "supported_statement": "BWXT describes engineering and manufacturing reactor pressure vessels, steam generators and heat exchangers.",
+      "primary_source": {
+        "url": "https://www.bwxt.com/sectors/nuclear-energy/components-equipment/",
+        "publisher": "BWXT capability page",
+        "source_date_original": null,
+        "locator": "Components and Equipment introductory description"
+      },
+      "limits": "Does not independently establish every Atomic Atlas customer relationship. A corporate component capability is not the same entity as the existing BWXT fuel facility in Atlas.",
+      "reviewer": "Codex",
+      "publication_status": "research_only"
+    },
+    {
+      "id": "supplier-framatome",
+      "kind": "supplier",
+      "name": "Framatome",
+      "claim_checked": "Le Creusot nuclear forgings and castings",
+      "assessment": "supported_historical_claim",
+      "supported_statement": "Framatome describes Le Creusot manufacturing forged or cast parts under nuclear quality regulations for civil and naval reactors.",
+      "primary_source": {
+        "url": "https://www.framatome.com/medias/visit-french-president-at-le-creusot-industrial-facility/",
+        "publisher": "Framatome company announcement",
+        "source_date_original": "2020-12",
+        "locator": "Paragraph following aircraft-carrier discussion"
+      },
+      "limits": "This is historical capability evidence. Header and body dates differ within December 2020; retain month precision. Full current Saint-Marcel scope, customer list and capacity need further verification. A searched steam-generator product-sheet URL returned 404 and is excluded as an accepted source.",
+      "reviewer": "Codex",
+      "publication_status": "research_only"
+    },
+    {
+      "id": "supplier-sheffield",
+      "kind": "supplier",
+      "name": "Sheffield Forgemasters",
+      "claim_checked": "Nuclear castings/forgings and SMR relationships",
+      "assessment": "supported_scoped_claim",
+      "supported_statement": "Company announcement describes nuclear-grade castings/forgings and signed civil nuclear MOUs with Rolls-Royce SMR and other named developers.",
+      "primary_source": {
+        "url": "https://sheffieldforgemasters.com/sheffield-forgemasters-expands-smr-pact-with-holtec/",
+        "publisher": "Sheffield Forgemasters announcement",
+        "source_date_original": "2024-11-21",
+        "locator": "Expanded Holtec MoU and final civil nuclear MOUs paragraph"
+      },
+      "limits": "Record relationships as MOUs, not delivered orders, qualified production capacity or guaranteed future revenue. Royal Navy relationship not verified in this source.",
+      "reviewer": "Codex",
+      "publication_status": "research_only"
+    },
+    {
+      "id": "project-long-mott",
+      "kind": "project",
+      "name": "Dow Seadrift / Long Mott",
+      "claim_checked": "Licensing filing type",
+      "assessment": "correction_required",
+      "supported_statement": "NRC records receipt of a construction permit application on March 31, 2025, and acceptance for docketing on May 12, 2025.",
+      "primary_source": {
+        "url": "https://www.nrc.gov/reactors/new-reactors/advanced/who-were-working-with/applicant-projects/long-mott/documents",
+        "publisher": "NRC application document register",
+        "source_date_original": "2025-03-31 / 2025-05-12",
+        "locator": "Document-register rows for receipt and docketing"
+      },
+      "limits": "Replace the Atomic Atlas early-site-permit label. Application receipt and docketing are not permit issuance; do not import its target operation date.",
+      "reviewer": "Codex",
+      "publication_status": "research_only"
+    },
+    {
+      "id": "project-clinch-river",
+      "kind": "project",
+      "name": "Clinch River BWRX-300",
+      "claim_checked": "Construction permit status",
+      "assessment": "correction_required",
+      "supported_statement": "NRC describes ongoing construction-permit review; its milestone table labels the decision Fall 2026 as a target. An early site permit was issued in 2019.",
+      "primary_source": {
+        "url": "https://www.nrc.gov/reactors/new-reactors/advanced/who-were-working-with/applicant-projects/clinch-river",
+        "publisher": "NRC project page",
+        "source_date_original": null,
+        "locator": "Project Overview; Key Milestones: Construction Permit Decision"
+      },
+      "limits": "Atomic Atlas approval wording is unsupported for the construction permit by the inspected regulator page. Keep early-site permit, excavation exemptions and construction permit distinct. Check the docket immediately before any status publication.",
+      "reviewer": "Codex",
+      "publication_status": "research_only"
+    },
+    {
+      "id": "project-kemmerer",
+      "kind": "project",
+      "name": "Natrium / Kemmerer Unit 1",
+      "claim_checked": "Construction permit issuance",
+      "assessment": "update_required",
+      "supported_statement": "NRC records issuance of construction permit CPAR-1 to US SFR Owner on March 9, 2026.",
+      "primary_source": {
+        "url": "https://www.nrc.gov/node/2156776",
+        "publisher": "NRC issuance announcement",
+        "source_date_original": "2026-03-09",
+        "locator": "NRC Issues Construction Permit to US SFR Owner"
+      },
+      "limits": "Atomic Atlas non-nuclear-construction wording omits the later licensing milestone. This permit does not authorize operation or establish its 2030 completion target.",
+      "reviewer": "Codex",
+      "publication_status": "research_only"
+    },
+    {
+      "id": "project-darlington",
+      "kind": "project",
+      "name": "Darlington New Nuclear",
+      "claim_checked": "Unit 1 construction licence",
+      "assessment": "supported_scoped_claim",
+      "supported_statement": "CNSC records an April 2025 licence to construct one BWRX-300 reactor; the inspected page lists one unit under construction.",
+      "primary_source": {
+        "url": "https://www.cnsc-ccsn.gc.ca/eng/reactors/new-reactor-power-plant-projects/new-reactor-power-plant-facilities/darlington-new-nuclear-project/",
+        "publisher": "CNSC project page",
+        "source_date_original": "2025-04",
+        "locator": "Current status; April 2025 construction licence; Facility information"
+      },
+      "limits": "One licensed unit must not become four licensed units. An application to operate is not an operating licence. The Atomic Atlas target year remains unverified.",
+      "reviewer": "Codex",
+      "publication_status": "research_only"
+    },
+    {
+      "id": "project-hermes",
+      "kind": "project",
+      "name": "Kairos Hermes",
+      "claim_checked": "Test-reactor construction permit",
+      "assessment": "supported_scoped_claim",
+      "supported_statement": "NRC records a December 14, 2023 construction permit for Hermes, a 35 MWth test reactor that will not generate electricity.",
+      "primary_source": {
+        "url": "https://www.nrc.gov/reactors/non-power/new-facility-licensing/hermes-kairos",
+        "publisher": "NRC project page",
+        "source_date_original": "2023-12-14",
+        "locator": "Project Overview; Plant Characteristics"
+      },
+      "limits": "Keep Hermes separate from Hermes 2 and the commercial KP-FHR design. Do not convert thermal power to electric output or import the target demo year. NRC identifies application docket 05007513.",
+      "reviewer": "Codex",
+      "publication_status": "research_only"
+    }
+  ]
+}

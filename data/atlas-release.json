@@ -1,13 +1,13 @@
 {
   "schemaVersion": 2,
-  "releaseId": "release_2026-09-15_adams_pilot",
+  "releaseId": "release_2026-09-15_licensing_update",
   "reviewStatus": "approved",
   "approvedBy": "Codex (user-authorized release)",
   "sourceCutoffUtc": "2026-08-26T23:50:00Z",
-  "generatedAtUtc": "2026-09-15T17:06:18.348Z",
-  "workbookSha256": "9eb653254d5a9462a9111330f8c2833fddd3740885a40312afa489ca2d31fd99",
-  "canonicalModelSha256": "b49171ef1a5c8b3f79f0091c65735dbce1b9b0557bf19816a7a83d46a3539b61",
-  "sourceCount": 45,
+  "generatedAtUtc": "2026-09-15T18:12:06.726Z",
+  "workbookSha256": "a0d40a70b73edcb908f23c1298a34d9a3083860bd0340a400891bf3f80b8e880",
+  "canonicalModelSha256": "dbce1e036139b10324c5b62ab9e52fe22fccd47e75ada1e9e0dd5ddb5c6aff32",
+  "sourceCount": 55,
   "sources": [
     {
       "id": "src_nrc_action_matrix_2025q1",
@@ -548,6 +548,126 @@
       "sourceAsOf": "2026-06-22",
       "retrievedAtUtc": "2026-09-15T17:02:34.458Z",
       "plainEnglish": "NRC-authored notice reviewed by Codex: p. 1 title and purpose name Unit 1; p. 2 identifies docket 05000220. Supports reactor identity only, not approval or operating status. Located via one partial ADAMS search response."
+    },
+    {
+      "id": "src_licensing_long_mott",
+      "publisher": "U.S. Nuclear Regulatory Commission",
+      "name": "Long Mott construction permit review",
+      "authorityClass": "official_regulatory",
+      "url": "https://www.nrc.gov/reactors/new-reactors/advanced/who-were-working-with/applicant-projects/long-mott",
+      "reuseStatus": "approved_factual_reuse",
+      "geographicScope": "US",
+      "sourceAsOf": "2026-08-31",
+      "retrievedAtUtc": "2026-09-15T18:07:34.483Z",
+      "plainEnglish": "Project overview and milestones; checked by Codex. Factual metadata reviewed by Codex under user authorization; no independent human source review recorded."
+    },
+    {
+      "id": "src_licensing_long_mott_docs",
+      "publisher": "U.S. Nuclear Regulatory Commission",
+      "name": "Long Mott application document register",
+      "authorityClass": "official_regulatory",
+      "url": "https://www.nrc.gov/reactors/new-reactors/advanced/who-were-working-with/applicant-projects/long-mott/documents",
+      "reuseStatus": "approved_factual_reuse",
+      "geographicScope": "US",
+      "sourceAsOf": "2026-08-27",
+      "retrievedAtUtc": "2026-09-15T18:07:34.483Z",
+      "plainEnglish": "Application receipt and acceptance for docketing; not permit issuance. Factual metadata reviewed by Codex under user authorization; no independent human source review recorded."
+    },
+    {
+      "id": "src_licensing_clinch_river",
+      "publisher": "U.S. Nuclear Regulatory Commission",
+      "name": "Clinch River construction permit review",
+      "authorityClass": "official_regulatory",
+      "url": "https://www.nrc.gov/reactors/new-reactors/advanced/who-were-working-with/applicant-projects/clinch-river",
+      "reuseStatus": "approved_factual_reuse",
+      "geographicScope": "US",
+      "sourceAsOf": "2026-09-11",
+      "retrievedAtUtc": "2026-09-15T18:07:34.483Z",
+      "plainEnglish": "Application in two parts; decision remains a target. Factual metadata reviewed by Codex under user authorization; no independent human source review recorded."
+    },
+    {
+      "id": "src_licensing_kemmerer",
+      "publisher": "U.S. Nuclear Regulatory Commission",
+      "name": "Kemmerer Unit 1 construction permit issuance",
+      "authorityClass": "official_regulatory",
+      "url": "https://www.nrc.gov/node/2156776",
+      "reuseStatus": "approved_factual_reuse",
+      "geographicScope": "US",
+      "sourceAsOf": "2026-03-09",
+      "retrievedAtUtc": "2026-09-15T18:07:34.483Z",
+      "plainEnglish": "Staff issuance of CPAR-1; no operating authorization inferred. Factual metadata reviewed by Codex under user authorization; no independent human source review recorded."
+    },
+    {
+      "id": "src_licensing_hermes",
+      "publisher": "U.S. Nuclear Regulatory Commission",
+      "name": "Hermes test reactor construction permit",
+      "authorityClass": "official_regulatory",
+      "url": "https://www.nrc.gov/reactors/non-power/new-facility-licensing/hermes-kairos",
+      "reuseStatus": "approved_factual_reuse",
+      "geographicScope": "US",
+      "sourceAsOf": "2026-08-27",
+      "retrievedAtUtc": "2026-09-15T18:07:34.483Z",
+      "plainEnglish": "Non-electric test reactor; not Hermes 2. Application in two parts, so no single application date inferred. Factual metadata reviewed by Codex under user authorization; no independent human source review recorded."
+    },
+    {
+      "id": "src_licensing_darlington",
+      "publisher": "Canadian Nuclear Safety Commission",
+      "name": "Darlington New Nuclear Project",
+      "authorityClass": "official_regulatory",
+      "url": "https://www.cnsc-ccsn.gc.ca/eng/reactors/new-reactor-power-plant-projects/new-reactor-power-plant-facilities/darlington-new-nuclear-project/",
+      "reuseStatus": "approved_factual_reuse",
+      "geographicScope": "Canada",
+      "sourceAsOf": null,
+      "retrievedAtUtc": "2026-09-15T18:07:01.528236Z",
+      "plainEnglish": "One-unit construction scope; dates of individual actions retained. Factual metadata reviewed by Codex under user authorization; no independent human source review recorded."
+    },
+    {
+      "id": "src_licensing_darlington_decision",
+      "publisher": "Canadian Nuclear Safety Commission",
+      "name": "Darlington one-unit construction licence decision",
+      "authorityClass": "official_regulatory",
+      "url": "https://www.canada.ca/en/nuclear-safety-commission/news/2025/04/commission-authorizes-ontario-power-generation-inc-to-construct-1-bwrx-300-reactor-at-the-darlington-new-nuclear-project-site.html",
+      "reuseStatus": "approved_factual_reuse",
+      "geographicScope": "Canada",
+      "sourceAsOf": "2025-04-04",
+      "retrievedAtUtc": "2026-09-15T18:11:03.506052Z",
+      "plainEnglish": "CNSC announcement of construction licence for one BWRX-300. Factual metadata reviewed by Codex under user authorization; no independent human source review recorded."
+    },
+    {
+      "id": "src_licensing_gaz_states",
+      "publisher": "U.S. Census Bureau",
+      "name": "2025 Census Gazetteer state internal points",
+      "authorityClass": "official_statistics",
+      "url": "https://www2.census.gov/geo/docs/maps-data/data/gazetteer/2025_Gazetteer/2025_Gaz_state_national.zip",
+      "reuseStatus": "approved_factual_reuse",
+      "geographicScope": "US",
+      "sourceAsOf": "2025",
+      "retrievedAtUtc": "2026-09-15T18:11:02.057303Z",
+      "plainEnglish": "Representative state internal points; not facility coordinates. Factual metadata reviewed by Codex under user authorization; no independent human source review recorded."
+    },
+    {
+      "id": "src_licensing_gaz_counties",
+      "publisher": "U.S. Census Bureau",
+      "name": "2025 Census Gazetteer county internal points",
+      "authorityClass": "official_statistics",
+      "url": "https://www2.census.gov/geo/docs/maps-data/data/gazetteer/2025_Gazetteer/2025_Gaz_counties_national.zip",
+      "reuseStatus": "approved_factual_reuse",
+      "geographicScope": "US",
+      "sourceAsOf": "2025",
+      "retrievedAtUtc": "2026-09-15T18:07:01.344943Z",
+      "plainEnglish": "Representative county internal points; not facility coordinates. Factual metadata reviewed by Codex under user authorization; no independent human source review recorded."
+    },
+    {
+      "id": "src_licensing_ontario",
+      "publisher": "Natural Resources Canada",
+      "name": "Canadian Geographical Names Database: Ontario",
+      "authorityClass": "official_statistics",
+      "url": "https://geogratis.gc.ca/services/geoname/en/geonames.json?q=Ontario&concise=PROV",
+      "reuseStatus": "approved_factual_reuse",
+      "geographicScope": "Canada",
+      "sourceAsOf": null,
+      "retrievedAtUtc": "2026-09-15T18:07:01.431459Z",
+      "plainEnglish": "Official Ontario feature FEHRI: representative province point; not facility coordinates. Factual metadata reviewed by Codex under user authorization; no independent human source review recorded."
     }
   ],
   "stages": {
@@ -3141,11 +3261,482 @@
             }
           ],
           "href": null
+        },
+        {
+          "id": "license_long_mott_construction",
+          "stage": "build-license",
+          "name": "Long Mott / Dow Seadrift",
+          "status": "under_review",
+          "typeLabel": "construction_permit_application",
+          "technology": "Xe-100",
+          "evidenceStrength": null,
+          "summary": "Construction permit application received March 31, 2025; accepted for docketing May 12, 2025. NRC review remains ongoing; no construction permit decision recorded on the cited page.",
+          "asOf": "2026-08-31",
+          "reviewStatus": "approved",
+          "location": {
+            "latitude": 28.441719,
+            "longitude": -96.579574,
+            "precision": "county",
+            "label": "Calhoun County, Texas",
+            "coordinateNote": "Approximate area: Census county internal point (GEOID 48057), not a verified facility-site coordinate."
+          },
+          "sourceIds": [
+            "src_licensing_long_mott",
+            "src_licensing_long_mott_docs",
+            "src_licensing_gaz_counties"
+          ],
+          "citations": [
+            {
+              "id": "cite_license_long_mott_construction_long_mott",
+              "sourceId": "src_licensing_long_mott",
+              "publisher": "U.S. Nuclear Regulatory Commission",
+              "sourceName": "Long Mott construction permit review",
+              "url": "https://www.nrc.gov/reactors/new-reactors/advanced/who-were-working-with/applicant-projects/long-mott",
+              "locator": "Project overview, location, and key milestones (docketing complete May 12, 2025; permit decision TBD).",
+              "supportsFields": [
+                "facility_name",
+                "regulator",
+                "jurisdiction",
+                "reactor_design",
+                "action_type",
+                "normalized_status",
+                "status_as_of",
+                "location_label"
+              ],
+              "sourceDateOriginal": "2026-08-31",
+              "sourceDatePrecision": "day",
+              "effectiveDate": null,
+              "retrievedAtUtc": "2026-09-15T18:07:34.483Z",
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cite_license_long_mott_construction_long_mott_docs",
+              "sourceId": "src_licensing_long_mott_docs",
+              "publisher": "U.S. Nuclear Regulatory Commission",
+              "sourceName": "Long Mott application document register",
+              "url": "https://www.nrc.gov/reactors/new-reactors/advanced/who-were-working-with/applicant-projects/long-mott/documents",
+              "locator": "Application document table: March 31, 2025 receipt and May 12, 2025 acceptance for docketing. Ongoing-review clause supported by companion project overview.",
+              "supportsFields": [
+                "application_date",
+                "source_status_text"
+              ],
+              "sourceDateOriginal": "2026-08-27",
+              "sourceDatePrecision": "day",
+              "effectiveDate": null,
+              "retrievedAtUtc": "2026-09-15T18:07:34.483Z",
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cite_license_long_mott_construction_gaz_counties",
+              "sourceId": "src_licensing_gaz_counties",
+              "publisher": "U.S. Census Bureau",
+              "sourceName": "2025 Census Gazetteer county internal points",
+              "url": "https://www2.census.gov/geo/docs/maps-data/data/gazetteer/2025_Gazetteer/2025_Gaz_counties_national.zip",
+              "locator": "2025_Gaz_counties_national: GEOID 48057, INTPTLAT and INTPTLONG.",
+              "supportsFields": [
+                "latitude",
+                "longitude",
+                "location_precision",
+                "coordinate_note"
+              ],
+              "sourceDateOriginal": "2025",
+              "sourceDatePrecision": "year",
+              "effectiveDate": null,
+              "retrievedAtUtc": "2026-09-15T18:07:01.344943Z",
+              "reviewStatus": "approved"
+            }
+          ],
+          "metrics": [],
+          "details": [
+            {
+              "label": "Regulator",
+              "value": "U.S. Nuclear Regulatory Commission"
+            },
+            {
+              "label": "Jurisdiction",
+              "value": "US-NRC"
+            },
+            {
+              "label": "Application date",
+              "value": "2025-03-31"
+            }
+          ],
+          "href": null
+        },
+        {
+          "id": "license_clinch_river_construction",
+          "stage": "build-license",
+          "name": "Clinch River BWRX-300",
+          "status": "under_review",
+          "typeLabel": "construction_permit_application",
+          "technology": "BWRX-300",
+          "evidenceStrength": null,
+          "summary": "Construction permit application under review. Environmental report submitted April 28, 2025; safety report submitted May 20, 2025. NRC lists the construction permit decision as a fall 2026 target. The 2019 early site permit is separate.",
+          "asOf": "2026-09-11",
+          "reviewStatus": "approved",
+          "location": {
+            "latitude": 35.85846,
+            "longitude": -86.349634,
+            "precision": "state",
+            "label": "Oak Ridge, Tennessee (state-level marker)",
+            "coordinateNote": "Approximate area: Census Tennessee internal point (GEOID 47), not a verified facility-site coordinate. The named project is in Oak Ridge."
+          },
+          "sourceIds": [
+            "src_licensing_clinch_river",
+            "src_licensing_gaz_states"
+          ],
+          "citations": [
+            {
+              "id": "cite_license_clinch_river_construction_clinch_river",
+              "sourceId": "src_licensing_clinch_river",
+              "publisher": "U.S. Nuclear Regulatory Commission",
+              "sourceName": "Clinch River construction permit review",
+              "url": "https://www.nrc.gov/reactors/new-reactors/advanced/who-were-working-with/applicant-projects/clinch-river",
+              "locator": "Project overview, docket links, application parts and construction permit decision target in Key Milestones.",
+              "supportsFields": [
+                "docket_number",
+                "facility_name",
+                "regulator",
+                "jurisdiction",
+                "reactor_design",
+                "action_type",
+                "normalized_status",
+                "source_status_text",
+                "status_as_of",
+                "location_label"
+              ],
+              "sourceDateOriginal": "2026-09-11",
+              "sourceDatePrecision": "day",
+              "effectiveDate": null,
+              "retrievedAtUtc": "2026-09-15T18:07:34.483Z",
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cite_license_clinch_river_construction_gaz_states",
+              "sourceId": "src_licensing_gaz_states",
+              "publisher": "U.S. Census Bureau",
+              "sourceName": "2025 Census Gazetteer state internal points",
+              "url": "https://www2.census.gov/geo/docs/maps-data/data/gazetteer/2025_Gazetteer/2025_Gaz_state_national.zip",
+              "locator": "2025_Gaz_state_national: GEOID 47 (Tennessee), INTPTLAT and INTPTLONG.",
+              "supportsFields": [
+                "latitude",
+                "longitude",
+                "location_precision",
+                "coordinate_note"
+              ],
+              "sourceDateOriginal": "2025",
+              "sourceDatePrecision": "year",
+              "effectiveDate": null,
+              "retrievedAtUtc": "2026-09-15T18:11:02.057303Z",
+              "reviewStatus": "approved"
+            }
+          ],
+          "metrics": [],
+          "details": [
+            {
+              "label": "Regulator",
+              "value": "U.S. Nuclear Regulatory Commission"
+            },
+            {
+              "label": "Jurisdiction",
+              "value": "US-NRC"
+            },
+            {
+              "label": "Docket",
+              "value": "05000615"
+            }
+          ],
+          "href": null
+        },
+        {
+          "id": "license_kemmerer_1_construction",
+          "stage": "build-license",
+          "name": "Kemmerer Power Station Unit 1 / Natrium",
+          "status": "licensed",
+          "typeLabel": "construction_permit",
+          "technology": null,
+          "evidenceStrength": null,
+          "summary": "NRC issued construction permit CPAR-1 on March 9, 2026. This authorizes construction of Kemmerer Unit 1; it is not an operating licence.",
+          "asOf": "2026-03-09",
+          "reviewStatus": "approved",
+          "location": {
+            "latitude": 42.989659,
+            "longitude": -107.544392,
+            "precision": "state",
+            "label": "Kemmerer, Wyoming (state-level marker)",
+            "coordinateNote": "Approximate area: Census Wyoming internal point (GEOID 56), not a verified facility-site coordinate. The named project is in Kemmerer."
+          },
+          "sourceIds": [
+            "src_licensing_kemmerer",
+            "src_licensing_gaz_states"
+          ],
+          "citations": [
+            {
+              "id": "cite_license_kemmerer_1_construction_kemmerer",
+              "sourceId": "src_licensing_kemmerer",
+              "publisher": "U.S. Nuclear Regulatory Commission",
+              "sourceName": "Kemmerer Unit 1 construction permit issuance",
+              "url": "https://www.nrc.gov/node/2156776",
+              "locator": "March 9, 2026 announcement: staff issuance of CPAR-1.",
+              "supportsFields": [
+                "decision_date",
+                "facility_name",
+                "regulator",
+                "jurisdiction",
+                "action_type",
+                "normalized_status",
+                "source_status_text",
+                "status_as_of",
+                "location_label"
+              ],
+              "sourceDateOriginal": "2026-03-09",
+              "sourceDatePrecision": "day",
+              "effectiveDate": null,
+              "retrievedAtUtc": "2026-09-15T18:07:34.483Z",
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cite_license_kemmerer_1_construction_gaz_states",
+              "sourceId": "src_licensing_gaz_states",
+              "publisher": "U.S. Census Bureau",
+              "sourceName": "2025 Census Gazetteer state internal points",
+              "url": "https://www2.census.gov/geo/docs/maps-data/data/gazetteer/2025_Gazetteer/2025_Gaz_state_national.zip",
+              "locator": "2025_Gaz_state_national: GEOID 56 (Wyoming), INTPTLAT and INTPTLONG.",
+              "supportsFields": [
+                "latitude",
+                "longitude",
+                "location_precision",
+                "coordinate_note"
+              ],
+              "sourceDateOriginal": "2025",
+              "sourceDatePrecision": "year",
+              "effectiveDate": null,
+              "retrievedAtUtc": "2026-09-15T18:11:02.057303Z",
+              "reviewStatus": "approved"
+            }
+          ],
+          "metrics": [],
+          "details": [
+            {
+              "label": "Regulator",
+              "value": "U.S. Nuclear Regulatory Commission"
+            },
+            {
+              "label": "Jurisdiction",
+              "value": "US-NRC"
+            },
+            {
+              "label": "Decision date",
+              "value": "2026-03-09"
+            }
+          ],
+          "href": null
+        },
+        {
+          "id": "license_darlington_1_construction",
+          "stage": "build-license",
+          "name": "Darlington New Nuclear: first BWRX-300",
+          "status": "licensed",
+          "typeLabel": "construction_licence",
+          "technology": "BWRX-300",
+          "evidenceStrength": null,
+          "summary": "CNSC announced its construction licence decision for one BWRX-300 on April 4, 2025. The application was submitted in October 2022. This record does not represent four licensed units or an operating licence.",
+          "asOf": "2025-04-04",
+          "reviewStatus": "approved",
+          "location": {
+            "latitude": 49.25,
+            "longitude": -84.5,
+            "precision": "state",
+            "label": "Clarington, Ontario (province-level marker)",
+            "coordinateNote": "Approximate area: official Ontario representative point (CGNDB FEHRI), not a verified facility-site coordinate. The named project is in Clarington."
+          },
+          "sourceIds": [
+            "src_licensing_darlington",
+            "src_licensing_darlington_decision",
+            "src_licensing_ontario"
+          ],
+          "citations": [
+            {
+              "id": "cite_license_darlington_1_construction_darlington",
+              "sourceId": "src_licensing_darlington",
+              "publisher": "Canadian Nuclear Safety Commission",
+              "sourceName": "Darlington New Nuclear Project",
+              "url": "https://www.cnsc-ccsn.gc.ca/eng/reactors/new-reactor-power-plant-projects/new-reactor-power-plant-facilities/darlington-new-nuclear-project/",
+              "locator": "Facility information and construction scope: one BWRX-300, Clarington, Ontario.",
+              "supportsFields": [
+                "facility_name",
+                "regulator",
+                "jurisdiction",
+                "reactor_design",
+                "action_type",
+                "normalized_status",
+                "location_label"
+              ],
+              "sourceDateOriginal": null,
+              "sourceDatePrecision": "unknown",
+              "effectiveDate": null,
+              "retrievedAtUtc": "2026-09-15T18:07:01.528236Z",
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cite_license_darlington_1_construction_darlington_decision",
+              "sourceId": "src_licensing_darlington_decision",
+              "publisher": "Canadian Nuclear Safety Commission",
+              "sourceName": "Darlington one-unit construction licence decision",
+              "url": "https://www.canada.ca/en/nuclear-safety-commission/news/2025/04/commission-authorizes-ontario-power-generation-inc-to-construct-1-bwrx-300-reactor-at-the-darlington-new-nuclear-project-site.html",
+              "locator": "April 4, 2025 news release, opening paragraphs. October 2022 application month supported by companion CNSC project page.",
+              "supportsFields": [
+                "decision_date",
+                "status_as_of",
+                "source_status_text"
+              ],
+              "sourceDateOriginal": "2025-04-04",
+              "sourceDatePrecision": "day",
+              "effectiveDate": null,
+              "retrievedAtUtc": "2026-09-15T18:11:03.506052Z",
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cite_license_darlington_1_construction_ontario",
+              "sourceId": "src_licensing_ontario",
+              "publisher": "Natural Resources Canada",
+              "sourceName": "Canadian Geographical Names Database: Ontario",
+              "url": "https://geogratis.gc.ca/services/geoname/en/geonames.json?q=Ontario&concise=PROV",
+              "locator": "Official feature FEHRI (Ontario), latitude 49.25, longitude -84.5; province representative point.",
+              "supportsFields": [
+                "latitude",
+                "longitude",
+                "location_precision",
+                "coordinate_note"
+              ],
+              "sourceDateOriginal": null,
+              "sourceDatePrecision": "unknown",
+              "effectiveDate": null,
+              "retrievedAtUtc": "2026-09-15T18:07:01.431459Z",
+              "reviewStatus": "approved"
+            }
+          ],
+          "metrics": [],
+          "details": [
+            {
+              "label": "Regulator",
+              "value": "Canadian Nuclear Safety Commission"
+            },
+            {
+              "label": "Jurisdiction",
+              "value": "CA-CNSC"
+            },
+            {
+              "label": "Decision date",
+              "value": "2025-04-04"
+            }
+          ],
+          "href": null
+        },
+        {
+          "id": "license_hermes_construction",
+          "stage": "build-license",
+          "name": "Hermes non-electric test reactor",
+          "status": "licensed",
+          "typeLabel": "construction_permit",
+          "technology": "KP-FHR test reactor",
+          "evidenceStrength": null,
+          "summary": "NRC issued the Hermes construction permit on December 14, 2023. Hermes is a 35 MWth non-electric test reactor, separate from Hermes 2. The safety and environmental application parts were submitted on different dates.",
+          "asOf": "2023-12-14",
+          "reviewStatus": "approved",
+          "location": {
+            "latitude": 35.85846,
+            "longitude": -86.349634,
+            "precision": "state",
+            "label": "Oak Ridge, Tennessee (state-level marker)",
+            "coordinateNote": "Approximate area: Census Tennessee internal point (GEOID 47), not a verified facility-site coordinate. The named test reactor is in Oak Ridge."
+          },
+          "sourceIds": [
+            "src_licensing_hermes",
+            "src_licensing_gaz_states"
+          ],
+          "citations": [
+            {
+              "id": "cite_license_hermes_construction_hermes",
+              "sourceId": "src_licensing_hermes",
+              "publisher": "U.S. Nuclear Regulatory Commission",
+              "sourceName": "Hermes test reactor construction permit",
+              "url": "https://www.nrc.gov/reactors/non-power/new-facility-licensing/hermes-kairos",
+              "locator": "Project overview, issuance December 14, 2023 (distinct from December 12 decision milestone); plant characteristics and application-parts footnote.",
+              "supportsFields": [
+                "docket_number",
+                "decision_date",
+                "facility_name",
+                "regulator",
+                "jurisdiction",
+                "reactor_design",
+                "action_type",
+                "normalized_status",
+                "source_status_text",
+                "status_as_of",
+                "location_label"
+              ],
+              "sourceDateOriginal": "2026-08-27",
+              "sourceDatePrecision": "day",
+              "effectiveDate": null,
+              "retrievedAtUtc": "2026-09-15T18:07:34.483Z",
+              "reviewStatus": "approved"
+            },
+            {
+              "id": "cite_license_hermes_construction_gaz_states",
+              "sourceId": "src_licensing_gaz_states",
+              "publisher": "U.S. Census Bureau",
+              "sourceName": "2025 Census Gazetteer state internal points",
+              "url": "https://www2.census.gov/geo/docs/maps-data/data/gazetteer/2025_Gazetteer/2025_Gaz_state_national.zip",
+              "locator": "2025_Gaz_state_national: GEOID 47 (Tennessee), INTPTLAT and INTPTLONG.",
+              "supportsFields": [
+                "latitude",
+                "longitude",
+                "location_precision",
+                "coordinate_note"
+              ],
+              "sourceDateOriginal": "2025",
+              "sourceDatePrecision": "year",
+              "effectiveDate": null,
+              "retrievedAtUtc": "2026-09-15T18:11:02.057303Z",
+              "reviewStatus": "approved"
+            }
+          ],
+          "metrics": [],
+          "details": [
+            {
+              "label": "Regulator",
+              "value": "U.S. Nuclear Regulatory Commission"
+            },
+            {
+              "label": "Jurisdiction",
+              "value": "US-NRC"
+            },
+            {
+              "label": "Docket",
+              "value": "05007513"
+            },
+            {
+              "label": "Decision date",
+              "value": "2023-12-14"
+            }
+          ],
+          "href": null
         }
       ],
-      "recordCount": 4,
+      "recordCount": 9,
       "sourceIds": [
-        "src_nrc_col_holders"
+        "src_nrc_col_holders",
+        "src_licensing_long_mott",
+        "src_licensing_long_mott_docs",
+        "src_licensing_gaz_counties",
+        "src_licensing_clinch_river",
+        "src_licensing_gaz_states",
+        "src_licensing_kemmerer",
+        "src_licensing_darlington",
+        "src_licensing_darlington_decision",
+        "src_licensing_ontario",
+        "src_licensing_hermes"
       ]
     },
     "operations": {

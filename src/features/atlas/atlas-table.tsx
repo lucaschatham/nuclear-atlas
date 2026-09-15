@@ -69,6 +69,7 @@ export function AtlasDataTable({
                 <div className="mt-1 max-w-72 truncate text-xs text-muted-foreground">{record.summary ?? record.typeLabel ?? "Public evidence record"}</div>
               </TableCell>
               <TableCell>
+                {record.stage === "build-license" && <div className="mb-1 text-xs text-muted-foreground">{humanize(record.typeLabel)}</div>}
                 {record.evidenceStrength ? <EvidenceBadge strength={record.evidenceStrength} /> : <Badge variant="secondary">{humanize(record.status)}</Badge>}
               </TableCell>
               <TableCell className="hidden md:table-cell">

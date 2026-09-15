@@ -1,5 +1,13 @@
 [
   {
+    "id": "licensing-update-2026-09-15",
+    "date": "2026-09-15",
+    "title": "Five verified construction licensing records",
+    "href": "/?stage=build-license&view=table",
+    "what_changed": "Added Long Mott, Clinch River, Kemmerer Unit 1, Darlington first BWRX-300, and Hermes test reactor licensing evidence from NRC and CNSC. Applications are distinct from issued construction permits. Administrative-area markers are approximate. Codex reviewed the sources under user authorization; no independent human review is recorded. Other records retain their original dates and August 26 baseline. This is a targeted update, not a live feed.",
+    "source": "https://www.nrc.gov/reactors/new-reactors/advanced/who-were-working-with/applicant-projects/clinch-river"
+  },
+  {
     "id": "adams-pilot-2026-09-15",
     "date": "2026-09-15",
     "title": "ADAMS pilot: Nine Mile Point 1",

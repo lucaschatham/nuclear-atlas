@@ -362,7 +362,7 @@ function buildRecords(table, rows, context) {
       table, id: row.license_action_id, name: row.facility_name, stage: "build-license", row, citations, sourceById, siteById,
       status: row.normalized_status, typeLabel: row.action_type, technology: row.reactor_design,
       summary: row.source_status_text, asOf: row.status_as_of,
-      details: [detail("Regulator", row.regulator), detail("Jurisdiction", row.jurisdiction), detail("Docket", row.docket_number), detail("Decision date", row.decision_date), detail("Effective date", row.effective_date)],
+      details: [detail("Regulator", row.regulator), detail("Jurisdiction", row.jurisdiction), detail("Docket", row.docket_number), detail("Application date", row.application_date), detail("Decision date", row.decision_date), detail("Effective date", row.effective_date)],
     })
     if (table === "OPERATIONS") {
       const reactor = reactorById.get(String(row.reactor_id))
