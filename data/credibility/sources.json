@@ -34,9 +34,13 @@
     "name": "ADAMS Public Search",
     "publisher": "U.S. Nuclear Regulatory Commission",
     "authority_class": "official_regulatory",
-    "geographic_scope": ["US"],
-    "endpoint": "https://adams-api-developer.nrc.gov/",
-    "allowed_hosts": ["adams-api-developer.nrc.gov", "adams-search.nrc.gov"],
+    "geographic_scope": [
+      "US"
+    ],
+    "endpoint": "https://adams-api.nrc.gov/aps/api/search",
+    "allowed_hosts": [
+      "adams-api.nrc.gov"
+    ],
     "access_method": "api",
     "auth_method": "subscription",
     "auth_env": "NRC_ADAMS_SUBSCRIPTION_KEY",
@@ -46,15 +50,22 @@
     "archival_policy": "record_snapshot",
     "expected_cadence": "intra_day",
     "polling_interval_hours": 24,
-    "supported_claim_types": ["licensing", "construction", "schedule", "safety", "environment", "waste"],
+    "supported_claim_types": [
+      "licensing",
+      "construction",
+      "schedule",
+      "safety",
+      "environment",
+      "waste"
+    ],
     "adapter": null,
     "adapter_version": "0.0.0",
-    "operational_state": "manual_only",
+    "operational_state": "on_demand_pilot",
     "empty_response_is_valid": false,
     "timeout_ms": 30000,
     "maximum_response_bytes": 25000000,
     "request": null,
-    "notes": "API access and the current query contract must be approved before automation."
+    "notes": "On-demand local API pilot verified September 15, 2026: 52 metadata records for docket 05000220; one identity citation published. Partial collection, no scheduled ingestion or automatic publication. Codex reviewed the cited original document under user authorization; no independent human document review recorded."
   },
   {
     "id": "nrc-structured-datasets",

@@ -1,3 +1,4 @@
+import adamsPilot from "../../data/adams-pilot.json";
 import registry from "../../data/credibility/sources.json";
 import guide from "../../data/credibility/source-guide.json";
 import examples from "../../data/credibility/source-examples.json";
@@ -26,13 +27,13 @@ export const methodologySources: MethodologySource[] = registry.map(
       description: description.plain_english,
       examples: sourceExamples,
       state: source.operational_state,
-      endpoint: source.endpoint,
+      endpoint: source.id === adamsPilot.sourceId ? "https://adams-search.nrc.gov/" : source.endpoint,
       access: source.access_method,
       cadence: source.expected_cadence.replaceAll("_", " "),
       geography: source.geographic_scope,
       authority: source.authority_class.replaceAll("_", " "),
       notes: source.notes,
-      lastCheckUtc:
+      lastCheckUtc: source.id === adamsPilot.sourceId ? adamsPilot.retrievedAtUtc :
         status.find((entry) => entry.source_id === source.id)
           ?.last_checked_at ?? null,
     };

@@ -1,11 +1,11 @@
 flowchart LR
   accTitle: Nuclear Atlas source-to-dashboard workflow
-  accDescr: Individual sources form a vertical list on the left and converge on one shared workflow. Solid source connections mean automated collection; dashed connections are not automated. Human review is required before publication.
+  accDescr: Individual sources form a vertical list on the left and converge on one shared workflow. Solid source connections mean automated collection; dashed connections are not automated. Evidence review and explicit publication authorization are separate; reviewer identity is recorded.
   %% source: nrc-reactor-status
   source_0["NRC daily power reactor status<br/>Automated collection<br/>Which U.S. power reactor reported each reading<br/>How much of its full power it was producing<br/>The day that power level was reported"]
   source_0 --> step_0
   %% source: nrc-adams
-  source_1["ADAMS Public Search<br/>Manual review<br/>Applications to build or operate a reactor<br/>Inspection findings and regulator questions<br/>Licenses and spent fuel storage decisions"]
+  source_1["ADAMS Public Search<br/>On-demand API pilot<br/>Applications to build or operate a reactor<br/>Inspection findings and regulator questions<br/>Licenses and spent fuel storage decisions"]
   source_1 -.-> step_0
   %% source: nrc-structured-datasets
   source_2["NRC structured nuclear datasets<br/>Candidate source<br/>Lists of reactors and their license details<br/>Reported plant events and inspection findings<br/>Approved spent fuel storage systems"]
@@ -103,11 +103,11 @@ flowchart LR
   %% source: third-party-nuclear-trackers
   source_33["Independent nuclear trackers and trade reporting<br/>Manual review<br/>Project names and locations to investigate<br/>Reported milestones to check against primary records<br/>Links that help find original evidence"]
   source_33 -.-> step_0
-  step_0["Collect<br/>Gather public records from approved sources and record when each source was checked.<br/>The collection workflow is configured for daily checks. A schedule does not prove a recent successful run."]
+  step_0["Collect<br/>Gather public records from approved sources and record when each source was checked.<br/>Scheduled collectors and the on-demand ADAMS pilot are separate. ADAMS searches one docket and archives results locally; a run does not prove complete coverage."]
   step_0 --> step_1
-  step_1["Keep the original<br/>Preserve imported records in local SQLite, with original JSON snapshots and their source dates.<br/>Scheduled collection receipts remain in Git. Local imports are separate; automatic collection into SQLite is not connected."]
+  step_1["Keep the original<br/>Preserve imported records in local SQLite, with original JSON snapshots and their source dates.<br/>ADAMS pilot metadata and raw responses are archived locally. Scheduled collection receipts remain in Git; publication is a separate reviewed step."]
   step_1 --> step_2
-  step_2["Review the evidence<br/>Check the source, dates, and facility match. Keep unknowns and conflicts visible.<br/>Human review is required before publication. Google Sheets and the reviewed workbook remain the authoring layer."]
+  step_2["Review the evidence<br/>Check the source, dates, and facility match. Keep unknowns and conflicts visible.<br/>Record who reviewed the evidence and who authorized publication. For the ADAMS pilot, Codex inspected the original notice under user authorization; no independent human document review is recorded."]
   step_2 --> step_3
   step_3["Publish a snapshot<br/>Validate the reviewed release and generate the static website and public downloads.<br/>Automatic publication of new source claims is not connected. Existing public releases remain dated."]
   step_3 --> step_4

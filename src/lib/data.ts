@@ -1,3 +1,4 @@
+import adamsPilot from "../../data/adams-pilot.json";
 import changelogJson from "../../data/changelog.json";
 import dealsJson from "../../data/deals.json";
 import atlasLocationsJson from "../../data/atlas-locations.json";
@@ -24,13 +25,13 @@ export const dashboardSources = sourcesJson.map((source) => {
     id: source.id,
     name: source.name,
     publisher: source.publisher,
-    endpoint: source.endpoint,
+    endpoint: source.id === adamsPilot.sourceId ? "https://adams-search.nrc.gov/" : source.endpoint,
     category: guide.category,
     plainEnglish: guide.plain_english,
     operationalState: source.operational_state,
     claimTypes: source.supported_claim_types,
-    lastCheckedAt: status?.last_checked_at ?? null,
-    healthy: status ? !status.is_stale && status.check_status !== "failed" : null,
+    lastCheckedAt: source.id === adamsPilot.sourceId ? adamsPilot.retrievedAtUtc : status?.last_checked_at ?? null,
+    healthy: source.id === adamsPilot.sourceId ? null : status ? !status.is_stale && status.check_status !== "failed" : null,
   };
 }) as SourceDashboardItem[];
 

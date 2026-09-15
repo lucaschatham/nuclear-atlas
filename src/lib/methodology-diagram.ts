@@ -28,7 +28,7 @@ export function buildWorkflowMermaid(
   return [
     "flowchart LR",
     "  accTitle: Nuclear Atlas source-to-dashboard workflow",
-    "  accDescr: Individual sources form a vertical list on the left and converge on one shared workflow. Solid source connections mean automated collection; dashed connections are not automated. Human review is required before publication.",
+    "  accDescr: Individual sources form a vertical list on the left and converge on one shared workflow. Solid source connections mean automated collection; dashed connections are not automated. Evidence review and explicit publication authorization are separate; reviewer identity is recorded.",
     ...sources.flatMap((source, index) => [
       `  %% source: ${source.id.replaceAll(/[\r\n]/g, "")}`,
       `  source_${index}["${[source.name, collectionStateLabels[source.state], ...source.examples].map(label).join("<br/>")}"]`,

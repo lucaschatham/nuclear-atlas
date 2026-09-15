@@ -95,7 +95,7 @@
         },
         "adapter": { "type": ["string", "null"] },
         "adapter_version": { "type": "string", "minLength": 1 },
-        "operational_state": { "enum": ["candidate", "probed", "manual_only", "approved_automated", "paused", "retired"] },
+        "operational_state": { "enum": ["candidate", "probed", "manual_only", "on_demand_pilot", "approved_automated", "paused", "retired"] },
         "empty_response_is_valid": { "type": "boolean" },
         "timeout_ms": { "type": "integer", "minimum": 1000 },
         "maximum_response_bytes": { "type": "integer", "minimum": 1024 },

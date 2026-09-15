@@ -8,11 +8,11 @@ This document distinguishes current implementation from planned work. Registered
 
 ## Workflow
 
-1. **Collect.** Gather public records from approved sources and record when each source was checked. The collection workflow is configured for daily checks. A schedule does not prove a recent successful run.
+1. **Collect.** Gather public records from approved sources and record when each source was checked. Scheduled collectors and the on-demand ADAMS pilot are separate. ADAMS searches one docket and archives results locally; a run does not prove complete coverage.
 
-2. **Keep the original.** Preserve imported records in local SQLite, with original JSON snapshots and their source dates. Scheduled collection receipts remain in Git. Local imports are separate; automatic collection into SQLite is not connected.
+2. **Keep the original.** Preserve imported records in local SQLite, with original JSON snapshots and their source dates. ADAMS pilot metadata and raw responses are archived locally. Scheduled collection receipts remain in Git; publication is a separate reviewed step.
 
-3. **Review the evidence.** Check the source, dates, and facility match. Keep unknowns and conflicts visible. Human review is required before publication. Google Sheets and the reviewed workbook remain the authoring layer.
+3. **Review the evidence.** Check the source, dates, and facility match. Keep unknowns and conflicts visible. Record who reviewed the evidence and who authorized publication. For the ADAMS pilot, Codex inspected the original notice under user authorization; no independent human document review is recorded.
 
 4. **Publish a snapshot.** Validate the reviewed release and generate the static website and public downloads. Automatic publication of new source claims is not connected. Existing public releases remain dated.
 
@@ -23,12 +23,12 @@ This document distinguishes current implementation from planned work. Registered
 ```mermaid
 flowchart LR
   accTitle: Nuclear Atlas source-to-dashboard workflow
-  accDescr: Individual sources form a vertical list on the left and converge on one shared workflow. Solid source connections mean automated collection; dashed connections are not automated. Human review is required before publication.
+  accDescr: Individual sources form a vertical list on the left and converge on one shared workflow. Solid source connections mean automated collection; dashed connections are not automated. Evidence review and explicit publication authorization are separate; reviewer identity is recorded.
   %% source: nrc-reactor-status
   source_0["NRC daily power reactor status<br/>Automated collection<br/>Which U.S. power reactor reported each reading<br/>How much of its full power it was producing<br/>The day that power level was reported"]
   source_0 --> step_0
   %% source: nrc-adams
-  source_1["ADAMS Public Search<br/>Manual review<br/>Applications to build or operate a reactor<br/>Inspection findings and regulator questions<br/>Licenses and spent fuel storage decisions"]
+  source_1["ADAMS Public Search<br/>On-demand API pilot<br/>Applications to build or operate a reactor<br/>Inspection findings and regulator questions<br/>Licenses and spent fuel storage decisions"]
   source_1 -.-> step_0
   %% source: nrc-structured-datasets
   source_2["NRC structured nuclear datasets<br/>Candidate source<br/>Lists of reactors and their license details<br/>Reported plant events and inspection findings<br/>Approved spent fuel storage systems"]
@@ -126,11 +126,11 @@ flowchart LR
   %% source: third-party-nuclear-trackers
   source_33["Independent nuclear trackers and trade reporting<br/>Manual review<br/>Project names and locations to investigate<br/>Reported milestones to check against primary records<br/>Links that help find original evidence"]
   source_33 -.-> step_0
-  step_0["Collect<br/>Gather public records from approved sources and record when each source was checked.<br/>The collection workflow is configured for daily checks. A schedule does not prove a recent successful run."]
+  step_0["Collect<br/>Gather public records from approved sources and record when each source was checked.<br/>Scheduled collectors and the on-demand ADAMS pilot are separate. ADAMS searches one docket and archives results locally; a run does not prove complete coverage."]
   step_0 --> step_1
-  step_1["Keep the original<br/>Preserve imported records in local SQLite, with original JSON snapshots and their source dates.<br/>Scheduled collection receipts remain in Git. Local imports are separate; automatic collection into SQLite is not connected."]
+  step_1["Keep the original<br/>Preserve imported records in local SQLite, with original JSON snapshots and their source dates.<br/>ADAMS pilot metadata and raw responses are archived locally. Scheduled collection receipts remain in Git; publication is a separate reviewed step."]
   step_1 --> step_2
-  step_2["Review the evidence<br/>Check the source, dates, and facility match. Keep unknowns and conflicts visible.<br/>Human review is required before publication. Google Sheets and the reviewed workbook remain the authoring layer."]
+  step_2["Review the evidence<br/>Check the source, dates, and facility match. Keep unknowns and conflicts visible.<br/>Record who reviewed the evidence and who authorized publication. For the ADAMS pilot, Codex inspected the original notice under user authorization; no independent human document review is recorded."]
   step_2 --> step_3
   step_3["Publish a snapshot<br/>Validate the reviewed release and generate the static website and public downloads.<br/>Automatic publication of new source claims is not connected. Existing public releases remain dated."]
   step_3 --> step_4
@@ -143,9 +143,9 @@ flowchart LR
 
 ### Local SQLite collection archive (Current)
 
-Imported source records, collection metadata, and citations are stored locally. Original JSON snapshots sit beside the database, with dated SQLite backups. This archive does not publish to the website.
+Imported source records, collection metadata, and citations are stored locally. Original JSON snapshots sit beside the database, with dated SQLite backups. This archive does not publish to the website. The on-demand ADAMS collector preserves raw API responses and run manifests beside the normalized SQLite records.
 
-Location: .local-data/nuclear-atlas.sqlite and .local-data/snapshots/
+Location: .local-data/nuclear-atlas.sqlite and .local-data/snapshots/ and .local-data/adams-runs/
 
 ### Git retains collection receipts (Current)
 
@@ -171,7 +171,7 @@ Location: No off-device SQLite backup is configured
 
 - **Retention and recovery:** Which raw records can we retain, for how long, and how do we restore them? Approve per-source retention, export an archive, and prove a hash-checked restore.
 
-- **Publication authority:** Who can approve evidence, and what may deterministic code publish? Keep human review; test permissions, conflicts, rollback, and failure without an AI reviewer.
+- **Publication authority:** Who can approve evidence, and what may deterministic code publish? Require explicit publication authorization and record the evidence reviewer separately. User authorization does not establish independent human document review.
 
 - **Time and identity:** How do we reconcile dates and entities without inventing precision? Define stable IDs, preserve original dates, and test offset and daylight-saving conversions.
 
@@ -349,9 +349,9 @@ Sources publish on different schedules. Checking a source today does not make it
 
 Retain evidence history and cite the replacement. Source outages must not erase approved facts. Conflicts and ambiguous entity matches require a human decision.
 
-### People approve factual changes
+### Review and authorization are distinct
 
-A successful download or an AI summary does not authorize publication. Human review checks the supporting evidence and resolves ambiguous matches before a new release.
+A successful download does not authorize publication. Record who inspected the original evidence and who authorized the release. The September 15 ADAMS citation was reviewed by Codex under user authorization; no independent human document review is recorded. Conflicts and ambiguous facility matches require a human decision.
 
 ### Bindingness rubric
 
@@ -401,19 +401,19 @@ Daily operating power is official operational evidence, not evidence of project 
 
 ### ADAMS Public Search
 
-- Source: https://adams-api-developer.nrc.gov/
-- State: Manual review
+- Source: https://adams-search.nrc.gov/
+- State: On-demand API pilot
 - Category: Reactors and regulation
 - Geography: US
 - Access: api; source cadence: intra day
 - Authority: official regulatory
-- Last recorded check (UTC): No published receipt
+- Last recorded check (UTC): 2026-09-15T17:02:34.458Z
 
 - Applications to build or operate a reactor
 - Inspection findings and regulator questions
 - Licenses and spent fuel storage decisions
 
-API access and the current query contract must be approved before automation.
+On-demand local API pilot verified September 15, 2026: 52 metadata records for docket 05000220; one identity citation published. Partial collection, no scheduled ingestion or automatic publication. Codex reviewed the cited original document under user authorization; no independent human document review recorded.
 
 ### NRC structured nuclear datasets
 

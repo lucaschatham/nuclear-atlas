@@ -40,14 +40,14 @@ export function WorkflowDiagram() {
     <div className={styles.archiveBranch}>
       <div className={styles.import}><span className={styles.dashed}/><ArrowDown size={16} aria-hidden="true"/><span>Manual import</span></div>
       <div className={styles.archiveRow}>
-        <p className={styles.archiveInput}>Also accepts<br/>prepared source JSON <ArrowRight size={18} aria-hidden="true"/></p>
+        <p className={styles.archiveInput}>Also accepts<br/>prepared source JSON<br/>or the ADAMS API pilot <ArrowRight size={18} aria-hidden="true"/></p>
         <div className={styles.archive}><Database size={36} strokeWidth={1.4} aria-hidden="true"/><div><h3>Local archive</h3><p>SQLite + original JSON files</p></div></div>
         <div className={styles.outputs}>
           <div><Download size={22} aria-hidden="true"/><span>Reproduce original files</span></div>
           <div><HardDrive size={22} aria-hidden="true"/><span>Back up the database</span></div>
         </div>
       </div>
-      <p className={styles.archiveNote}>Stored on this computer. Imports preserve evidence; they do not publish to the website.</p>
+      <p className={styles.archiveNote}>The ADAMS pilot runs on demand and writes directly to this local archive. Publication requires a separate evidence review and authorized release.</p>
     </div>
     <ol aria-label="Publishing process" className="sr-only">{["Public sources", "Reviewed workbook", "Approved release", "Nuclear Atlas"].map(title => <li key={title}>{title}</li>)}</ol>
   </figure>;

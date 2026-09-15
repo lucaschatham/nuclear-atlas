@@ -1,3 +1,4 @@
+import adamsPilot from "../../../data/adams-pilot.json";
 import { PersonaGuide } from "@/features/methodology/persona-guide";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -52,7 +53,7 @@ export default function AboutPage() {
             <div className="mt-5 space-y-4">
               <h2 className="text-lg font-semibold">Simple storage, reviewed releases</h2>
               <p className="max-w-3xl text-sm leading-6 text-muted-foreground">Local SQLite keeps imported records and collection history. Original JSON snapshots sit beside it. Google Sheets and the reviewed workbook remain the authoring layer; the website serves static files.</p>
-              <p className="text-sm leading-6 text-muted-foreground">Source collection is not yet automatically connected to the local archive. Off-device backups and long-term retention still need decisions.</p>
+              <p className="text-sm leading-6 text-muted-foreground">The on-demand ADAMS pilot writes metadata and raw responses to the local archive. Scheduled collectors remain separate. Off-device backups and long-term retention still need decisions.</p>
               <div className="flex flex-wrap gap-2">
                 <Button variant="outline" role="link" nativeButton={false} render={<a href={`${basePath}/methodology/nuclear-atlas-prd.md`} download />}><Download />Download PRD</Button>
                 <Button variant="outline" role="link" nativeButton={false} render={<a href="https://github.com/lucaschatham/nuclear-atlas/blob/main/docs/database-schema.md" target="_blank" rel="noreferrer" />}>Database schema<ExternalLink /></Button>
@@ -94,6 +95,11 @@ export default function AboutPage() {
             <h2 id="coverage-title" className="text-xl font-semibold">What’s covered and what’s missing</h2>
             <p className="text-sm leading-6 text-muted-foreground">This release contains {recordCount} records across seven lifecycle stages. Coverage is primarily U.S. and uneven. Counts describe this snapshot, not the entire industry.</p>
           </div>
+          <section aria-labelledby="adams-coverage-title" className="rounded-lg border p-4">
+            <h3 id="adams-coverage-title" className="font-semibold">ADAMS pilot · September 15, 2026</h3>
+            <p className="mt-2 text-sm leading-6">{adamsPilot.collectedRecords} records collected locally · {adamsPilot.publishedCitations} identity citation published · 1 docket covered</p>
+            <p className="mt-1 text-sm leading-6 text-muted-foreground">{adamsPilot.facility}, docket {adamsPilot.docket}. One search response from a 90-day date-added window; coverage is partial. Collection is on demand, not a live feed. The August 26 facility-data cutoff is unchanged.</p>
+          </section>
           <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">{methodologyStages.map((stage) => (
             <Card key={stage.id} size="sm"><CardHeader><CardDescription>{atlasRelease.stages[stage.id]?.recordCount ?? 0} published records</CardDescription><CardTitle><h3>{stage.label}</h3></CardTitle></CardHeader><CardContent className="text-sm leading-6 text-muted-foreground">{stage.next}</CardContent></Card>
           ))}</div>

@@ -7,19 +7,19 @@
       "id": "collect",
       "title": "Collect",
       "detail": "Gather public records from approved sources and record when each source was checked.",
-      "caveat": "The collection workflow is configured for daily checks. A schedule does not prove a recent successful run."
+      "caveat": "Scheduled collectors and the on-demand ADAMS pilot are separate. ADAMS searches one docket and archives results locally; a run does not prove complete coverage."
     },
     {
       "id": "store",
       "title": "Keep the original",
       "detail": "Preserve imported records in local SQLite, with original JSON snapshots and their source dates.",
-      "caveat": "Scheduled collection receipts remain in Git. Local imports are separate; automatic collection into SQLite is not connected."
+      "caveat": "ADAMS pilot metadata and raw responses are archived locally. Scheduled collection receipts remain in Git; publication is a separate reviewed step."
     },
     {
       "id": "review",
       "title": "Review the evidence",
       "detail": "Check the source, dates, and facility match. Keep unknowns and conflicts visible.",
-      "caveat": "Human review is required before publication. Google Sheets and the reviewed workbook remain the authoring layer."
+      "caveat": "Record who reviewed the evidence and who authorized publication. For the ADAMS pilot, Codex inspected the original notice under user authorization; no independent human document review is recorded."
     },
     {
       "id": "publish",
@@ -39,8 +39,8 @@
       "id": "current-local",
       "title": "Local SQLite collection archive",
       "status": "Current",
-      "detail": "Imported source records, collection metadata, and citations are stored locally. Original JSON snapshots sit beside the database, with dated SQLite backups. This archive does not publish to the website.",
-      "location": ".local-data/nuclear-atlas.sqlite and .local-data/snapshots/"
+      "detail": "Imported source records, collection metadata, and citations are stored locally. Original JSON snapshots sit beside the database, with dated SQLite backups. This archive does not publish to the website. The on-demand ADAMS collector preserves raw API responses and run manifests beside the normalized SQLite records.",
+      "location": ".local-data/nuclear-atlas.sqlite and .local-data/snapshots/ and .local-data/adams-runs/"
     },
     {
       "id": "current-git",
@@ -78,7 +78,7 @@
     {
       "title": "Publication authority",
       "question": "Who can approve evidence, and what may deterministic code publish?",
-      "acceptance": "Keep human review; test permissions, conflicts, rollback, and failure without an AI reviewer."
+      "acceptance": "Require explicit publication authorization and record the evidence reviewer separately. User authorization does not establish independent human document review."
     },
     {
       "title": "Time and identity",
@@ -130,8 +130,8 @@
       "detail": "Retain evidence history and cite the replacement. Source outages must not erase approved facts. Conflicts and ambiguous entity matches require a human decision."
     },
     {
-      "title": "People approve factual changes",
-      "detail": "A successful download or an AI summary does not authorize publication. Human review checks the supporting evidence and resolves ambiguous matches before a new release."
+      "title": "Review and authorization are distinct",
+      "detail": "A successful download does not authorize publication. Record who inspected the original evidence and who authorized the release. The September 15 ADAMS citation was reviewed by Codex under user authorization; no independent human document review is recorded. Conflicts and ambiguous facility matches require a human decision."
     }
   ],
   "stages": {

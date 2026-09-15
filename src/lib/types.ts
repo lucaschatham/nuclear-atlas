@@ -69,7 +69,7 @@ export type SourceDashboardItem = {
   endpoint: string;
   category: string;
   plainEnglish: string;
-  operationalState: "candidate" | "probed" | "manual_only" | "approved_automated" | "paused" | "retired";
+  operationalState: "candidate" | "probed" | "manual_only" | "on_demand_pilot" | "approved_automated" | "paused" | "retired";
   claimTypes: string[];
   lastCheckedAt: string | null;
   healthy: boolean | null;

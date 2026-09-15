@@ -93,7 +93,7 @@ test("methodology outlines every registered source with concrete examples and it
         (example) => example.length >= 12 && example.length <= 130,
       ),
     );
-    assert.equal(source.endpoint, original.endpoint);
+    assert.equal(source.endpoint, source.id === "nrc-adams" ? "https://adams-search.nrc.gov/" : original.endpoint);
     assert.ok(!("auth_env" in source));
   }
 });
@@ -140,7 +140,7 @@ test("methodology diagrams ship rendered, offline assets and editable Mermaid so
   for (const name of ["workflow"]) {
     const source = await read(`public/methodology/${name}.mmd`);
     assert.match(source, /flowchart LR/);
-    assert.match(source, /human review/i);
+    assert.match(source, /reviewer identity is recorded/i);
     assert.match(source, /Map and Table/);
     assert.match(source, /SQLite/);
     {
@@ -164,4 +164,27 @@ test("methodology downloads honor the configured production base path", async ()
     assert.match(source, /NEXT_PUBLIC_BASE_PATH/);
     assert.doesNotMatch(source, /href="\/(?:data|methodology)\//);
   }
+});
+
+test("ADAMS pilot has verified local coverage without claiming scheduled automation", async () => {
+  const pilot = JSON.parse(await read("data/adams-pilot.json"));
+  const adams = methodologySources.find(source => source.id === "nrc-adams");
+  assert.equal(adams.state, "on_demand_pilot");
+  assert.equal(adams.lastCheckUtc, pilot.retrievedAtUtc);
+  assert.equal(pilot.collectedRecords, 52);
+  assert.equal(pilot.publishedCitations, 1);
+  const release = JSON.parse(await read("data/atlas-release.json"));
+  const citations = release.stages.operations.records.flatMap(record => record.citations);
+  assert.equal(citations.filter(c => c.id === pilot.citationId).length, pilot.publishedCitations);
+  assert.equal(citations.find(c => c.id === pilot.citationId).retrievedAtUtc, pilot.retrievedAtUtc);
+  assert.ok(release.sourceCutoffUtc.startsWith("2026-08-26"));
+});
+
+test("release changelog links to valid local pages and retains review attribution", async () => {
+  const entries = JSON.parse(await read("data/release-changelog.json"));
+  const pilot = entries.find(entry => entry.id === "adams-pilot-2026-09-15");
+  assert.ok(pilot);
+  assert.equal(pilot.href, "/?stage=operations&view=table");
+  assert.match(pilot.what_changed, /Codex/);
+  assert.match(pilot.what_changed, /identity/);
 });

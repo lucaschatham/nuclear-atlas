@@ -163,3 +163,20 @@ test("existing methodology section links select their containing tab", async ({ 
     }
   }
 });
+
+test("ADAMS pilot coverage, review attribution and changelog are clear", async ({ page }) => {
+  await page.goto('/about/#data-sources');
+  await page.getByRole('tab', { name: 'Sources', exact: true }).click();
+  await page.getByRole('textbox', { name: 'Search data sources' }).fill('ADAMS');
+  const source = page.locator('[data-source-id="nrc-adams"]');
+  await expect(source.getByText('On-demand API pilot', { exact: false }).first()).toBeVisible();
+  await source.getByRole('button').click();
+  await expect(source.getByText(/2026-09-15.*UTC/)).toBeVisible();
+  await page.getByRole('tab', { name: 'Coverage', exact: true }).click();
+  await expect(page.getByText('52 records collected locally · 1 identity citation published · 1 docket covered')).toBeVisible();
+  await page.getByRole('tab', { name: 'Fact Checks', exact: true }).click();
+  await expect(page.getByText(/no independent human document review is recorded/)).toBeVisible();
+  await page.goto('/changelog/');
+  const entry = page.getByRole('listitem').filter({ hasText: 'ADAMS pilot: Nine Mile Point 1' });
+  await expect(entry.getByRole('link', { name: 'ADAMS pilot: Nine Mile Point 1' })).toHaveAttribute('href', '/?stage=operations&view=table');
+});

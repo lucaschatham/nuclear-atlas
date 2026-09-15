@@ -54,7 +54,7 @@ export function SourceHealth({ source, showLabel = true }: { source: SourceDashb
     ? "Check failed"
     : source.operationalState === "approved_automated"
       ? "Checked daily"
-      : source.operationalState.replaceAll("_", " ");
+      : source.operationalState === "on_demand_pilot" ? "On-demand API pilot" : source.operationalState.replaceAll("_", " ");
   return (
     <span className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">
       {healthy ? (

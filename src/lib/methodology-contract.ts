@@ -1,5 +1,6 @@
 export const collectionStateLabels: Record<string, string> = {
   approved_automated: "Automated collection",
+  on_demand_pilot: "On-demand API pilot",
   manual_only: "Manual review",
   candidate: "Candidate source",
   probed: "Access tested",
