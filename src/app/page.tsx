@@ -9,7 +9,7 @@ export default function Home() {
       <AtlasWorkspace records={records} release={atlasRelease} />
       <footer className="border-t bg-background px-4 py-6 text-center sm:px-6">
         <a
-          href={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/haleu-model.html`}
+          href={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/haleu-model/`}
           className="inline-flex min-h-11 items-center justify-center rounded-md border bg-card px-5 py-3 text-sm font-medium shadow-sm transition-colors hover:bg-accent focus-visible:outline-2 focus-visible:outline-offset-4"
         >
           Explore HALEU core cost &amp; market scale

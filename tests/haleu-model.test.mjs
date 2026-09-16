@@ -2,7 +2,7 @@ import { readFileSync } from 'node:fs';
 import { createContext, runInContext } from 'node:vm';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-const html = readFileSync(new URL('../public/haleu-model.html', import.meta.url), 'utf8');
+const html = readFileSync(new URL('../public/haleu-model/index.html', import.meta.url), 'utf8');
 test('published fuel model excludes private identity and workbook links', () => {
   assert.doesNotMatch(html, /valar|charlotte|mark’s|docs\.google\.com|127\.0\.0\.1|\/Users\//i);
   assert.match(html, /NUCLEAR ATLAS/);
